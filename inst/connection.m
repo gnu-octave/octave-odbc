@@ -143,11 +143,17 @@ classdef connection < handle
     endfunction
 
     function data = sqlread (this, tablename, varargin)
-      if !ischar(tablename)
+      ## -*- texinfo -*-
+      ## @deftypefn {} {@var{data} =} sqlread (@var{conn}, @var{tablename})
+      ## @deftypefnx {} {@var{data} =} sqlread (@var{conn}, @var{tablename}, @var{propertryname}, @var{propertyvalue})
+      ## Read data from table @var{tablename}
+      ## @end deftypefn
+
+      if nargin < 2 || !ischar(tablename)
         error ("Expected tablename as a string");
       endif
 
-      if numel(varargin) >0
+      if numel(varargin) > 0
         if mod (numel(varargin), 2) != 0
            error ("expected property name, value pairs");
         endif
