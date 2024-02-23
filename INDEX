@@ -1,0 +1,15 @@
+octave-odbc >> Octave ODBC Toolkit
+ODBC connection
+  database
+  odbc
+  connection
+Importing Data
+  connection.fetch
+  connection.sqlread
+Exporting Data
+  connection.sqlwrite
+Database Operations
+  connection.commit
+  connection.execute
+  connection.rollback
+  connection.sqlupdate

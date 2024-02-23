@@ -1,0 +1,14 @@
+Name: odbc
+Version: 0.0.1
+Date: 2024-02-23
+Author: John Donoghue <john.donoghue@ieee.org>
+Maintainer: John Donoghue <john.donoghue@ieee.org>
+Title: Octave ODBC Toolkit
+Description: Basic Octave implementation for ODBC database functionality
+Categories: Database
+Depends: octave (>= 6.0.0)
+#BuildRequires: unixODBC-dev
+#SystemRequirements: unixODBC
+License: GPLv3+
+Url: https://gnu-octave.github.io/octave-odbc/
+Repository: https://github.com/gnu-octave/octave-odbc/
