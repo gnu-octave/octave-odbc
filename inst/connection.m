@@ -95,8 +95,8 @@ classdef connection < handle
           # TODO
           #
         elseif strcmp(n, "RowFilter")
-          if !isa(v, "dbrowfilter")
-            error ("Expected RowFilter to be a dbrowfilter class");
+          if !isa(v, "rowfilter")
+            error ("Expected RowFilter to be a rowfilter class");
           endif
           rowfilter = v;
         else
@@ -174,7 +174,14 @@ classdef connection < handle
       data = __odbc_run__(this.dbhandle, sqlquery);
       if nargout > 0
         # create table ?
-        rdata = struct2dbtable(data);
+        if exist ("struct2table") != 0
+          rdata = struct2table(data);
+        elseif exist ("struct2dbtable") != 0
+          # sqlite provides a dbtable
+          rdata = struct2dbtable(data);
+        else
+          rdata = data;
+        endif
       endif
     endfunction
   endmethods
