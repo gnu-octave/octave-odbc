@@ -315,8 +315,9 @@ clean: clean-tarballs clean-unpacked-release clean-install clean-docs clean-runi
 ## no install run
 ## Remove if not needed, most packages do not have PKG_ADD directives.
 CC_SOURCES  := $(wildcard src/*.cc)
+M_SOURCES  := $(wildcard inst/*.m)
 PKG_ADD     := $(shell $(GREP) -sPho '(?<=(//|\#\#) PKG_ADD: ).*' \
-                         $(CC_SOURCES))
+                         $(CC_SOURCES) $(M_SOURCES))
 
 src/Makefile: src/Makefile.in
 ifneq (,$(wildcard $(TOPDIR)/src/bootstrap))
