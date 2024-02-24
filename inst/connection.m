@@ -83,6 +83,7 @@ classdef connection < handle
     # rollback
 
     function data = fetch (this, query, varargin)
+
       ## fetch data from database
       if !ischar(query)
         error ("Expected sqlquery as a string");
