@@ -175,7 +175,24 @@ AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
  [AC_MSG_RESULT([no])])
 
 if test $have_windows = yes; then
-  echo "TODO set linbs erc for windows odbc"
+  save_CXXFLAGS=$CXXFLAGS
+  CXXFLAGS="$ODBC_CFLAGS $CXXFLAGS"
+  AC_CHECK_HEADERS([windows.h],[],[])
+  AC_CHECK_HEADERS([sql.h],
+   [AC_SEARCH_LIBS([SQLAllocHandle], [odbc32],[],[])],
+   [],
+   [#ifdef HAVE_WINDOWS_H
+    #include <windows.h>
+    #endif
+    ])
+
+  if test "x$ac_cv_search_sqlallochandle" != "xno"; then
+    test "x$ac_cv_search_sqlallochandle" = "xnone required" || ODBC_LIBS="$ac_cv_search_sqlallochandle"
+  fi
+ 
+  ODBC_LIBS="$ODBC_LIBS"
+  ODBC_CFLAGS="$ODBC_CFLAGS"
+  CXXFLAGS=$save_CXXFLAGS
 else
  # look for unix odbc 
  AC_CHECK_TOOL([ODBC_CONFIG], [odbc_config], [none])
@@ -184,9 +201,9 @@ else
  fi
  ODBC_LIBS=`$ODBC_CONFIG --libs`
  ODBC_CFLAGS=`$ODBC_CONFIG --cflags`
- AC_SUBST([ODBC_LIBS])
- AC_SUBST([ODBC_CFLAGS])
 fi
+AC_SUBST([ODBC_LIBS])
+AC_SUBST([ODBC_CFLAGS])
 
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT

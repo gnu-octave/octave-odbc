@@ -33,6 +33,10 @@
 
 //#include "octave_odbc.h"
 
+#ifdef HAVE_WINDOWS_H
+  #define WIN32_LEAN_AND_MEAN
+  #include <windows.h>
+#endif
 #include <sql.h>
 #include <sqlext.h>
 
