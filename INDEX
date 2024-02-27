@@ -4,6 +4,7 @@ ODBC connection
   odbc
   connection
   listDataSources
+  configureODBCDataSource
 Importing Data
   connection.fetch
   connection.sqlread
