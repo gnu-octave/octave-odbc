@@ -42,11 +42,15 @@ classdef connection < handle
     # here
     function this = connection (databasename, varargin)
       ## connection constructor
+      if nargin < 1 || !ischar(databasename)
+        error ("Expected database name as a string");
+      endif
       
       username = "";
       password = "";
       readonly = 0;
       autocommit = 1;
+      timeout = 0;
 
       prop_idx = 1;
       if nargin > 1
@@ -75,6 +79,8 @@ classdef connection < handle
             password = v;
           elseif strcmp(n, "autocommit")
             autocommit = v;
+          elseif strcmp(n, "logintimeout")
+            timeout = v;
           elseif strcmp(n, "readonly")
             readonly = v;
           else
