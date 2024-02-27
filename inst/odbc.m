@@ -17,6 +17,7 @@
 ## -*- texinfo -*- 
 ## @deftypefn {} {@var{conn} =} odbc (@var{dbname}, @var{username}, @var{password})
 ## @deftypefnx {} {@var{conn} =} odbc (@var{dbname}, @var{username}, @var{password}, @var{propertyname}, @var{propertyvalue} @dots{})
+## @deftypefnx {} {@var{conn} =} odbc (@var{dsnconnectstr})
 ## Create a odbc database connection
 ##
 ## @subsubheading Inputs
@@ -46,8 +47,13 @@
 ## @seealso{database, connection}
 ## @end deftypefn
 
-function conn = odbc(databasename, username, password, varargin)
+function conn = odbc(databasename, varargin)
+  if nargin < 1 || !ischar(databasename)
+    error ("Expected databasename or connect string as 1st agument");
+  endif
 
-  conn = connection(databasename, username, password, varargin{:});
+  conn = connection(databasename, varargin{:});
 
 endfunction
+
+

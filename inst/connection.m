@@ -40,8 +40,56 @@ classdef connection < handle
 
   methods
     # here
-    function this = connection (databasename, username, password, varargin)
+    function this = connection (databasename, varargin)
       ## connection constructor
+      
+      username = "";
+      password = "";
+      readonly = 0;
+      autocommit = 1;
+
+      prop_idx = 1;
+      if nargin > 1
+        if this.isinputprop(varargin{1})
+          username = varargin{1};
+          password = varargin{2};
+          prop_idx = 3;
+        endif
+      endif
+      if prop_idx < nargin
+        if mod (nargin-prop_idx, 2) != 0
+          error ("expected property name, value pairs");
+        endif
+        if !iscellstr (varargin (prop_idx:2:nargin-1))
+          error ("expected property names to be strings");
+        endif
+
+        for idx=prop_idx:2:nargin-1
+
+          n = varargin{idx};
+          v = varargin{idx+1};
+
+          if strcmpi(n, "username")
+            username = v;
+          elseif strcmp(n, "password")
+            password = v;
+          elseif strcmp(n, "autocommit")
+            autocommit = v;
+          elseif strcmp(n, "readonly")
+            readonly = v;
+          else
+            error ("Unknown property '%s'", n);
+          endif
+        endfor
+      endif
+
+      if !ischar(username)
+        error ("Username should be a string");
+      endif
+      if !ischar(password)
+        error ("Password should be a string");
+      endif
+
       this.DataSource = databasename;
       this.UserName = username;
 
@@ -205,6 +253,16 @@ classdef connection < handle
           rdata = struct2dbtable(data);
         else
           rdata = data;
+        endif
+      endif
+    endfunction
+
+    function y = isinputprop(this, n)
+      known_props = { "drivermanager", "autocommit", "logintimeout", "readonly" };
+      y = false;
+      if ischar(n)
+        if sum(strcmpi(n, known_props)) > 0
+          y = true;
         endif
       endif
     endfunction
