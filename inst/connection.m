@@ -39,9 +39,12 @@ classdef connection < handle
   endproperties
 
   methods
-    # here
     function this = connection (databasename, varargin)
-      ## connection constructor
+      ## -*- texinfo -*-
+      ## @deftypefn {} {@var{conn} =} connection (@var{conn}, @var{varargs})
+      ## ODCB connection constructor
+      ## @end deftypefn
+
       if nargin < 1 || !ischar(databasename)
         error ("Expected database name as a string");
       endif
@@ -103,7 +106,11 @@ classdef connection < handle
     endfunction
 
     function delete (this)
-      ## connection deconstructor
+      ## -*- texinfo -*-
+      ## @deftypefn {} {} delete (@var{conn})
+      ## ODCB connection deconstructor
+      ## @end deftypefn
+
       try
         this.dbhandle = [];
       catch
@@ -112,12 +119,20 @@ classdef connection < handle
     endfunction
 
     function Y = isopen (this)
-      ## is database open
+      ## -*- texinfo -*-
+      ## @deftypefn {} {@var{T} =} iaopen (@var{conn})
+      ## REturn true if ODCB connection is open
+      ## @end deftypefn
+
       Y = ! isempty(this.dbhandle);
     endfunction
 
     function close (this)
-      ## close database if open
+      ## -*- texinfo -*-
+      ## @deftypefn {} {} close (@var{conn})
+      ## close ODCB connection
+      ## @end deftypefn
+
       if !isempty(this.dbhandle)
         __odbc_close__(this.dbhandle);
         this.dbhandle = [];
@@ -125,7 +140,6 @@ classdef connection < handle
       this.Message = "Closed";
     endfunction
 
-    # sqlread
     # sqlupdate
     # executeSQLScript
     # runstoredprocedure
@@ -137,15 +151,18 @@ classdef connection < handle
     # rollback
 
     function data = fetch (this, query, varargin)
+      ## -*- texinfo -*-
+      ## @deftypefn {} {@var{data} =} fetch (@var{conn}, @var{query})
+      ## Perform SQL query @var{query}, and return result
+      ## @end deftypefn
 
-      ## fetch data from database
       if !ischar(query)
         error ("Expected sqlquery as a string");
       endif
 
       if numel(varargin) >0
         if mod (numel(varargin), 2) != 0
-           error ("expected property name, value pairs");
+          error ("expected property name, value pairs");
         endif
         if !iscellstr (varargin (1:2:numel(varargin)))
           error ("expected property names to be strings");
@@ -181,19 +198,26 @@ classdef connection < handle
       endif
 
       if !isempty(maxrows)
-          query = [query " LIMIT " maxrows];
+        query = [query " LIMIT " maxrows];
       endif
 
       data = _run(this, query);
     endfunction
 
     function data = select (this, sqlquery, varargin)
-      ## select data from database
+      ## -*- texinfo -*-
+      ## @deftypefn {} {@var{data} =} select (@var{conn}, @var{query})
+      ## Perform SQL query @var{query}, and return result
+      ## @end deftypefn
       data = _run(this, sqlquery);
     endfunction
 
     function execute (this, sqlquery)
-      ## execute a sql command that returns no data
+      ## -*- texinfo -*-
+      ## @deftypefn {} {} execute (@var{conn}, @var{query})
+      ## Perform SQL query @var{query}, that does not return result
+      ## @end deftypefn
+ 
       _run(this, sqlquery);
     endfunction
 
@@ -225,7 +249,6 @@ classdef connection < handle
     function disp(this)
       ## Display information about the database
       
-      # TODO: make underlying obj show most (all?) this unless not connected - then show just top part with message
       printf ("  connection with properties:\n");
       printf ("                  DataSource: '%s'\n", this.DataSource);
       printf ("                    UserName: '%s'\n", this.UserName);
@@ -233,7 +256,6 @@ classdef connection < handle
       printf ("                        Type: '%s'\n", this.Type);
       if !isempty(this.dbhandle)
         disp(this.dbhandle);
-      printf (" handle = %d\n", this.dbhandle);
       endif
     endfunction
   endmethods
@@ -249,6 +271,7 @@ classdef connection < handle
 
   methods (Access = private)
     function rdata = _run (this, sqlquery)
+      ## private function to interface to oct file
       data = __odbc_run__(this.dbhandle, sqlquery);
       if nargout > 0
         # create table ?
@@ -264,6 +287,7 @@ classdef connection < handle
     endfunction
 
     function y = isinputprop(this, n)
+      ## private function to return whether a name is a property name
       known_props = { "drivermanager", "autocommit", "logintimeout", "readonly" };
       y = false;
       if ischar(n)
