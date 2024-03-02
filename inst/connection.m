@@ -140,7 +140,6 @@ classdef connection < handle
       this.Message = "Closed";
     endfunction
 
-    # sqlupdate
     # executeSQLScript
     # runstoredprocedure
     # sqlinnerjoin
@@ -244,6 +243,31 @@ classdef connection < handle
       ## select data from database
       sqlquery = ["SELECT * FROM " tablename];
       data = fetch(this, sqlquery, varargin{:});
+    endfunction
+
+    function commit (this)
+      ## -*- texinfo -*-
+      ## @deftypefn {} {} commit (@var{conn})
+      ## Make permanant changes to the database.
+      ## @end deftypefn
+ 
+    endfunction
+
+    function rollback (this)
+      ## -*- texinfo -*-
+      ## @deftypefn {} {} rollback (@var{conn})
+      ## Rollback changes to the database.
+      ## @end deftypefn
+ 
+    endfunction
+
+    function update(conn,tablename,colnames,data,whereclause)
+      ## -*- texinfo -*-
+      ## @deftypefn {} {} update (@var{conn}, @var{tablename}, @var{colnames}, @var{data}, @var{whereclause})
+      ## Update columns in database.
+      ## @end deftypefn
+ 
+      sqlquery = "";
     endfunction
 
     function disp(this)
