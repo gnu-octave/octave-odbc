@@ -57,7 +57,7 @@ classdef connection < handle
 
       prop_idx = 1;
       if nargin > 1
-        if this.isinputprop(varargin{1})
+        if ! this.isinputprop(varargin{1})
           username = varargin{1};
           password = varargin{2};
           prop_idx = 3;
