@@ -315,11 +315,10 @@ octave_odbc::create (const std::string &dbname, const std::string &username, con
   // connection string
   if (dbname.find('=') != std::string::npos)
   {
-	  SQLCHAR outname[1024];
-	  SQLSMALLINT outlen;
+    SQLCHAR outname[1024];
+    SQLSMALLINT outlen;
 
     rc = SQLDriverConnect( dbc, NULL, (SQLCHAR*) dbname.c_str(), dbname.length(), outname, sizeof(outname), &outlen, SQL_DRIVER_NOPROMPT);
-printf("out: %s\n", (char*)outname);
   }
   else
     // DBC: Connect
@@ -355,11 +354,11 @@ printf("out: %s\n", (char*)outname);
   SQLCHAR szName[256];
   SQLSMALLINT cbName;
 
-  rc = SQLGetInfo(dbc, SQL_DATA_SOURCE_NAME, szName, sizeof(szName), &cbName);
-  printf("DS %s\n", (char*)szName);
+  //rc = SQLGetInfo(dbc, SQL_DATA_SOURCE_NAME, szName, sizeof(szName), &cbName);
+  //printf("DS %s\n", (char*)szName);
 
   rc = SQLGetInfo(dbc, SQL_DRIVER_NAME, szName, sizeof(szName), &cbName);
-  printf("DN %s\n", (char*)szName);
+  //printf("DN %s\n", (char*)szName);
   db_driver_name = (char*)szName;
 
   //rc = SQLGetInfo(dbc, SQL_DRIVER_ODBC_VER, szName, sizeof(szName), &cbName);
@@ -367,14 +366,14 @@ printf("out: %s\n", (char*)outname);
   rc = SQLGetInfo(dbc, SQL_DRIVER_VER, szName, sizeof(szName), &cbName);
   db_driver_ver = (char*)szName;
 
-  rc = SQLGetInfo(dbc, SQL_DATABASE_NAME, szName, sizeof(szName), &cbName);
-  printf("DBN %s\n", (char*)szName);
+  //rc = SQLGetInfo(dbc, SQL_DATABASE_NAME, szName, sizeof(szName), &cbName);
+  //printf("DBN %s\n", (char*)szName);
 
   rc = SQLGetInfo(dbc, SQL_DBMS_VER, szName, sizeof(szName), &cbName);
   db_ver = (char*)szName;
 
   rc = SQLGetInfo(dbc, SQL_DBMS_NAME, szName, sizeof(szName), &cbName);
-  printf("DB %s\n", (char*)szName);
+  //printf("DB %s\n", (char*)szName);
   db_name = (char *)szName;
 
   return true;
@@ -567,7 +566,6 @@ Private function\n \
   std::string pass = args (2).string_value();
 
   init_types ();
-  printf("odbc: %s %s\n", db.c_str(), user.c_str());
 
   octave_odbc * retvalue = new octave_odbc ();
 
