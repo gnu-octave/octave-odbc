@@ -344,7 +344,7 @@ endclassdef
 %! assert(size(tbl), [3 2]);
 %! tbl = db.sqlread("TestTable", "MaxRows", 1);
 %! assert(size(tbl), [1 2]);
-%! filter = rowfilter("Id") < '1';
+%! filter = rowfilter("Id") > 1;
 %! tbl = db.sqlread("TestTable", "RowFilter", filter);
 %! assert(size(tbl), [2 2]);
 
@@ -353,7 +353,7 @@ endclassdef
 %! assert(size(tbl), [3 2]);
 %! tbl = db.fetch("SELECT * FROM TestTable", "MaxRows", 1);
 %! assert(size(tbl), [1 2]);
-%! filter = rowfilter("Id") < '1';
+%! filter = rowfilter("Id") > '1';
 %! tbl = db.fetch("SELECT * FROM TestTable", "RowFilter", filter);
 %! assert(size(tbl), [2 2]);
 
