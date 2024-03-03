@@ -24,8 +24,6 @@
 ## @subsubheading Outputs
 ## None
 ##
-## @end table
-##
 ## @seealso{listSataSources}
 ## @end deftypefn
 
