@@ -178,7 +178,7 @@ classdef connection < handle
           l = fgetl(fid);
           l = strtrim(l);
           if !isempty(l)
-            t = fetch(this, l)
+            t = fetch(this, l, varargin{:})
             query{end+1} = l;
             data{end+1} = t;
             mess{end+1} = this.Message;
@@ -213,6 +213,7 @@ classdef connection < handle
       maxrows = [];
       rowfilter = [];
       debug = 0;
+      format = "table";
  
       for idx=1:2:numel(varargin)
         n = varargin{idx};
@@ -221,6 +222,8 @@ classdef connection < handle
           maxrows = num2str(v);
         elseif strcmp(n, "Debug")
           debug = v;
+        elseif strcmp(n, "DataReturnFormat")
+          format = v;
         elseif strcmp(n, "VariableNamingRule")
           if !ischar(v) || sum(strcmp(v, {'preserve', 'modify'})) != 1
             error ("Expected VariableNamingRule property value to be 'preserve' or 'modify'");
@@ -249,7 +252,7 @@ classdef connection < handle
         printf("Query: '%s'\n", query);
       endif
 
-      data = _run(this, query);
+      data = _run(this, query, format);
     endfunction
 
     function data = select (this, sqlquery, varargin)
@@ -345,18 +348,29 @@ classdef connection < handle
   endmethods
 
   methods (Access = private)
-    function rdata = _run (this, sqlquery)
+    function rdata = _run (this, sqlquery, format)
+      if nargin < 3
+        format = "table";
+      endif
       ## private function to interface to oct file
       data = __odbc_run__(this.dbhandle, sqlquery);
       if nargout > 0
-        # create table ?
-        if exist ("struct2table") != 0
-          rdata = struct2table(data);
-        elseif exist ("struct2dbtable") != 0
-          # sqlite provides a dbtable
-          rdata = struct2dbtable(data);
-        else
+        if strcmp(format, "table")
+          # create table ?
+          if exist ("struct2table") != 0
+            rdata = struct2table(data);
+          elseif exist ("struct2dbtable") != 0
+            # sqlite provides a dbtable
+            rdata = struct2dbtable(data);
+          else
+            rdata = data;
+          endif
+        elseif strcmp(format, "structure")
           rdata = data;
+        elseif strcmp(format, "cellarray")
+          rdata = struct2cell(data);
+        else
+          error ("Unknown returnformat '%s'", format);
         endif
       endif
     endfunction
