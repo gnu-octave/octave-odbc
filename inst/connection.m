@@ -215,7 +215,9 @@ classdef connection < handle
       ## @deftypefn {} {@var{data} =} select (@var{conn}, @var{query})
       ## Perform SQL query @var{query}, and return result
       ## @end deftypefn
-      data = _run(this, sqlquery);
+
+      # TODO: verify statement is SELECT ... ?
+      data = fetch(this, sqlquery, varargin{:});
     endfunction
 
     function execute (this, sqlquery)
@@ -356,6 +358,12 @@ endclassdef
 %! filter = rowfilter("Id") > '1';
 %! tbl = db.fetch("SELECT * FROM TestTable", "RowFilter", filter);
 %! assert(size(tbl), [2 2]);
+
+%!xtest
+%! tbl = db.select("SELECT * FROM TestTable");
+%! assert(size(tbl), [3 2]);
+%! tbl = db.select("SELECT * FROM TestTable", "MaxRows", 1);
+%! assert(size(tbl), [1 2]);
 
 %!test
 %! close(db);
