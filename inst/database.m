@@ -24,7 +24,7 @@
 ## @item @var{dbname}
 ## ODBC DSN connection name, or connection string
 ## @item @var{username}
-## Username foe connecting to database.
+## Username for connecting to database.
 ## @item @var{password}
 ## Password for connecting to database.
 ## @end table
