@@ -39,3 +39,9 @@ function src = listDataSources ()
     src = struct2dbtable(src);
   endif
 endfunction
+
+%!test
+%! v = listDataSources ();
+%! a = v.Name;
+%! a = v.DriverType;
+%! a = v.Vendor;

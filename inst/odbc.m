@@ -56,4 +56,8 @@ function conn = odbc(databasename, varargin)
 
 endfunction
 
+%!xtest
+%! a = odbc("octave_odbc_test");
+%! assert(isopen(a));
+%! close(a);
 
