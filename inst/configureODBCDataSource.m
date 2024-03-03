@@ -30,5 +30,21 @@
 function configureODBCDataSource ()
   if ispc
     system ("odbcad32.exe");
+  else
+    # in unix, there are several possible programs we could use if installed
+    
+    bin = file_in_path (getenv ("PATH"), "ODBCManageDataSourcesQ5");
+    if isempty(bin)
+      bin = file_in_path (getenv ("PATH"), "ODBCManageDataSourcesQ4")
+    endif
+    if isempty(bin)
+      bin = file_in_path (getenv ("PATH"), "ODBCManageDataSources");
+    endif
+
+    if isempty(bin)
+      error ("Couldnt find ODBCManageDataSources in path")
+    endif
+
+    system (bin);
   endif
 endfunction
