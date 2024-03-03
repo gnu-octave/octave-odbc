@@ -170,12 +170,15 @@ classdef connection < handle
 
       maxrows = [];
       rowfilter = [];
+      debug = 0;
  
       for idx=1:2:numel(varargin)
         n = varargin{idx};
         v = varargin{idx+1};
         if strcmp(n, "MaxRows")
           maxrows = num2str(v);
+        elseif strcmp(n, "Debug")
+          debug = v;
         elseif strcmp(n, "VariableNamingRule")
           if !ischar(v) || sum(strcmp(v, {'preserve', 'modify'})) != 1
             error ("Expected VariableNamingRule property value to be 'preserve' or 'modify'");
@@ -198,6 +201,10 @@ classdef connection < handle
 
       if !isempty(maxrows)
         query = [query " LIMIT " maxrows];
+      endif
+
+      if debug
+        printf("Query: '%s'\n", query);
       endif
 
       data = _run(this, query);
@@ -322,3 +329,34 @@ classdef connection < handle
     endfunction
   endmethods
 endclassdef
+
+%!shared dbname, db
+%! dbname = tempname;
+%! db = connection(["driver=SQLite3;Database=" dbname ';']);
+%! assert(isopen(db));
+%! db.execute("CREATE TABLE TestTable (Id INT NOT NULL PRIMARY KEY, Name VARCHAR(255));");
+%! db.execute("INSERT INTO TestTable (Id,Name) VALUES (1, 'Name1');");
+%! db.execute("INSERT INTO TestTable (Id,Name) VALUES (2, 'Name2');");
+%! db.execute("INSERT INTO TestTable (Id,Name) VALUES (3, 'Name3');");
+
+%!xtest
+%! tbl = db.sqlread("TestTable");
+%! assert(size(tbl), [3 2]);
+%! tbl = db.sqlread("TestTable", "MaxRows", 1);
+%! assert(size(tbl), [1 2]);
+%! filter = rowfilter("Id") < '1';
+%! tbl = db.sqlread("TestTable", "RowFilter", filter);
+%! assert(size(tbl), [2 2]);
+
+%!xtest
+%! tbl = db.fetch("SELECT * FROM TestTable");
+%! assert(size(tbl), [3 2]);
+%! tbl = db.fetch("SELECT * FROM TestTable", "MaxRows", 1);
+%! assert(size(tbl), [1 2]);
+%! filter = rowfilter("Id") < '1';
+%! tbl = db.fetch("SELECT * FROM TestTable", "RowFilter", filter);
+%! assert(size(tbl), [2 2]);
+
+%!test
+%! close(db);
+%! delete(dbname);

@@ -51,3 +51,10 @@ function conn = database(databasename, username, password, varargin)
   conn = odbc(databasename, username, password, varargin{:});
 
 endfunction
+
+%!xtest
+%! a = database("octave_odbc_test", "test", "");
+%! assert(isopen(a));
+%! assert(a.UserName, "test");
+%! close(a);
+

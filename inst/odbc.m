@@ -61,3 +61,10 @@ endfunction
 %! assert(isopen(a));
 %! close(a);
 
+%!xtest
+%! t = tempname;
+%! a = odbc(["driver=SQLite3;Database=" t ';']);
+%! assert(isopen(a));
+%! close(a);
+%! delete(t);
+
