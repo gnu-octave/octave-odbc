@@ -8,6 +8,7 @@ ODBC connection
 Importing Data
   connection.fetch
   connection.sqlread
+  connection.select
 Exporting Data
   connection.sqlwrite
 Database Operations
