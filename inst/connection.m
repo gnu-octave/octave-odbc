@@ -148,6 +148,48 @@ classdef connection < handle
     # sqlwrite
     # commit
     # rollback
+    
+    function results = executeSQLScript (this, filename, varargin)
+      ## -*- texinfo -*-
+      ## @deftypefn {} {@var{results} =} executeSQLScript (@var{conn}, @var{scriptname})
+      ## Run statements from a script file
+      ## @end deftypefn
+
+      if nargin < 2 || !ischar(filename)
+        error ("Expected filename as string.");
+      endif
+
+      # TODO: process input properties
+      # TODO: process statements which could be multiline, contain comments etc
+
+      results = {};
+
+      query = {};
+      data = {};
+      mess = {};
+
+      fid = fopen(filename, "rt");
+      if fid < 0
+        error ("Could not open file '%s'", filename);
+      endif 
+
+      unwind_protect
+        while !feof(fid)
+          l = fgetl(fid);
+          l = strtrim(l);
+          if !isempty(l)
+            t = fetch(this, l)
+            query{end+1} = l;
+            data{end+1} = t;
+            mess{end+1} = this.Message;
+          endif
+        endwhile
+      unwind_protect_cleanup
+        fclose(fid);
+      end_unwind_protect
+
+      results = struct("SQLQuery", query, "Data", data, "Message", mess);
+    endfunction
 
     function data = fetch (this, query, varargin)
       ## -*- texinfo -*-

@@ -9,6 +9,7 @@ Importing Data
   connection.fetch
   connection.sqlread
   connection.select
+  connection.executeSQLScript
 Exporting Data
   connection.sqlwrite
 Database Operations
