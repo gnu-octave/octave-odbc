@@ -140,15 +140,162 @@ classdef connection < handle
       this.Message = "Closed";
     endfunction
 
-    # executeSQLScript
     # runstoredprocedure
     # sqlinnerjoin
     # sqlouterjoin
     # update
-    # sqlwrite
     # commit
     # rollback
-    
+   
+    function sqlwrite (this, tablename, data, varargin)
+      ## -*- texinfo -*-
+      ## @deftypefn {} {} sqlwrite (@var{db}, @var{tablename}, @var{data})
+      ## @deftypefnx {} {} sqlwrite (@var{db}, @var{tablename}, @var{data}, @var{columntypes})
+      ## @deftypefnx {} {} sqlwrite (@var{db}, @var{tablename}, @var{data}, @var{propertyname}, @var{propertyvalue} @dots{})
+      ## Insert rows of data into a table.
+      ##
+      ## Insert rows of data into a sqlite database table.
+      ## If the table does not exist it will be created, using the ColumnType property if available
+      ## otherwise, the type of input data will be used to determine field types.
+      ##
+      ## @subsubheading Inputs
+      ## @table @asis
+      ## @item @var{db}
+      ## Previously created octave_sqlite object
+      ## @item @var{tablename}
+      ## Name of table to write data to
+      ## @item @var{data}
+      ## Table containing data to write to the database. Variables names are expected to match the database.
+      ## @item @var{columntypes}
+      ## Optional cell array of same size as data used if table must be created. The column types may also
+      ## be passed in using the @var{propertyname}, @var{propertyvalue} syntax.
+      ## @item @var{propertyname}, @var{propertyvalue}
+      ##  property name/value pairs where known properties are:
+      ##  @table @asis
+      ##  @item ColumnType
+      ##  Optional cell array of same size as the data that may be used
+      ##  if the table is created as part of the write operation.
+      ##  @end table
+      ## @end table
+      ##
+      ## @subsubheading Outputs
+      ## None
+      ##
+      ## @seealso{database, odbc, sqlread}
+      ## @end deftypefn
+
+      if nargin < 3 || nargin > 5
+        print_usage();
+      endif
+
+      if !ischar(tablename)
+        error ("Expected tablename as a string");
+      endif
+
+      coltypes = {};
+      if nargin == 5
+        # "ColumnType", value
+        if !ischar(varargin{1}) || !strcmp(varargin{1}, "ColumnType")
+          error ("Expected optional property as 'ColumnType'");
+        endif
+        coltypes = varargin{2};  
+      elseif nargin == 4
+        coltypes = varargin{1};  
+      endif
+
+      if isa(data, "dbtable")
+        data = table2struct(data);
+      elseif isa(data, "table")
+        data = table2struct(data, 'ToScalar', true);
+      elseif iscell(data)
+        data = cell2struct(data);
+      elseif !isstruct(data)
+        error ("Expected input data as a table or struct");
+      endif
+
+      cols = fieldnames(data);
+
+      if !isempty(coltypes)
+        if !iscellstr(coltypes)
+          error ("Expected ColumnType to be a cell string");
+        endif
+
+        if size(coltypes) != size(cols)
+          error ("Expected ColumnType to match data column count size");
+        endif
+      endif
+
+      sql = sprintf ('INSERT INTO %s (', tablename);
+      for col=1:numel(cols)
+        if col > 1
+          sql = [sql "," ];
+        endif
+        sql = [sql cols{col}];
+      endfor
+      sql = [sql ") VALUES \n"];
+      for idx = 1:length(data.(cols{1}))
+        values = "";
+        for col=1:numel(cols)
+          if col > 1
+            values = [values ","];
+          endif
+          v = data.(cols{col});
+          if ismatrix(v)
+            v = v(idx,:);
+          else
+            v = v{idx};
+          endif
+          if iscell(v)
+            v = v{1};
+          endif
+          if islogical(v)
+            if v
+              v = 1;
+            else
+              v = 0;
+            endif
+          endif
+
+          if isnumeric(v)
+             v = num2str(v);
+          else
+             v = ['"' v '"'];
+          endif
+          values = [values v];
+
+        endfor
+
+        if idx > 1
+          sql = [sql ",\n"];
+        endif
+        sql = [sql "(" values ")"];
+
+      endfor
+
+      # create table if ne need to ?
+      if isempty(coltypes)
+        coltypes = {};
+        # currently assign all columns to numeric if not specified as it will
+        # handle all types of data
+        for col=1:numel(cols)
+          coltypes{end+1} = this.calc_type(data.(cols{col}));
+        endfor
+      endif
+      tsql = sprintf("CREATE TABLE IF NOT EXISTS %s (", tablename);
+      for idx=1:numel(coltypes)
+        if idx > 1
+          tsql = [tsql ", "];
+        endif
+        tsql = [tsql sprintf("%s %s", cols{idx}, coltypes{idx})];
+      endfor 
+      tsql = [tsql ")"];
+
+      execute(this, tsql);
+
+      execute(this, sql);
+
+    endfunction
+   
     function results = executeSQLScript (this, filename, varargin)
       ## -*- texinfo -*-
       ## @deftypefn {} {@var{results} =} executeSQLScript (@var{conn}, @var{scriptname})
@@ -270,7 +417,6 @@ classdef connection < handle
       ## @deftypefn {} {} execute (@var{conn}, @var{query})
       ## Perform SQL query @var{query}, that does not return result
       ## @end deftypefn
- 
       _run(this, sqlquery);
     endfunction
 
@@ -375,6 +521,23 @@ classdef connection < handle
       endif
     endfunction
 
+    function type = calc_type(this, n)
+      if iscellstr(n)
+        type = "varchar";
+      elseif isnumeric(n)
+        type = "numeric";
+      elseif iscell(n)
+        type = "numeric";
+        for idx=1:length(n)
+          if !isnumeric(n{idx})
+            type = "varchar";
+          endif
+        endfor
+      else
+        type = "varchar";
+      endif
+    endfunction
+
     function y = isinputprop(this, n)
       ## private function to return whether a name is a property name
       known_props = { "drivermanager", "autocommit", "logintimeout", "readonly" };
@@ -420,6 +583,12 @@ endclassdef
 %! assert(size(tbl), [3 2]);
 %! tbl = db.select("SELECT * FROM TestTable", "MaxRows", 1);
 %! assert(size(tbl), [1 2]);
+
+%!xtest
+%! t = struct("Id", [1;2], "Name", ['Name1';'Name2']);
+%! sqlwrite(db, "Test1", t);
+%! tbl = sqlread(db , "Test1");
+%! assert(size(tbl), [2 2]);
 
 %!test
 %! close(db);
