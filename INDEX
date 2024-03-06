@@ -17,5 +17,6 @@ Database Operations
   connection.execute
   connection.rollback
   connection.sqlupdate
+  connection.update
 Support Functions
   rowfilter

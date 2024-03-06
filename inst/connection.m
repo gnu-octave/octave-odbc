@@ -21,16 +21,19 @@ classdef connection < handle
   ## @end deftp
  
   properties (SetAccess=protected, GetAccess=public)
+    # read only properties
+
     DataSource = ''; # DataSource value
     UserName = '';   # Username
     Message = '';    # Last message from database access
     Type = 'ODBC Connection Object'; # connection type
+
+    ReadOnly = 'off';
+    LoginTimeout = 0;
   endproperties
 
   properties (SetAccess=public, GetAccess=public)
     AutoCommit = 'on';
-    ReadOnly = 'off';
-    LoginTimeout = 0;
     # more stuff .....
   endproperties
 
@@ -73,19 +76,38 @@ classdef connection < handle
 
         for idx=prop_idx:2:nargin-1
 
-          n = varargin{idx};
+          n = lower(varargin{idx});
           v = varargin{idx+1};
 
-          if strcmpi(n, "username")
+          if strcmp(n, "username")
             username = v;
           elseif strcmp(n, "password")
             password = v;
           elseif strcmp(n, "autocommit")
-            autocommit = v;
+            if !ischar(v) 
+             error ("expected autocommit value to be a string");
+            elseif strcmpi(v, "on")
+              autocommit = 1;
+            elseif strcmpi(v, "off")
+              autocommit = 0;
+            else
+              error ("expected autocommit value to be on or off");
+            endif
           elseif strcmp(n, "logintimeout")
-            timeout = v;
+            if !isnumeric(v) || v <= 0
+             error ("expected login timeout value to be positive numeric");
+            endif
+            timeout = int32(v);
           elseif strcmp(n, "readonly")
-            readonly = v;
+            if !ischar(v) 
+             error ("expected readonly value to be a string");
+            elseif strcmpi(v, "on")
+              readonly = 1;
+            elseif strcmpi(v, "off")
+              readonly = 0;
+            else
+              error ("expected readonly value to be on or off");
+            endif
           else
             error ("Unknown property '%s'", n);
           endif
@@ -102,7 +124,21 @@ classdef connection < handle
       this.DataSource = databasename;
       this.UserName = username;
 
-      this.dbhandle = __odbc_create__(databasename, username, password);
+      flags = 0;
+
+      this.ReadOnly = "off";
+      if readonly
+        this.ReadOnly = "on";
+        flags = flags + 1;
+      endif
+
+      this.AutoCommit = "off";
+      if autocommit
+        this.AutoCommit = "on";
+        flags = flags + 2;
+      endif
+
+      this.dbhandle = __odbc_create__(databasename, username, password, flags, timeout);
     endfunction
 
     function delete (this)
@@ -120,7 +156,7 @@ classdef connection < handle
 
     function Y = isopen (this)
       ## -*- texinfo -*-
-      ## @deftypefn {} {@var{T} =} iaopen (@var{conn})
+      ## @deftypefn {} {@var{T} =} isopen (@var{conn})
       ## REturn true if ODCB connection is open
       ## @end deftypefn
 
@@ -143,9 +179,6 @@ classdef connection < handle
     # runstoredprocedure
     # sqlinnerjoin
     # sqlouterjoin
-    # update
-    # commit
-    # rollback
    
     function sqlwrite (this, tablename, data, varargin)
       ## -*- texinfo -*-
@@ -450,7 +483,7 @@ classdef connection < handle
       ## @deftypefn {} {} commit (@var{conn})
       ## Make permanant changes to the database.
       ## @end deftypefn
- 
+      _run(this, "COMMIT");
     endfunction
 
     function rollback (this)
@@ -458,13 +491,23 @@ classdef connection < handle
       ## @deftypefn {} {} rollback (@var{conn})
       ## Rollback changes to the database.
       ## @end deftypefn
- 
+      _run(this, "ROLLBACK");
     endfunction
 
     function update(conn,tablename,colnames,data,whereclause)
       ## -*- texinfo -*-
       ## @deftypefn {} {} update (@var{conn}, @var{tablename}, @var{colnames}, @var{data}, @var{whereclause})
       ## Update columns in database.
+      ## @end deftypefn
+ 
+      sqlquery = "";
+    endfunction
+
+    function sqlupdate(conn,tablename, data, filter, varargin)
+      ## -*- texinfo -*-
+      ## @deftypefn {} {} sqlupdate (@var{db}, @var{tablename}, @var{data}, @var{filter})
+      ## @deftypefnx {} {} sqlupdate (@var{db}, @var{tablename}, @var{data}, @var{filter}, @var{propertyname}, @var{propertyvalue} @dots{})
+      ## Update rows of data in database.
       ## @end deftypefn
  
       sqlquery = "";
@@ -491,6 +534,28 @@ classdef connection < handle
       endif
       msg = this.Message;
     endfunction
+
+    function msg = get.ReadOnly (this)
+      if !isempty(this.dbhandle)
+        this.ReadOnly = this.dbhandle.ReadOnly;
+      endif
+      msg = this.ReadOnly;
+    endfunction
+
+    function msg = get.AutoCommit (this)
+      if !isempty(this.dbhandle)
+        this.AutoCommit = this.dbhandle.AutoCommit;
+      endif
+      msg = this.AutoCommit;
+    endfunction
+
+    function msg = get.LoginTimeout (this)
+      if !isempty(this.dbhandle)
+        this.LoginTimeout = this.dbhandle.LoginTimeout;
+      endif
+      msg = this.LoginTimeout;
+    endfunction
+ 
   endmethods
 
   methods (Access = private)

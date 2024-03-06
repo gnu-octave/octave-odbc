@@ -61,7 +61,7 @@ public:
   ~octave_odbc (void);
 
   // interface functions
-  bool create (const std::string &filename, const std::string &username, const std::string &password);
+  bool create (const std::string &filename, const std::string &username, const std::string &password, int flags, unsigned int to);
   void close (void);
   bool is_open() const;
   bool run (const std::string &query, octave_value &v);
@@ -109,6 +109,10 @@ private:
 
   SQLHENV env;
   SQLHDBC dbc;
+
+  std::string readonly;
+  std::string autocommit;
+  unsigned int timeout;
 
   std::string db_name;
   std::string db_ver;
@@ -181,9 +185,9 @@ void
 octave_odbc::print_raw (std::ostream& os, bool pr_as_read_syntax) const
 {
   os << "  Database with Properties:"; newline(os);
-  os << "                  AutoCommit: 'on'"; newline(os);
-  os << "                    ReadOnly: 'off'"; newline(os);
-  os << "                LoginTimeout: 0"; newline(os);
+  os << "                  AutoCommit: " << autocommit; newline(os);
+  os << "                    ReadOnly: " << readonly; newline(os);
+  os << "                LoginTimeout: " << timeout; newline(os);
   os << "  Database and Driver Information:"; newline(os);
   os << "         DatabaseProductName: " << db_name; newline(os);
   os << "      DatabaseProductVersion: " << db_ver; newline(os);
@@ -211,10 +215,12 @@ octave_odbc::subsref (const std::string& type, const std::list<octave_value_list
 	  retval(0) = octave_value(is_open());
 	else if (prop == "Message")
 	  retval(0) = octave_value(getMessage());
-	//else if (prop == "IsReadOnly")
-	//  retval(0) = octave_value(mode == "readonly");
-	//else if (prop == "AutoCommit")
-	 // retval(0) = autocommit;
+	else if (prop == "ReadOnly")
+	  retval(0) = readonly;
+	else if (prop == "AutoCommit")
+	  retval(0) = autocommit;
+	else if (prop == "LoginTimeout")
+	  retval(0) = octave_value(timeout);
 	else
 	  error ("Unkown property '%s'", prop.c_str());
       }
@@ -291,10 +297,13 @@ octave_odbc::subsasgn (const std::string& type, const std::list<octave_value_lis
 }
 
 bool
-octave_odbc::create (const std::string &dbname, const std::string &username, const std::string &password)
+octave_odbc::create (const std::string &dbname, const std::string &username, const std::string &password, int flags, unsigned int to)
 {
   SQLRETURN rc;
 
+  autocommit = "off";
+  readonly = "off";
+  timeout = to;
 
   // Environment
   rc = SQLAllocHandle( SQL_HANDLE_ENV, SQL_NULL_HANDLE, &env);
@@ -303,28 +312,51 @@ octave_odbc::create (const std::string &dbname, const std::string &username, con
   rc = SQLSetEnvAttr( env, SQL_ATTR_ODBC_VERSION, (void*)SQL_OV_ODBC3, 0);
 
   // DBC: Allocate
-       rc = SQLAllocHandle( SQL_HANDLE_DBC, env, &dbc);
+  rc = SQLAllocHandle( SQL_HANDLE_DBC, env, &dbc);
 
-  //rc =     SQLSetConnectAttr(hdbc, SQL_LOGIN_TIMEOUT, (SQLPOINTER)5, 0);
+  if (timeout > 0)
+    {
+      SQLPOINTER tm = (SQLPOINTER)((long)timeout);
+      rc = SQLSetConnectAttr(dbc, SQL_LOGIN_TIMEOUT, (SQLPOINTER)tm, 0);
+    }
 
-  // are we a db dsn name, or a connection dtring ?
-  // TODO: need parse out some options here ?and set them or sqlconnect will handle ?
-  // pullout timeout at least so we know it? or query it and set after connected ????????
-  // UID ? for username
+  SQLUINTEGER commit = SQL_AUTOCOMMIT_OFF;
+  if (flags & 2)
+    {
+      commit = SQL_AUTOCOMMIT_ON;
+    }
+  else
+    {
+      rc = SQLSetConnectAttr(dbc, SQL_ATTR_AUTOCOMMIT, (SQLPOINTER)SQL_AUTOCOMMIT_OFF, 0);
+    }
+
+  SQLUINTEGER access = SQL_MODE_READ_WRITE;
+  if (flags & 1)
+    {
+      access = SQL_MODE_READ_ONLY;
+    
+      rc = SQLSetConnectAttr(dbc, SQL_ATTR_ACCESS_MODE, (SQLPOINTER)SQL_MODE_READ_ONLY, 0);
+    }
+  else
+    {
+      rc =     SQLSetConnectAttr(dbc, SQL_ATTR_ACCESS_MODE, (SQLPOINTER)SQL_MODE_READ_WRITE, 0);
+    }
 
   // connection string
   if (dbname.find('=') != std::string::npos)
-  {
-    SQLCHAR outname[1024];
-    SQLSMALLINT outlen;
+    {
+      SQLCHAR outname[1024];
+      SQLSMALLINT outlen;
 
-    rc = SQLDriverConnect( dbc, NULL, (SQLCHAR*) dbname.c_str(), dbname.length(), outname, sizeof(outname), &outlen, SQL_DRIVER_NOPROMPT);
-  }
+      rc = SQLDriverConnect( dbc, NULL, (SQLCHAR*) dbname.c_str(), dbname.length(), outname, sizeof(outname), &outlen, SQL_DRIVER_NOPROMPT);
+    }
   else
-    // DBC: Connect
-    rc = SQLConnect( dbc, (SQLCHAR*) dbname.c_str(), SQL_NTS,
-      (SQLCHAR*) username.c_str(), SQL_NTS,
-      (SQLCHAR*) password.c_str(), SQL_NTS);
+    {
+      // DBC: Connect
+      rc = SQLConnect( dbc, (SQLCHAR*) dbname.c_str(), SQL_NTS,
+        (SQLCHAR*) username.c_str(), SQL_NTS,
+        (SQLCHAR*) password.c_str(), SQL_NTS);
+    }
 
   if (rc == SQL_SUCCESS_WITH_INFO || rc == SQL_ERROR)
     {
@@ -375,6 +407,23 @@ octave_odbc::create (const std::string &dbname, const std::string &username, con
   rc = SQLGetInfo(dbc, SQL_DBMS_NAME, szName, sizeof(szName), &cbName);
   //printf("DB %s\n", (char*)szName);
   db_name = (char *)szName;
+
+  SQLINTEGER sz;
+  rc = SQLGetConnectAttr(dbc, SQL_ATTR_AUTOCOMMIT, (SQLPOINTER)&commit, SQL_IS_INTEGER, &sz);
+  if (commit == SQL_AUTOCOMMIT_ON)
+    autocommit = "on";
+  else
+    autocommit = "off";
+
+  rc = SQLGetConnectAttr(dbc, SQL_ATTR_ACCESS_MODE, (SQLPOINTER)&access, SQL_IS_INTEGER, &sz);
+  if (access == SQL_MODE_READ_ONLY)
+    readonly = "on";
+  else
+    readonly = "off";
+
+  SQLINTEGER tmv;
+  rc = SQLGetConnectAttr(dbc, SQL_LOGIN_TIMEOUT, (SQLPOINTER)&tmv, SQL_IS_INTEGER, &sz);
+  timeout = tmv;
 
   return true;
 }
@@ -555,7 +604,7 @@ DEFUN_DLD(__odbc_create__, args, nargout,
 Private function\n \
 @end deftypefn")
 {
-  if ( args.length() != 3 || !args (0).is_string () || !args (1).is_string () || !args (2).is_string ())
+  if ( args.length() != 5 || !args (0).is_string () || !args (1).is_string () || !args (2).is_string () || !args(3).isnumeric() || !args(4).isnumeric())
     {
       print_usage ();
       return octave_value();
@@ -564,12 +613,14 @@ Private function\n \
   std::string db = args (0).string_value();
   std::string user = args (1).string_value();
   std::string pass = args (2).string_value();
+  int flags = args (3).int_value();
+  int timeout = args (4).int_value();
 
   init_types ();
 
   octave_odbc * retvalue = new octave_odbc ();
 
-  if ( retvalue->create (db, user, pass) == false )
+  if ( retvalue->create (db, user, pass, flags, timeout) == false )
     {
       error ("Error connecting: %s", retvalue->getMessage().c_str());
       delete retvalue;
