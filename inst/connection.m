@@ -549,6 +549,16 @@ classdef connection < handle
       msg = this.AutoCommit;
     endfunction
 
+    function set.AutoCommit (this, value)
+      
+      if !ischar(value) || !(strcmp(value, "on") || strcmp(value, "off"))
+        error ("Expected AutoCommit as 'off' or 'on'");
+      endif
+      if !isempty(this.dbhandle)
+        this.dbhandle.AutoCommit = value;
+      endif
+    endfunction
+
     function msg = get.LoginTimeout (this)
       if !isempty(this.dbhandle)
         this.LoginTimeout = this.dbhandle.LoginTimeout;

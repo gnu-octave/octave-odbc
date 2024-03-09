@@ -248,45 +248,30 @@ octave_odbc::subsasgn (const std::string& type, const std::list<octave_value_lis
     case '.':
       if (type.length () == 1)
         {
-          error ("octave_odbc invalid index");
-/*
           octave_value prop = (idx.front ()) (0);
 	  if (!prop.is_string() || prop.string_value() != "AutoCommit")
 	    {
               error ("octave_odbc Unknown property");
 	    }
-	  else if(!rhs.is_string() || (rhs.string_value() != "on" && rhs.string_value() != "off"))
-	  {
-              error ("Expected AUtoCommit as 'on' or 'off'");
-
-	  }
+          else if(!rhs.is_string() || (rhs.string_value() != "on" && rhs.string_value() != "off"))
+            {
+              error ("Expected AutoCommit as 'on' or 'off'");
+            }
 	  else
-	  {
-	    std::string  newautocommit = rhs.string_value();
-
-	    if (newautocommit != autocommit)
-	    {
-              if (newautocommit == "off")
-	      {
-		if(begin())
-	          autocommit = newautocommit;
-	      }
-              if (newautocommit == "on")
-	      {
-                // TODO: do we commit or rollback if go from on to off with stuff there ?
-		if (have_pending_commits())
-		  error ("Pending commits need to be commited or rolledback before changing commit state");
-                else
-		{
-		  rollback(); // should be nothing to reject really, but need to get out of transaction state
-	          autocommit = newautocommit;
-		}
-	      }
+            {
+              std::string  newautocommit = rhs.string_value();
+              if (newautocommit != autocommit)
+                {
+                  SQLRETURN rc;
+                  if (newautocommit == "off")
+                      rc = SQLSetConnectAttr(dbc, SQL_ATTR_AUTOCOMMIT, (SQLPOINTER)SQL_AUTOCOMMIT_OFF, 0);
+		  else
+                     rc = SQLSetConnectAttr(dbc, SQL_ATTR_AUTOCOMMIT, (SQLPOINTER)SQL_AUTOCOMMIT_ON, 0);
+                  autocommit = newautocommit;
+                }
             }
             OV_COUNT++;
             retval = octave_value (this);
-	  }
-*/
         }
       else
         {
