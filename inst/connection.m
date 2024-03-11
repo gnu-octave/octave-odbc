@@ -483,7 +483,7 @@ classdef connection < handle
       ## @deftypefn {} {} commit (@var{conn})
       ## Make permanant changes to the database.
       ## @end deftypefn
-      _run(this, "COMMIT");
+      __odbc_commit__(this.dbhandle);
     endfunction
 
     function rollback (this)
@@ -491,7 +491,7 @@ classdef connection < handle
       ## @deftypefn {} {} rollback (@var{conn})
       ## Rollback changes to the database.
       ## @end deftypefn
-      _run(this, "ROLLBACK");
+      __odbc_rollback__(this.dbhandle);
     endfunction
 
     function update(conn,tablename,colnames,data,whereclause)

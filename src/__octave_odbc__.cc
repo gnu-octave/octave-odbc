@@ -65,6 +65,8 @@ public:
   void close (void);
   bool is_open() const;
   bool run (const std::string &query, octave_value &v);
+  bool rollback ();
+  bool commit ();
   std::string getMessage() const;
 
   /**
@@ -467,7 +469,7 @@ octave_odbc::run (const std::string &query, octave_value &v)
 
   if (rc == SQL_ERROR)
     {
-      SQLFreeHandle( SQL_HANDLE_DBC, hstmt);
+      SQLFreeHandle( SQL_HANDLE_STMT, hstmt);
       return false;
     }
 
@@ -563,6 +565,61 @@ octave_odbc::run (const std::string &query, octave_value &v)
   return true;
 }
 
+bool
+octave_odbc::rollback (void)
+{
+  bool ok = true;
+  if (dbc)
+    {
+      SQLRETURN rc = SQLEndTran(SQL_HANDLE_DBC, dbc, SQL_ROLLBACK);
+      if (rc == SQL_SUCCESS_WITH_INFO || rc == SQL_ERROR)
+        {
+          SQLCHAR       SqlState[6], Msg[SQL_MAX_MESSAGE_LENGTH];
+          SQLINTEGER    NativeError;
+          SQLSMALLINT   i, MsgLen;
+          SQLRETURN     rc2;
+
+          if (rc == SQL_ERROR)
+            ok = false;
+
+          i = 1;
+          while ((rc2 = SQLGetDiagRec(SQL_HANDLE_DBC, dbc, i, SqlState, &NativeError, Msg, sizeof(Msg), &MsgLen)) == SQL_SUCCESS || rc2 == SQL_SUCCESS_WITH_INFO)
+           {
+             i++;
+	     message = (char*)Msg;
+	   }
+        }
+    }
+  return ok;
+}
+
+bool
+octave_odbc::commit (void)
+{
+  bool ok = true;
+  if (dbc)
+    {
+      SQLRETURN rc = SQLEndTran(SQL_HANDLE_DBC, dbc, SQL_COMMIT);
+      if (rc == SQL_SUCCESS_WITH_INFO || rc == SQL_ERROR)
+        {
+          SQLCHAR       SqlState[6], Msg[SQL_MAX_MESSAGE_LENGTH];
+          SQLINTEGER    NativeError;
+          SQLSMALLINT   i, MsgLen;
+          SQLRETURN     rc2;
+
+          if (rc == SQL_ERROR)
+            ok = false;
+
+          i = 1;
+          while ((rc2 = SQLGetDiagRec(SQL_HANDLE_DBC, dbc, i, SqlState, &NativeError, Msg, sizeof(Msg), &MsgLen)) == SQL_SUCCESS || rc2 == SQL_SUCCESS_WITH_INFO)
+           {
+             i++;
+	     message = (char*)Msg;
+	   }
+        }
+    }
+  return ok;
+}
 
 std::string
 octave_odbc::getMessage() const
@@ -678,6 +735,73 @@ Private function\n \
       return octave_value();
     }
 }
+
+// PKG_ADD: autoload ("__odbc_rollback__", "__octave_odbc__.oct");
+DEFUN_DLD(__odbc_rollback__, args, nargout,
+"-*- texinfo -*-\n \
+@deftypefn {Function File} {} __odbc_run__\n \
+Private function\n \
+@end deftypefn")
+{
+  init_types ();
+
+  if (args.length () != 1 || 
+      args(0).type_id () != octave_odbc::static_type_id ())
+    {
+      print_usage ();
+      return octave_value (false);  
+    }
+
+  octave_odbc * db = NULL;
+
+  const octave_base_value& rep = args (0).get_rep ();
+
+  db = &((octave_odbc &)rep);
+
+  if(db->rollback())
+    {
+      return octave_value ();
+    }
+  else
+    {
+      error ("Could not run rollback: %s", db->getMessage().c_str());
+      return octave_value();
+    }
+}
+
+// PKG_ADD: autoload ("__odbc_commit__", "__octave_odbc__.oct");
+DEFUN_DLD(__odbc_commit__, args, nargout,
+"-*- texinfo -*-\n \
+@deftypefn {Function File} {} __odbc_commit__\n \
+Private function\n \
+@end deftypefn")
+{
+  init_types ();
+
+  if (args.length () != 1 || 
+      args(0).type_id () != octave_odbc::static_type_id ())
+    {
+      print_usage ();
+      return octave_value (false);  
+    }
+
+  octave_odbc * db = NULL;
+
+  const octave_base_value& rep = args (0).get_rep ();
+
+  db = &((octave_odbc &)rep);
+
+  if(db->commit())
+    {
+      return octave_value ();
+    }
+  else
+    {
+      error ("Could not run commit: %s", db->getMessage().c_str());
+      return octave_value();
+    }
+}
+
 
 // PKG_ADD: autoload ("__odbc_list__", "__octave_odbc__.oct");
 DEFUN_DLD(__odbc_list__, args, nargout,
