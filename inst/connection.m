@@ -501,9 +501,63 @@ classdef connection < handle
       ## @end deftypefn
  
       sqlquery = "";
+
+      if nargin != 5
+        error ("update: expected tablename, colnames, data and whereclause");
+      endif
+
+      if !ischar(tablename)
+        error ("Expected tablename as a string");
+      endif
+
+      if !ischar(whereclause)
+        error ("Expected whereclause as a string");
+      endif
+
+      if isa(data, "dbtable")
+        data = table2struct(data);
+      elseif isa(data, "table")
+        data = table2struct(data, 'ToScalar', true);
+      elseif !isstruct(data)
+        error ("Expected table or struct data");
+      endif
+
+      if !iscellstr(colnames)
+        error ("Expected colnames as cellstr");
+      endif
+
+      sql = sprintf("UPDATE %s SET ", tablename);
+
+      for col=1:numel(colnames)
+        if col > 1
+          sql = [sql "," ];
+        endif
+        v = data.(colnames{col});
+
+        if islogical(v)
+          if v
+            v = 1;
+          else
+            v = 0;
+          endif
+        endif
+
+        if isnumeric(v)
+           v = num2str(v);
+        else
+           v = ['"' v '"'];
+        endif
+ 
+        sql = [sql colnames{col} " = " v];
+      endfor
+
+      sql = [sql " " whereclause];
+ 
+      execute(conn, sql);
+ 
     endfunction
 
-    function sqlupdate(conn,tablename, data, filter, varargin)
+    function sqlupdate(conn, tablename, data, filter, varargin)
       ## -*- texinfo -*-
       ## @deftypefn {} {} sqlupdate (@var{db}, @var{tablename}, @var{data}, @var{filter})
       ## @deftypefnx {} {} sqlupdate (@var{db}, @var{tablename}, @var{data}, @var{filter}, @var{propertyname}, @var{propertyvalue} @dots{})
@@ -511,6 +565,41 @@ classdef connection < handle
       ## @end deftypefn
  
       sqlquery = "";
+
+      if mod (nargin, 2) != 0
+        error ("sqlupdate: expected property name, value pairs");
+      endif
+      if !iscellstr (varargin (1:2:nargin-4))
+        error ("sqlupdate: expected property names to be strings");
+      endif
+ 
+      if !ischar(tablename)
+        error ("Expected tablename as a string");
+      endif
+
+      if isa(data, "dbtable")
+        #data = table2struct(data);
+        cols = subsref (data, substruct(".", "Properties")).VariableNames;
+      elseif isa(data, "table")
+        #data = table2struct(data, 'ToScalar', true);
+        cols = subsref (data, substruct(".", "Properties")).VariableNames;
+      elseif isstruct(data)
+        cols = fieldnames(data);
+      else
+        error ("Expected table or struct data");
+      endif
+
+      for i = 1:2:nargin-4
+        propname = tolower (varargin{i});
+        propvalue = varargin{i+1};
+
+        # currently not using the properties, but verify name at least
+        if strcmp(propname, "schema") == false &&  strcmp(propname, "catalog") == false
+          error ("sqlupdate: Unknown property name '%s'", propname);
+        endif
+      endfor
+
+      update(conn, tablename, cols, data, ["WHERE " char(filter)]);
     endfunction
 
     function disp(this)
@@ -664,6 +753,24 @@ endclassdef
 %! sqlwrite(db, "Test1", t);
 %! tbl = sqlread(db , "Test1");
 %! assert(size(tbl), [2 2]);
+
+%!xtest
+%! tbl = db.select("SELECT * FROM TestTable WHERE Id=1");
+%! assert(tbl.Name{1}, "Name1");
+%! rf = rowfilter("Id");
+%! rf = (rf.Id == 1);
+%! data = struct("Name", {'Name11'});
+%! db.sqlupdate("TestTable", data, rf);
+%! tbl = db.select("SELECT * FROM TestTable WHERE Id=1");
+%! assert(tbl.Name{1}, "Name11");
+
+%!xtest
+%! tbl = db.select("SELECT * FROM TestTable WHERE Id=2");
+%! assert(tbl.Name{1}, "Name2");
+%! data = struct("Name", {'Name22'});
+%! db.update("TestTable", {"Name"}, data, "WHERE Id=2");
+%! tbl = db.select("SELECT * FROM TestTable WHERE Id=2");
+%! assert(tbl.Name{1}, "Name22");
 
 %!test
 %! close(db);
