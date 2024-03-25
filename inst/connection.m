@@ -358,7 +358,7 @@ classdef connection < handle
           l = fgetl(fid);
           l = strtrim(l);
           if !isempty(l)
-            t = fetch(this, l, varargin{:})
+            t = fetch(this, l, varargin{:});
             query{end+1} = l;
             data{end+1} = t;
             mess{end+1} = this.Message;
@@ -716,15 +716,18 @@ classdef connection < handle
 endclassdef
 
 %!shared dbname, db
+%! # test connection, isopen, properties and execute
 %! dbname = tempname;
 %! db = connection(["driver=SQLite3;Database=" dbname ';']);
 %! assert(isopen(db));
+%! assert(db.Type, 'ODBC Connection Object');
 %! db.execute("CREATE TABLE TestTable (Id INT NOT NULL PRIMARY KEY, Name VARCHAR(255));");
 %! db.execute("INSERT INTO TestTable (Id,Name) VALUES (1, 'Name1');");
 %! db.execute("INSERT INTO TestTable (Id,Name) VALUES (2, 'Name2');");
 %! db.execute("INSERT INTO TestTable (Id,Name) VALUES (3, 'Name3');");
 
 %!xtest
+%! # test sqlread
 %! tbl = db.sqlread("TestTable");
 %! assert(size(tbl), [3 2]);
 %! tbl = db.sqlread("TestTable", "MaxRows", 1);
@@ -734,6 +737,7 @@ endclassdef
 %! assert(size(tbl), [2 2]);
 
 %!xtest
+%! # test fetch
 %! tbl = db.fetch("SELECT * FROM TestTable");
 %! assert(size(tbl), [3 2]);
 %! tbl = db.fetch("SELECT * FROM TestTable", "MaxRows", 1);
@@ -743,6 +747,7 @@ endclassdef
 %! assert(size(tbl), [2 2]);
 
 %!xtest
+%! # test select
 %! tbl = db.select("SELECT * FROM TestTable");
 %! assert(size(tbl), [3 2]);
 %! tbl = db.select("SELECT * FROM TestTable", "MaxRows", 1);
@@ -755,6 +760,7 @@ endclassdef
 %! assert(size(tbl), [2 2]);
 
 %!xtest
+%! # test sqlupdate
 %! tbl = db.select("SELECT * FROM TestTable WHERE Id=1");
 %! assert(tbl.Name{1}, "Name1");
 %! rf = rowfilter("Id");
@@ -765,6 +771,7 @@ endclassdef
 %! assert(tbl.Name{1}, "Name11");
 
 %!xtest
+%! # test update
 %! tbl = db.select("SELECT * FROM TestTable WHERE Id=2");
 %! assert(tbl.Name{1}, "Name2");
 %! data = struct("Name", {'Name22'});
@@ -772,6 +779,21 @@ endclassdef
 %! tbl = db.select("SELECT * FROM TestTable WHERE Id=2");
 %! assert(tbl.Name{1}, "Name22");
 
+%!xtest
+%! # test executeSQLScript
+%! sqlfile = tempname;
+%! fd = fopen(sqlfile, "w+t");
+%! fprintf(fd, "SELECT * FROM TestTable WHERE Id=1\n");
+%! fprintf(fd, "SELECT * FROM TestTable WHERE Id=2\n");
+%! fclose(fd);
+%! results = db.executeSQLScript(sqlfile);
+%! assert(isstruct(results));
+%! assert(fieldnames(results), {'SQLQuery'; 'Data'; 'Message'});
+%! assert(results(1).SQLQuery, "SELECT * FROM TestTable WHERE Id=1");
+%! delete(sqlfile);
+
 %!test
+%! # test close
 %! close(db);
+%! assert(!isopen(db));
 %! delete(dbname);
