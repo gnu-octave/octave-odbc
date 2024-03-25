@@ -8,6 +8,7 @@ ODBC connection
 Importing Data
   connection.fetch
   connection.sqlinnerjoin
+  connection.sqlouterjoin
   connection.sqlread
   connection.select
   connection.executeSQLScript
