@@ -186,7 +186,7 @@ classdef connection < handle
       ## @deftypefnx {} {@var{data} =} sqlinnerjoin (@var{db}, @var{lefttablename}, @var{righttablename}, "LeftKeys", @var{keys}, "RightKeys", @var{keys}, @dots{})
       ## Perform an innerjoin on two tables.
       ## 
-      ## Performs an innerjoin equivalent to 'SELECT * from lefttable, righttable'.
+      ## Performs an innerjoin equivalent to 'SELECT * from lefttable INNER JOIN righttable ON lefttable.key = rightable.key'.
       ##
       ## @subsubheading Inputs
       ## @table @asis
@@ -250,7 +250,8 @@ classdef connection < handle
       endfor
  
       where_cnt = 0;
-      sqlquery = sprintf("SELECT * FROM %s,%s WHERE ", lefttable, righttable);
+      #sqlquery = sprintf("SELECT * FROM %s,%s WHERE ", lefttable, righttable);
+      sqlquery = sprintf("SELECT * FROM %s INNER JOIN %s ON ", lefttable, righttable);
 
       if isempty(keys) && isempty(leftkeys) && isempty(rightkeys)
         ldata = _run(this, sprintf("SELECT * FROM '%s' LIMIT 1",  lefttable), "structure");
