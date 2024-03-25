@@ -7,6 +7,7 @@ ODBC connection
   configureODBCDataSource
 Importing Data
   connection.fetch
+  connection.sqlinnerjoin
   connection.sqlread
   connection.select
   connection.executeSQLScript

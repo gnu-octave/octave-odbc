@@ -177,8 +177,148 @@ classdef connection < handle
     endfunction
 
     # runstoredprocedure
-    # sqlinnerjoin
     # sqlouterjoin
+    
+    function data = sqlinnerjoin (this, lefttable, righttable, varargin)
+      ## -*- texinfo -*-
+      ## @deftypefn {} {@var{data} =} sqlinnerjoin (@var{db}, @var{lefttablename}, @var{righttablename})
+      ## @deftypefnx {} {@var{data} =} sqlinnerjoin (@var{db}, @var{lefttablename}, @var{righttablename}, "Keys", @var{keys}, @dots{})
+      ## @deftypefnx {} {@var{data} =} sqlinnerjoin (@var{db}, @var{lefttablename}, @var{righttablename}, "LeftKeys", @var{keys}, "RightKeys", @var{keys}, @dots{})
+      ## Perform an innerjoin on two tables.
+      ## 
+      ## Performs an innerjoin equivalent to 'SELECT * from lefttable, righttable'.
+      ##
+      ## @subsubheading Inputs
+      ## @table @asis
+      ## @item @var{db}
+      ## Previously created connection object
+      ## @item @var{lefttablename}
+      ## Name of lefthand table
+      ## @item @var{righttablename}
+      ## Name of righthand table
+      ## @item @var{keys}
+      ## A string or cellstring of column names to join against.
+      ## If specified as Keys, the names will be used on lefthand and rightside of the join.
+      ## If specified as LeftKeys and RightKeys, keys will be used separately for each side of the table.
+      ## If no keys are provided, common named columns will be matched between the tables.
+      ## @item @var{propertyname}, @var{propertyvalue}
+      ##  property name/value pairs where known properties are:
+      ##  @table @asis
+      ##  @item MaxRows
+      ##  Max number of rows to return.
+      ##  @item DataReturnFormat
+      ##  Format to return data in ('table', 'structure', 'cellarray')
+      ##  @end table
+      ## @end table
+      ##
+      ## @subsubheading Outputs
+      ## None
+      ##
+      ## @seealso{database, odbc, fetch}
+      ## @end deftypefn
+
+      if !ischar(lefttable) || !ischar(righttable)
+        error ("Expected left and right table as a string");
+      endif
+
+      if numel(varargin) > 0
+        if mod (numel(varargin), 2) != 0
+          error ("expected property name, value pairs");
+        endif
+        if !iscellstr (varargin (1:2:numel(varargin)))
+          error ("expected property names to be strings");
+        endif
+      endif
+
+      passon_args = {};
+      keys = {};
+      leftkeys = {};
+      rightkeys = {};
+      for idx=1:2:numel(varargin)
+        n = varargin{idx};
+        v = varargin{idx+1};
+        if strcmp(n, "Keys")
+          keys = v;
+        elseif strcmp(n, "LeftKeys")
+          leftkeys = v;
+        elseif strcmp(n, "RightKeys")
+          rightkeys = v;
+        else
+          parseon_args{end+1} = n
+          parseon_args{end+1} = v
+        endif
+      endfor
+ 
+      where_cnt = 0;
+      sqlquery = sprintf("SELECT * FROM %s,%s WHERE ", lefttable, righttable);
+
+      if isempty(keys) && isempty(leftkeys) && isempty(rightkeys)
+        ldata = _run(this, sprintf("SELECT * FROM '%s' LIMIT 1",  lefttable), "structure");
+        rdata = _run(this, sprintf("SELECT * FROM '%s' LIMIT 1",  righttable), "structure");
+
+        lcols = fieldnames(ldata);
+        rcols = fieldnames(rdata);
+
+        for idx=1:length(lcols)
+          z = ismember(lcols{idx}, rcols);
+          if sum(z) > 0
+            if where_cnt > 0
+              sqlquery = [sqlquery " AND "];
+            endif
+            sqlquery = [sqlquery sprintf("%s.%s = %s.%s", lefttable, lcols{idx}, righttable, lcols{idx})];
+            where_cnt = where_cnt + 1;
+          endif
+        endfor
+
+        if where_cnt == 0
+          error ("no common columns found in tables");
+        endif
+      elseif !isempty(keys) && isempty(leftkeys) && isempty(rightkeys)
+        if ischar(keys)
+          keys = {keys};
+        endif
+        if !iscellstr(keys)
+          error ("Expected Keys as string or cellstring");
+        endif
+        for idx=1:length(keys)
+          if where_cnt > 0
+            sqlquery = [sqlquery " AND "];
+          endif
+          sqlquery = [sqlquery sprintf("%s.%s = %s.%s", lefttable, keys{idx}, righttable, keys{idx})];
+          where_cnt = where_cnt + 1;
+        endfor
+      elseif isempty(keys) && !isempty(leftkeys) && !isempty(rightkeys)
+        if ischar(leftkeys)
+          leftkeys = {leftkeys};
+        endif
+        if ischar(rightkeys)
+          rightkeys = {rightkeys};
+        endif
+
+        if !iscellstr(leftkeys) || !iscellstr(rightkeys)
+          error ("Expected LeftKeys and RightKeys as string or cellstring");
+        endif
+        if size(leftkeys) != size(rightkeys)
+          error ("Expected LeftKeys and RightKeys to be same size");
+        endif
+
+        for idx=1:length(leftkeys)
+          if where_cnt > 0
+            sqlquery = [sqlquery " AND "];
+          endif
+          sqlquery = [sqlquery sprintf("%s.%s = %s.%s", lefttable, leftkeys{idx}, righttable, rightkeys{idx})];
+          where_cnt = where_cnt + 1;
+        endfor
+      else
+        error ("Expected Keys or LeftKeys and RightKeys");
+      endif
+
+      if where_cnt == 0
+        error ("no constraint columns specified in keys");
+      endif
+
+      data = fetch(this, sqlquery, passon_args{:});
+    endfunction
    
     function sqlwrite (this, tablename, data, varargin)
       ## -*- texinfo -*-
@@ -725,6 +865,8 @@ endclassdef
 %! db.execute("INSERT INTO TestTable (Id,Name) VALUES (1, 'Name1');");
 %! db.execute("INSERT INTO TestTable (Id,Name) VALUES (2, 'Name2');");
 %! db.execute("INSERT INTO TestTable (Id,Name) VALUES (3, 'Name3');");
+%! db.execute("CREATE TABLE TestX (Id INT NOT NULL PRIMARY KEY, Author VARCHAR(255));");
+%! db.execute("INSERT INTO TestX (Id,Author) VALUES (1, 'Author1');");
 
 %!xtest
 %! # test sqlread
@@ -778,6 +920,21 @@ endclassdef
 %! db.update("TestTable", {"Name"}, data, "WHERE Id=2");
 %! tbl = db.select("SELECT * FROM TestTable WHERE Id=2");
 %! assert(tbl.Name{1}, "Name22");
+
+%!xtest
+%! # test inner join
+%! tbl = db.sqlinnerjoin("TestTable", "TestX");
+%! assert(size(tbl), [1 3]);
+%! tbl = db.sqlinnerjoin("TestTable", "TestX", "Keys", "Id");
+%! assert(size(tbl), [1 3]);
+%! tbl = db.sqlinnerjoin("TestTable", "TestX", "Keys", {"Id"});
+%! assert(size(tbl), [1 3]);
+%! tbl = db.sqlinnerjoin("TestTable", "TestX", "LeftKeys", "Name", "RightKeys", "Author");
+%! assert(size(tbl), [0 3]);
+%! tbl = db.sqlinnerjoin("TestTable", "TestX", "LeftKeys", {"Name"}, "RightKeys", {"Author"});
+%! assert(size(tbl), [0 3]);
+%! tbl = db.sqlinnerjoin("TestTable", "TestX", "LeftKeys", "Id", "RightKeys", "Id");
+%! assert(size(tbl), [1 3]);
 
 %!xtest
 %! # test executeSQLScript
