@@ -63,7 +63,7 @@ To download a copy of the @acronym{GNU} Octave ODBC package, please visit
 
 @dircategory Math
 @direntry
-* ODBC for Octave: (odbc).         DBS Toolkit for Octave 
+* ODBC for Octave: (odbc).         ODBC Toolkit for Octave 
 @end direntry
 
 @c %*** Start of BODY
@@ -94,6 +94,8 @@ or can be installed in an off-line mode via a downloaded tarball.
 
 The toolkit has a dependency on the unixODBC library in Linux, so it must be installed in order
 to successfully install the toolkit.
+
+In Microsoft Windows, it uses the native odbc library.
 
 The toolkit must be then be loaded once per each @acronym{GNU} Octave session in order to use its functionality.
 
@@ -142,7 +144,66 @@ The toolkit will also load the tablicious toolkit if available to provide table 
 @chapter Basic Usage Overview
 @cindex Basic Usage Overview
 
-To be written
+@section Database Configuration
+@cindex Database Configuration
+
+A ODBC driver and datasource must be configured in order to connect to it.
+
+The known datasources can be displayed by running the command @code{listDataSources}
+
+For Windows ODBC, to modify or add additional datasources. run the command @code{configureODBCDataSource} to 
+open the system ODBC configraion tool.
+
+In Linux, configure using the configution files or tools  available for unixODBC.
+
+
+@section Database Connection
+@cindex Database Connection
+
+A database can be connected to by using the @code{odbc} or @code{database} function.
+
+The datasource name can be either a DSN value as returned from @code{listDataSources}
+or a DSNless connection string providing driver information to pass to a driver.
+
+@subsubheading Example
+@example
+Connection to MYSQL using DSN
+@code{
+# connection using DSN
+conn = odbc("MySQL ODBC" ,"username","password")
+}
+@end example
+
+@example
+Connection using DSNless string
+@code{
+# connection to SQLITE using DSNless string
+conn = odbc("Driver=SQLite3;Database=mytest.db;", "","")
+}
+@end example
+
+@cindex Read a table
+
+To quickly read data from a table, use the sqlread function
+
+@subsubheading Example
+@example
+@code {
+data = sqlread(conn, "TestTable")
+}
+@end example
+
+@section Close the database
+@cindex Close the database
+
+To close the database, use the close function
+
+@subsubheading Example
+@example
+@code {
+close(conn)
+}
+@end example
 
 @c -------------------------------------------------------------------------
 @node Function Reference
