@@ -3,7 +3,7 @@
 @c Octave ODBC Toolkit - Basic ODBC implementation of Database Toolkit
 
 @c For manually generating the documentation use
-@c   LANGUAGE=en makeinfo --html --no-split octave-sqlite.texi
+@c   LANGUAGE=en makeinfo --html --no-split octave-odbc.texi
 
 @c %*** Start of HEADER
 @setfilename octave-odbc.info
@@ -20,7 +20,7 @@
 
 @c %*** Start of TITLEPAGE
 @titlepage
-@c @center @image{octave-sqlite-logo}
+@c @center @image{octave-odbc-logo}
 @vskip 0pt plus 1filll
 @title Octave ODBC Toolkit @value{VERSION}
 @subtitle ODBC functions for @acronym{GNU} Octave.
@@ -55,7 +55,7 @@ Octave that you have.  The precise conditions can be found in the
 @acronym{GNU} General Public License that comes with the @acronym{GNU}
 Octave ODBC Toolkit and that also appears in @ref{Copying}.
 
-To download a copy of the @acronym{GNU} Octave SQLITE package, please visit
+To download a copy of the @acronym{GNU} Octave ODBC package, please visit
 @url{https://gnu-octave.github.io/octave-odbc/}.
 
 @end titlepage
@@ -99,8 +99,8 @@ The toolkit must be then be loaded once per each @acronym{GNU} Octave session in
 
 @section Online Direct install
 @cindex Online install
-With an internet connection available, the octave sqlite package can be installed from
-the octave-sqlite website using the following command within @acronym{GNU} Octave:
+With an internet connection available, the octave ODBC package can be installed from
+the octave-odbc website using the following command within @acronym{GNU} Octave:
 
 @example
 pkg install https://github.com/gnu-octave/octave-odbc/releases/download/v@value{VERSION}/octave-odbc-@value{VERSION}.tar.gz
