@@ -50,7 +50,6 @@ classdef rowfilter
   ## }
   ## @end example
   ##
-  ## @seealso{dbtable}
   ## @end deftypefn
 
   properties (Access = private)

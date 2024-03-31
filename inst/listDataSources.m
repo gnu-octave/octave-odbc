@@ -24,7 +24,7 @@
 ## @subsubheading Outputs
 ## @table @code
 ## @item @var{src}
-## As table or cell structure of available data sources. The result contains fields for 
+## A table or cell structure of available data sources. The result contains fields for 
 ## Name, DriverType and Vendor. 
 ## @end table
 ##

@@ -16,7 +16,7 @@
 
 ## -*- texinfo -*- 
 ## @deftypefn {} {} configureODBCDataSource ()
-## Open the ODBC Datasource Administrator dialogbox in Windows.
+## Open the ODBC Datasource Administrator dialog box in Windows.
 ##
 ## @subsubheading Inputs
 ## None
@@ -24,7 +24,7 @@
 ## @subsubheading Outputs
 ## None
 ##
-## @seealso{listSataSources}
+## @seealso{listDataSources}
 ## @end deftypefn
 
 function configureODBCDataSource ()

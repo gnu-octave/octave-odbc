@@ -17,7 +17,29 @@
 classdef connection < handle
   ## -*- texinfo -*-
   ## @deftp {Class} connection
-  ## Connection class for a odbc databse connection
+  ## Connection class for a odbc database connection
+  ## @subsubheading Object Properties
+  ## @table @asis
+  ## @item DataSource
+  ## Datasource value as passed during creation
+  ## @item UserName
+  ## Username value as passed during creation
+  ## @item Password
+  ## Password value as passed during creation
+  ## @item Message
+  ## Readonly last error message
+  ## @item Type
+  ## 'ODBC Connection Object'
+  ## @item ReadOnly
+  ## Boolean for readonly access passed during creation
+  ## @item AutoCommit
+  ## Boolean for control of commit to database
+  ## @item LoginTimeout
+  ## Number of seconds for a login timeout
+  ## @end table
+  ##
+  ## Class is created using the odbc or database function.
+  ## @seealso{odbc, database}
   ## @end deftp
  
   properties (SetAccess=protected, GetAccess=public)
@@ -157,7 +179,7 @@ classdef connection < handle
     function Y = isopen (this)
       ## -*- texinfo -*-
       ## @deftypefn {} {@var{T} =} isopen (@var{conn})
-      ## REturn true if ODCB connection is open
+      ## Return true if ODCB connection is open
       ## @end deftypefn
 
       Y = ! isempty(this.dbhandle);
@@ -468,14 +490,14 @@ classdef connection < handle
       ## @deftypefnx {} {} sqlwrite (@var{db}, @var{tablename}, @var{data}, @var{propertyname}, @var{propertyvalue} @dots{})
       ## Insert rows of data into a table.
       ##
-      ## Insert rows of data into a sqlite database table.
+      ## Insert rows of data into a database table.
       ## If the table does not exist it will be created, using the ColumnType property if available
       ## otherwise, the type of input data will be used to determine field types.
       ##
       ## @subsubheading Inputs
       ## @table @asis
       ## @item @var{db}
-      ## Previously created octave_sqlite object
+      ## Previously created database connection object
       ## @item @var{tablename}
       ## Name of table to write data to
       ## @item @var{data}
@@ -614,6 +636,21 @@ classdef connection < handle
       ## -*- texinfo -*-
       ## @deftypefn {} {@var{results} =} executeSQLScript (@var{conn}, @var{scriptname})
       ## Run statements from a script file
+      ## 
+      ## @subsubheading Inputs
+      ## @table @code
+      ## @item @var{conn}
+      ## ODBC connection object
+      ## @item @var{scriptname}
+      ## Filename to read statements from. NOTE: currently the file is expected to contain one statement per line.
+      ## @end table
+      ##
+      ## @subsubheading Outputs
+      ## @table @code
+      ## @item @var{results}
+      ## A struct with fields SQLQuery, Data and Message for each SAQL statement in the file.
+      ## @end table
+      ##
       ## @end deftypefn
 
       if nargin < 2 || !ischar(filename)
@@ -655,7 +692,52 @@ classdef connection < handle
     function data = fetch (this, query, varargin)
       ## -*- texinfo -*-
       ## @deftypefn {} {@var{data} =} fetch (@var{conn}, @var{query})
+      ## @deftypefnx {} {@var{data} =} fetch (@var{conn}, @var{query}, @var{propertyname}, @var{propertyvalue} @dots{})
       ## Perform SQL query @var{query}, and return result
+      ## @subsubheading Inputs
+      ## @table @asis
+      ## @item @var{conn}
+      ##  currently open database connection.
+      ## @item @var{sqlquery}
+      ##  String containing a valid select SQL query.
+      ## @item @var{propertyname}, @var{propertyvalue}
+      ##  property name/value pairs where known properties are:
+      ##  @table @asis
+      ##  @item MaxRows
+      ##   Integer value of max number of rows in the query
+      ##  @item VariableNamingRule
+      ##   String value 'preserve' (default) or 'modify' to flag renaming of variable names (currently ignored)
+      ##  @item RowFilter
+      ##   rowfilter object to filter results
+      ##  @end table
+      ## @end table
+      ##
+      ## @subsubheading Outputs
+      ## @table @asis
+      ## @item @var{data}
+      ##  a table containing the query result.
+      ## @end table
+      ##
+      ## @subsubheading Examples
+      ## Select all rows of data from a database tables
+      ## @example
+      ## @code {
+      ## # create sql connection
+      ## db = database("default", "", "");
+      ## data = fetch(db, 'SELECT * FROM TestTable');
+      ## }
+      ## @end example
+      ##
+      ## Select 5 rows of data from a database tables
+      ## @example
+      ## @code {
+      ## # create sql connection
+      ## db = database("default", "", "");
+      ## data = fetch(db, 'SELECT * FROM TestTable', "MaxRows", 5);
+      ## }
+      ## @end example
+      ##
+      ## @seealso{database, connection}
       ## @end deftypefn
 
       if !ischar(query)
@@ -719,7 +801,52 @@ classdef connection < handle
     function data = select (this, sqlquery, varargin)
       ## -*- texinfo -*-
       ## @deftypefn {} {@var{data} =} select (@var{conn}, @var{query})
+      ## @deftypefnx {} {@var{data} =} select (@var{conn}, @var{query}, @var{propertyname}, @var{propertyvalue} @dots{})
       ## Perform SQL query @var{query}, and return result
+      ## @subsubheading Inputs
+      ## @table @asis
+      ## @item @var{conn}
+      ##  currently open database connection.
+      ## @item @var{query}
+      ##  String containing a valid select SQL query.
+      ## @item @var{propertyname}, @var{propertyvalue}
+      ##  property name/value pairs where known properties are:
+      ##  @table @asis
+      ##  @item MaxRows
+      ##   Integer value of max number of rows in the query
+      ##  @item VariableNamingRule
+      ##   String value 'preserve' (default) or 'modify' to flag renaming of variable names (currently ignored)
+      ##  @item RowFilter
+      ##   rowfilter object to filter results
+      ##  @end table
+      ## @end table
+      ##
+      ## @subsubheading Outputs
+      ## @table @asis
+      ## @item @var{data}
+      ##  a table containing the query result.
+      ## @end table
+      ##
+      ## @subsubheading Examples
+      ## Select all rows of data from a database tables
+      ## @example
+      ## @code {
+      ## # create sql connection
+      ## db = database("default", "", "");
+      ## data = fetch(db, 'SELECT * FROM TestTable');
+      ## }
+      ## @end example
+      ##
+      ## Select 5 rows of data from a database tables
+      ## @example
+      ## @code {
+      ## # create sql connection
+      ## db = database("default", "", "");
+      ## data = fetch(db, 'SELECT * FROM TestTable', "MaxRows", 5);
+      ## }
+      ## @end example
+      ##
+      ## @seealso{database, connection}
       ## @end deftypefn
 
       # TODO: verify statement is SELECT ... ?
@@ -730,6 +857,31 @@ classdef connection < handle
       ## -*- texinfo -*-
       ## @deftypefn {} {} execute (@var{conn}, @var{query})
       ## Perform SQL query @var{query}, that does not return result
+      ##
+      ## @subsubheading Inputs
+      ## @table @asis
+      ## @item @var{db}
+      ## Previously created database cnnection object
+      ## @item @var{sqlquery}
+      ## A valid non selecting SQL query string
+      ## @end table
+      ##
+      ## @subsubheading Outputs
+      ## None
+      ##
+      ## @subsubheading Examples
+      ## Create a database table and insert a row
+      ## @example
+      ## @code {
+      ## # create sql connection
+      ## db = database("default", "", "");
+      ## # create table and then insert a row
+      ## execute(db, 'CREATE TABLE Test (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT)');
+      ## execute(db, 'INSERT INTO Test (Name) VALUES ("Line1")');
+      ## }
+      ## @end example
+      ##
+      ## @seealso{database, fetch}
       ## @end deftypefn
       _run(this, sqlquery);
     endfunction
@@ -739,6 +891,54 @@ classdef connection < handle
       ## @deftypefn {} {@var{data} =} sqlread (@var{conn}, @var{tablename})
       ## @deftypefnx {} {@var{data} =} sqlread (@var{conn}, @var{tablename}, @var{propertryname}, @var{propertyvalue})
       ## Read data from table @var{tablename}
+      ##
+      ## Return rows of data from table @var{tablename} in a database.
+      ## This function is the equivalent of running SELECT * FROM @var{table}.
+      ##
+      ## @subsubheading Inputs
+      ## @table @asis
+      ## @item @var{conn}
+      ##  currently open database.
+      ## @item @var{tablename}
+      ##  Name of a table with the database.
+      ## @item @var{propertyname}, @var{propertyvalue}
+      ##  property name/value pairs where known properties are:
+      ##  @table @asis
+      ##  @item MaxRows
+      ##   Integer value of max number of rows in the query
+      ##  @item VariableNamingRule
+      ##   String value 'preserve' (default) or 'modify' to flag renaming of variable names (currently ignored)
+      ##  @item RowFilter
+      ##   rowfilter object to filter results
+      ##  @end table
+      ## @end table
+      ##
+      ## @subsubheading Outputs
+      ## @table @asis
+      ## @item @var{data}
+      ##  a table containing the query result.
+      ## @end table
+      ##
+      ## @subsubheading Examples
+      ## Select all rows of data from a database table
+      ## @example
+      ## @code {
+      ## # create sql connection to an existing database
+      ## db = database("default", "", "");
+      ## data = sqlread(db, 'TestTable');
+      ## }
+      ## @end example
+      ##
+      ## Select 5 rows of data from a database table
+      ## @example
+      ## @code {
+      ## # create sql connection
+      ## db = database("default", "", "");
+      ## data = sqlread(db, 'TestTable', "MaxRows", 5);
+      ## }
+      ## @end example
+      ##
+      ## @seealso{database, fetch}
       ## @end deftypefn
 
       if nargin < 2 || !ischar(tablename)
@@ -763,6 +963,15 @@ classdef connection < handle
       ## -*- texinfo -*-
       ## @deftypefn {} {} commit (@var{conn})
       ## Make permanant changes to the database.
+      ##
+      ## @subsubheading Inputs
+      ## @table @asis
+      ## @item @var{conn}
+      ##  currently open database.
+      ## @end table
+      ##
+      ## @subsubheading Outputs
+      ## None
       ## @end deftypefn
       __odbc_commit__(this.dbhandle);
     endfunction
@@ -771,6 +980,15 @@ classdef connection < handle
       ## -*- texinfo -*-
       ## @deftypefn {} {} rollback (@var{conn})
       ## Rollback changes to the database.
+      ##
+      ## @subsubheading Inputs
+      ## @table @asis
+      ## @item @var{conn}
+      ##  currently open database.
+      ## @end table
+      ##
+      ## @subsubheading Outputs
+      ## None
       ## @end deftypefn
       __odbc_rollback__(this.dbhandle);
     endfunction
@@ -779,6 +997,37 @@ classdef connection < handle
       ## -*- texinfo -*-
       ## @deftypefn {} {} update (@var{conn}, @var{tablename}, @var{colnames}, @var{data}, @var{whereclause})
       ## Update columns in database.
+      ##
+      ## @subsubheading Inputs
+      ## @table @asis
+      ## @item @var{conn}
+      ## Previously created database connection object
+      ## @item @var{tablename}
+      ## Name of table to write data to
+      ## @item @var{colnames}
+      ## cellstr of column names update. Variables names are expected to match the database.
+      ## @item @var{data}
+      ## Table or struct containing data to write to the database. Column names are expected to be present in the data..
+      ## @item @var{whereclause}
+      ## String WHERE condition to meet for updates.
+      ## @end table
+      ##
+      ## @subsubheading Outputs
+      ## None
+      ##
+      ## @subsubheading Examples
+      ## Update a row in the database
+      ## @example
+      ## @code {
+      ## # create sql connection
+      ## db = database("default", "", "");
+      ## # update name where Id > 1
+      ## t = table(['Name3'], 'VariableNames', @{'Name'@});
+      ## update(db, "Test", t, "WHERE Id > 1");
+      ## }
+      ## @end example
+      ##
+      ## @seealso{sqlupdate}
       ## @end deftypefn
  
       sqlquery = "";
@@ -843,6 +1092,46 @@ classdef connection < handle
       ## @deftypefn {} {} sqlupdate (@var{db}, @var{tablename}, @var{data}, @var{filter})
       ## @deftypefnx {} {} sqlupdate (@var{db}, @var{tablename}, @var{data}, @var{filter}, @var{propertyname}, @var{propertyvalue} @dots{})
       ## Update rows of data in database.
+      ##
+      ## @subsubheading Inputs
+      ## @table @asis
+      ## @item @var{db}
+      ## Previously created database connection object
+      ## @item @var{tablename}
+      ## Name of table to write data to
+      ## @item @var{data}
+      ## Table containing or struct data to write to the database. Variables names are expected to match the database.
+      ## @item @var{filter}
+      ## A Filter object  or cell array of filter objects used to determine which rows of the table to update.
+      ## @item @var{propertyname}, @var{propertyvalue}
+      ##  property name/value pairs where known properties are:
+      ##  @table @asis
+      ##  @item Catalog
+      ##  An optional database catalog name.
+      ##  @item Schema
+      ##  An optional database schema name.
+      ##  @end table
+      ## @end table
+      ##
+      ## @subsubheading Outputs
+      ## None
+      ##
+      ## @subsubheading Examples
+      ## Update db where id > 1
+      ## @example
+      ## @code {
+      ## # create sql connection
+      ## db = database("default", "", "");
+      ## # make a filter to select what to update
+      ## rf = rowfilter(@{'Id'@});
+      ## rf = rf.Id > 1;
+      ## # update name where Id > 1
+      ## t = table(['Name3'], 'VariableNames', @{'Name'@});
+      ## sqlupdate(db, "Test", t, rf);
+      ## }
+      ## @end example
+      ##
+      ## @seealso{update}
       ## @end deftypefn
  
       sqlquery = "";

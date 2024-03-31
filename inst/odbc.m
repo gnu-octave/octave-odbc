@@ -18,7 +18,7 @@
 ## @deftypefn {} {@var{conn} =} odbc (@var{dbname}, @var{username}, @var{password})
 ## @deftypefnx {} {@var{conn} =} odbc (@var{dbname}, @var{username}, @var{password}, @var{propertyname}, @var{propertyvalue} @dots{})
 ## @deftypefnx {} {@var{conn} =} odbc (@var{dsnconnectstr})
-## Create a odbc database connection
+## Create an ODBC database connection
 ##
 ## @subsubheading Inputs
 ## @table @code
