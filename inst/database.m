@@ -52,6 +52,10 @@ function conn = database(databasename, username, password, varargin)
 
 endfunction
 
+%!error database("octave_odbc_test");
+%!error database("octave_odbc_test", "");
+%!error database("octave_odbc_test", "", "X", "");
+
 %!xtest
 %! a = database("octave_odbc_test", "test", "");
 %! assert(isopen(a));

@@ -1189,23 +1189,26 @@ classdef connection < handle
   methods
     function msg = get.Message (this)
       if !isempty(this.dbhandle)
-        this.Message = this.dbhandle.Message;
+        msg = this.dbhandle.Message;
+      else
+        msg = this.Message;
       endif
-      msg = this.Message;
     endfunction
 
     function msg = get.ReadOnly (this)
       if !isempty(this.dbhandle)
-        this.ReadOnly = this.dbhandle.ReadOnly;
+        msg = this.dbhandle.ReadOnly;
+      else
+        msg = this.ReadOnly;
       endif
-      msg = this.ReadOnly;
     endfunction
 
     function msg = get.AutoCommit (this)
       if !isempty(this.dbhandle)
-        this.AutoCommit = this.dbhandle.AutoCommit;
+        msg = this.dbhandle.AutoCommit;
+      else
+        msg = this.AutoCommit;
       endif
-      msg = this.AutoCommit;
     endfunction
 
     function set.AutoCommit (this, value)
@@ -1215,14 +1218,16 @@ classdef connection < handle
       endif
       if !isempty(this.dbhandle)
         this.dbhandle.AutoCommit = value;
+        this.AutoCommit = value;
       endif
     endfunction
 
     function msg = get.LoginTimeout (this)
       if !isempty(this.dbhandle)
-        this.LoginTimeout = this.dbhandle.LoginTimeout;
+        msg = this.LoginTimeout = this.dbhandle.LoginTimeout;
+      else
+        msg = this.LoginTimeout;
       endif
-      msg = this.LoginTimeout;
     endfunction
  
   endmethods
@@ -1287,6 +1292,7 @@ endclassdef
 
 %!shared dbname, db
 %! # test connection, isopen, properties and execute
+%! # assumes we have a Sqlite3 driver installed
 %! dbname = tempname;
 %! db = connection(["driver=SQLite3;Database=" dbname ';']);
 %! assert(isopen(db));
@@ -1385,6 +1391,28 @@ endclassdef
 %! assert(fieldnames(results), {'SQLQuery'; 'Data'; 'Message'});
 %! assert(results(1).SQLQuery, "SELECT * FROM TestTable WHERE Id=1");
 %! delete(sqlfile);
+
+%!xtest
+%! # test AutoCommit
+%! assert(db.AutoCommit, 'on');
+%! db.AutoCommit = 'off';
+%! assert(db.AutoCommit, 'off');
+%! tbl = db.select("SELECT * FROM TestTable");
+%! assert(size(tbl), [3 2]);
+%! db.execute("INSERT INTO TestTable (Id,Name) VALUES (4, 'Name4');");
+%! tbl = db.select("SELECT * FROM TestTable");
+%! assert(size(tbl), [4 2]);
+%! rollback(db);
+%! tbl = db.select("SELECT * FROM TestTable");
+%! assert(size(tbl), [3 2]);
+%!
+%! db.execute("INSERT INTO TestTable (Id,Name) VALUES (4, 'Name4');");
+%! tbl = db.select("SELECT * FROM TestTable");
+%! assert(size(tbl), [4 2]);
+%! commit(db);
+%! tbl = db.select("SELECT * FROM TestTable");
+%! assert(size(tbl), [4 2]);
+%! db.AutoCommit = 'off';
 
 %!test
 %! # test close

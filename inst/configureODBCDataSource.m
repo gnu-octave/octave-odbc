@@ -16,7 +16,8 @@
 
 ## -*- texinfo -*- 
 ## @deftypefn {} {} configureODBCDataSource ()
-## Open the ODBC Datasource Administrator dialog box in Windows.
+## Open the ODBC Datasource Administrator dialog box in Windows or
+## ODBCManageDataSources in Unix if available.
 ##
 ## @subsubheading Inputs
 ## None
