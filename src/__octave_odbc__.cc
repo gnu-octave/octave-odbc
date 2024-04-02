@@ -645,6 +645,30 @@ init_types(void)
     }
 }
 
+// PKG_ADD: autoload ("__odbc_pkg_lock__", "__octave_odbc__.oct");
+// PKG_ADD: __odbc_pkg_lock__(1);
+// PKG_DEL: __odbc_pkg_lock__(0);
+#ifdef DEFMETHOD_DLD
+DEFMETHOD_DLD (__odbc_pkg_lock__, interp, args, , "internal function")
+{
+  octave_value retval;
+  if (args.length () >= 1)
+    {
+      if (args(0).int_value () == 1)
+        interp.mlock();
+      else if (args(0).int_value () == 0 &&  interp.mislocked("__odbc_pkg_lock__"))
+        interp.munlock("__odbc_pkg_lock__");
+    }
+  return retval;
+}
+#else
+DEFUN_DLD(__odbc_pkg_lock__, args, ,  "internal function")
+{
+  octave_value retval;
+  return retval;
+}
+#endif
+
 // PKG_ADD: autoload ("__odbc_create__", "__octave_odbc__.oct");
 DEFUN_DLD(__odbc_create__, args, nargout,
 "-*- texinfo -*-\n \
