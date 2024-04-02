@@ -63,7 +63,11 @@ endfunction
 
 %!xtest
 %! t = tempname;
-%! a = odbc(["driver=SQLite3;Database=" t ';']);
+%! if ispc
+%!   a = odbc(["driver={SQLite3 ODBC Driver};Database=" dbname ';']);
+%! else
+%!   a = odbc(["driver=SQLite3;Database=" t ';']);
+%! endif
 %! assert(isopen(a));
 %! close(a);
 %! delete(t);

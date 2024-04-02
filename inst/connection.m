@@ -1294,7 +1294,12 @@ endclassdef
 %! # test connection, isopen, properties and execute
 %! # assumes we have a Sqlite3 driver installed
 %! dbname = tempname;
+%! db = [];
+%! if ispc
+%! db = connection(["driver={SQLite3 ODBC Driver};Database=" dbname ';']);
+%! else
 %! db = connection(["driver=SQLite3;Database=" dbname ';']);
+%! endif
 %! assert(isopen(db));
 %! assert(db.Type, 'ODBC Connection Object');
 %! db.execute("CREATE TABLE TestTable (Id INT NOT NULL PRIMARY KEY, Name VARCHAR(255));");
@@ -1416,6 +1421,8 @@ endclassdef
 
 %!test
 %! # test close
-%! close(db);
-%! assert(!isopen(db));
+%! if !isempty(db)
+%!   close(db);
+%!   assert(!isopen(db));
+%! endif
 %! delete(dbname);

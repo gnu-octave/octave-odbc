@@ -26,6 +26,10 @@ The Documentation is also installed as a pdf in the installed package folder.
 Online documentation is also available at
 https://gnu-octave.github.io/octave-odbc/
 
+## Inbuilt Tests
+In built function test can be run using `pkg test odbc`. It requires the SQLite3 ODBC drivers
+to be installed, and an octave_odbc_test DSN to be configured.
+
 ## Reporting Bugs
 
 Bugs can be filed on the [issue tracker](https://github.com/gnu-octave/octave-odbc/issues).
