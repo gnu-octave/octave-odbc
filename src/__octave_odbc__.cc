@@ -269,7 +269,9 @@ octave_odbc::subsasgn (const std::string& type, const std::list<octave_value_lis
                       rc = SQLSetConnectAttr(dbc, SQL_ATTR_AUTOCOMMIT, (SQLPOINTER)SQL_AUTOCOMMIT_OFF, 0);
 		  else
                      rc = SQLSetConnectAttr(dbc, SQL_ATTR_AUTOCOMMIT, (SQLPOINTER)SQL_AUTOCOMMIT_ON, 0);
-                  autocommit = newautocommit;
+
+		  if (rc == SQL_SUCCESS_WITH_INFO || rc == SQL_SUCCESS)
+                    autocommit = newautocommit;
                 }
             }
             OV_COUNT++;
@@ -303,7 +305,11 @@ octave_odbc::create (const std::string &dbname, const std::string &username, con
 
   if (timeout > 0)
     {
+#if (SIZEOF_LONG_INT == 8)
       SQLPOINTER tm = (SQLPOINTER)((long)timeout);
+#else
+      SQLPOINTER tm = (SQLPOINTER)((SQLINTEGER)timeout);
+#endif
       rc = SQLSetConnectAttr(dbc, SQL_LOGIN_TIMEOUT, (SQLPOINTER)tm, 0);
     }
 
