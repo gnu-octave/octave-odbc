@@ -285,7 +285,7 @@ doc/version.texi: $(release_dir_dep)
 doc/$(packageprefix)$(package).pdf: doc/$(packageprefix)$(package).texi doc/functions.texi doc/version.texi
 	cd doc && SOURCE_DATE_EPOCH=$(REPO_TIMESTAMP) $(TEXI2PDF) $(packageprefix)$(package).texi
 	# remove temp files
-	cd doc && $(RM) -f $(packageprefix)$(package).aux  $(packageprefix)$(package).cp  $(packageprefix)$(package).cps  $(packageprefix)$(package).fn  $(packageprefix)$(package).fns  $(packageprefix)$(package).log  $(packageprefix)$(package).toc
+	cd doc && $(RM) -f $(packageprefix)$(package).aux  $(packageprefix)$(package).cp  $(packageprefix)$(package).cps  $(packageprefix)$(package).fn  $(packageprefix)$(package).fns  $(packageprefix)$(package).log  $(packageprefix)$(package).toc $(packageprefix)$(package).tp $(packageprefix)$(package).tps
 
 doc/$(packageprefix)$(package).html: doc/$(packageprefix)$(package).texi doc/functions.texi doc/version.texi
 	cd doc && SOURCE_DATE_EPOCH=$(REPO_TIMESTAMP) $(MAKEINFO) --html --css-ref=$(packageprefix)$(package).css  --no-split --output=$(packageprefix)${package}.html $(packageprefix)$(package).texi

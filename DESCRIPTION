@@ -8,7 +8,7 @@ Description: Basic Octave implementation for ODBC database functionality
 Categories: Database
 Depends: octave (>= 6.0.0)
 #BuildRequires: unixODBC-dev
-#SystemRequirements: unixODBC
+SystemRequirements: unixODBC
 License: GPLv3+
 Url: https://gnu-octave.github.io/octave-odbc/
 Repository: https://github.com/gnu-octave/octave-odbc/
