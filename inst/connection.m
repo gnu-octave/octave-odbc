@@ -265,8 +265,8 @@ classdef connection < handle
         elseif strcmp(n, "RightKeys")
           rightkeys = v;
         else
-          parseon_args{end+1} = n
-          parseon_args{end+1} = v
+          passon_args{end+1} = n;
+          passon_args{end+1} = v;
         endif
       endfor
  
@@ -406,8 +406,8 @@ classdef connection < handle
         elseif strcmp(n, "RightKeys")
           rightkeys = v;
         else
-          parseon_args{end+1} = n
-          parseon_args{end+1} = v
+          passon_args{end+1} = n;
+          passon_args{end+1} = v;
         endif
       endfor
  
@@ -1310,37 +1310,37 @@ endclassdef
 %! db.execute("INSERT INTO TestX (Id,Author) VALUES (1, 'Author1');");
 
 %!xtest
-%! # test sqlread
-%! tbl = db.sqlread("TestTable");
-%! assert(size(tbl), [3 2]);
-%! tbl = db.sqlread("TestTable", "MaxRows", 1);
-%! assert(size(tbl), [1 2]);
+%! # test sqlread - using structure return format to ensure we know what we are getting
+%! tbl = db.sqlread("TestTable", "DataReturnFormat", "structure");
+%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [3 2]);
+%! tbl = db.sqlread("TestTable", "MaxRows", 1, "DataReturnFormat", "structure");
+%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [1 2]);
 %! filter = rowfilter("Id") > 1;
-%! tbl = db.sqlread("TestTable", "RowFilter", filter);
-%! assert(size(tbl), [2 2]);
+%! tbl = db.sqlread("TestTable", "RowFilter", filter, "DataReturnFormat", "structure");
+%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [2 2]);
 
 %!xtest
 %! # test fetch
-%! tbl = db.fetch("SELECT * FROM TestTable");
-%! assert(size(tbl), [3 2]);
-%! tbl = db.fetch("SELECT * FROM TestTable", "MaxRows", 1);
-%! assert(size(tbl), [1 2]);
+%! tbl = db.fetch("SELECT * FROM TestTable", "DataReturnFormat", "structure");
+%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [3 2]);
+%! tbl = db.fetch("SELECT * FROM TestTable", "MaxRows", 1, "DataReturnFormat", "structure");
+%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [1 2]);
 %! filter = rowfilter("Id") > '1';
-%! tbl = db.fetch("SELECT * FROM TestTable", "RowFilter", filter);
-%! assert(size(tbl), [2 2]);
+%! tbl = db.fetch("SELECT * FROM TestTable", "RowFilter", filter, "DataReturnFormat", "structure");
+%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [2 2]);
 
 %!xtest
 %! # test select
-%! tbl = db.select("SELECT * FROM TestTable");
-%! assert(size(tbl), [3 2]);
-%! tbl = db.select("SELECT * FROM TestTable", "MaxRows", 1);
-%! assert(size(tbl), [1 2]);
+%! tbl = db.select("SELECT * FROM TestTable", "DataReturnFormat", "structure");
+%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [3 2]);
+%! tbl = db.select("SELECT * FROM TestTable", "MaxRows", 1, "DataReturnFormat", "structure");
+%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [1 2]);
 
 %!xtest
 %! t = struct("Id", [1;2], "Name", ['Name1';'Name2']);
 %! sqlwrite(db, "Test1", t);
-%! tbl = sqlread(db , "Test1");
-%! assert(size(tbl), [2 2]);
+%! tbl = sqlread(db , "Test1", "DataReturnFormat", "structure");
+%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [2 2]);
 
 %!xtest
 %! # test sqlupdate
@@ -1364,25 +1364,25 @@ endclassdef
 
 %!xtest
 %! # test inner join
-%! tbl = db.sqlinnerjoin("TestTable", "TestX");
-%! assert(size(tbl), [1 3]);
-%! tbl = db.sqlinnerjoin("TestTable", "TestX", "Keys", "Id");
-%! assert(size(tbl), [1 3]);
-%! tbl = db.sqlinnerjoin("TestTable", "TestX", "Keys", {"Id"});
-%! assert(size(tbl), [1 3]);
-%! tbl = db.sqlinnerjoin("TestTable", "TestX", "LeftKeys", "Name", "RightKeys", "Author");
-%! assert(size(tbl), [0 3]);
-%! tbl = db.sqlinnerjoin("TestTable", "TestX", "LeftKeys", {"Name"}, "RightKeys", {"Author"});
-%! assert(size(tbl), [0 3]);
-%! tbl = db.sqlinnerjoin("TestTable", "TestX", "LeftKeys", "Id", "RightKeys", "Id");
-%! assert(size(tbl), [1 3]);
+%! tbl = db.sqlinnerjoin("TestTable", "TestX", "DataReturnFormat", "structure");
+%! assert([size(fieldnames(tbl),1), size(tbl.Id,1)], [3 1]);
+%! tbl = db.sqlinnerjoin("TestTable", "TestX", "Keys", "Id", "DataReturnFormat", "structure");
+%! assert([size(fieldnames(tbl),1), size(tbl.Id,1)], [3 1]);
+%! tbl = db.sqlinnerjoin("TestTable", "TestX", "Keys", {"Id"}, "DataReturnFormat", "structure");
+%! assert([size(fieldnames(tbl),1), size(tbl.Id,1)], [3 1]);
+%! tbl = db.sqlinnerjoin("TestTable", "TestX", "LeftKeys", "Name", "RightKeys", "Author", "DataReturnFormat", "structure");
+%! assert([size(fieldnames(tbl),1), size(tbl.Id,1)], [3 0]);
+%! tbl = db.sqlinnerjoin("TestTable", "TestX", "LeftKeys", {"Name"}, "RightKeys", {"Author"}, "DataReturnFormat", "structure");
+%! assert([size(fieldnames(tbl),1), size(tbl.Id,1)], [3 0]);
+%! tbl = db.sqlinnerjoin("TestTable", "TestX", "LeftKeys", "Id", "RightKeys", "Id", "DataReturnFormat", "structure");
+%! assert([size(fieldnames(tbl),1), size(tbl.Id,1)], [3 1]);
 
 %!xtest
 %! # test outer join
-%! tbl = db.sqlouterjoin("TestTable", "TestX");
-%! assert(size(tbl), [3 3]);
-%! tbl = db.sqlouterjoin("TestTable", "TestX", "Keys", {"Id"});
-%! assert(size(tbl), [3 3]);
+%! tbl = db.sqlouterjoin("TestTable", "TestX", "DataReturnFormat", "structure");
+%! assert([size(fieldnames(tbl),1), size(tbl.Id,1)], [3 3]);
+%! tbl = db.sqlouterjoin("TestTable", "TestX", "Keys", {"Id"}, "DataReturnFormat", "structure");
+%! assert([size(fieldnames(tbl),1), size(tbl.Id,1)], [3 3]);
 
 %!xtest
 %! # test executeSQLScript
@@ -1402,21 +1402,21 @@ endclassdef
 %! assert(db.AutoCommit, 'on');
 %! db.AutoCommit = 'off';
 %! assert(db.AutoCommit, 'off');
-%! tbl = db.select("SELECT * FROM TestTable");
-%! assert(size(tbl), [3 2]);
+%! tbl = db.select("SELECT * FROM TestTable", "DataReturnFormat", "structure");
+%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [3 2]);
 %! db.execute("INSERT INTO TestTable (Id,Name) VALUES (4, 'Name4');");
-%! tbl = db.select("SELECT * FROM TestTable");
-%! assert(size(tbl), [4 2]);
+%! tbl = db.select("SELECT * FROM TestTable", "DataReturnFormat", "structure");
+%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [4 2]);
 %! rollback(db);
-%! tbl = db.select("SELECT * FROM TestTable");
-%! assert(size(tbl), [3 2]);
+%! tbl = db.select("SELECT * FROM TestTable", "DataReturnFormat", "structure");
+%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [3 2]);
 %!
 %! db.execute("INSERT INTO TestTable (Id,Name) VALUES (4, 'Name4');");
-%! tbl = db.select("SELECT * FROM TestTable");
-%! assert(size(tbl), [4 2]);
+%! tbl = db.select("SELECT * FROM TestTable", "DataReturnFormat", "structure");
+%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [4 2]);
 %! commit(db);
-%! tbl = db.select("SELECT * FROM TestTable");
-%! assert(size(tbl), [4 2]);
+%! tbl = db.select("SELECT * FROM TestTable", "DataReturnFormat", "structure");
+%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [4 2]);
 %! db.AutoCommit = 'off';
 
 %!test
