@@ -196,11 +196,12 @@ if test $have_windows = yes; then
 else
  # look for unix odbc 
  AC_CHECK_TOOL([ODBC_CONFIG], [odbc_config], [none])
- if [ test "x$ODBC_CONFIG" = "xnone" ]; then
-   AC_MSG_ERROR([*** 'odbc_config' not found.])
+ if ! [ test "x$ODBC_CONFIG" = "xnone" ]; then
+   ODBC_LIBS=`$ODBC_CONFIG --libs`
+   ODBC_CFLAGS=`$ODBC_CONFIG --cflags`
+ else
+   PKG_CHECK_MODULES([ODBC], [odbc])
  fi
- ODBC_LIBS=`$ODBC_CONFIG --libs`
- ODBC_CFLAGS=`$ODBC_CONFIG --cflags`
 fi
 AC_SUBST([ODBC_LIBS])
 AC_SUBST([ODBC_CFLAGS])

@@ -1,3 +1,8 @@
+Summary of important user-visible changes for odbc 0.0.2:
+-------------------------------------------------------------------
+
+ ** Use pkg-config if cant find odbc_config tool
+
 Summary of important user-visible changes for odbc 0.0.1:
 -------------------------------------------------------------------
 
