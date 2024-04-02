@@ -154,7 +154,7 @@ The known datasources can be displayed by running the command @code{listDataSour
 For Windows ODBC, to modify or add additional datasources. run the command @code{configureODBCDataSource} to 
 open the system ODBC configraion tool.
 
-In Linux, configure using the configution files or tools  available for unixODBC.
+In Linux, configure using the configuration files or tools available for unixODBC.
 
 
 @section Database Connection
@@ -166,16 +166,16 @@ The datasource name can be either a DSN value as returned from @code{listDataSou
 or a DSNless connection string providing driver information to pass to a driver.
 
 @subsubheading Example
+Connection to MYSQL using DSN:
 @example
-Connection to MYSQL using DSN
 @code{
 # connection using DSN
 conn = odbc("MySQL ODBC" ,"username","password")
 }
 @end example
 
+Connection using DSNless string:
 @example
-Connection using DSNless string
 @code{
 # connection to SQLITE using DSNless string
 conn = odbc("Driver=SQLite3;Database=mytest.db;", "","")
@@ -184,7 +184,7 @@ conn = odbc("Driver=SQLite3;Database=mytest.db;", "","")
 
 @cindex Read a table
 
-To quickly read data from a table, use the sqlread function
+To quickly read data from a table, use the sqlread function.
 
 @subsubheading Example
 @example
@@ -196,7 +196,7 @@ data = sqlread(conn, "TestTable")
 @section Close the database
 @cindex Close the database
 
-To close the database, use the close function
+To close the database, use the close function.
 
 @subsubheading Example
 @example
