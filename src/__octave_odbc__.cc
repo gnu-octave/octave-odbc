@@ -308,7 +308,7 @@ octave_odbc::create (const std::string &dbname, const std::string &username, con
 #if (SIZEOF_LONG_INT == 8)
       SQLPOINTER tm = (SQLPOINTER)((long)timeout);
 #else
-      SQLPOINTER tm = (SQLPOINTER)((SQLINTEGER)timeout);
+      SQLPOINTER tm = (SQLPOINTER)((long long)timeout);
 #endif
       rc = SQLSetConnectAttr(dbc, SQL_LOGIN_TIMEOUT, (SQLPOINTER)tm, 0);
     }
