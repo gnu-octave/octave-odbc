@@ -3,7 +3,7 @@ layout: "default"
 permalink: "/news/"
 title: "Odbc Toolkit - News"
 pkg_name: "odbc"
-version: "0.0.1"
+version: "0.0.2"
 description: "Basic Octave implementation for ODBC database functionality"
 navigation:
 - id: "overview"
@@ -19,9 +19,14 @@ navigation:
   url: "/manual"
 ---
 <pre>
+Summary of important user-visible changes for odbc 0.0.2:
+-------------------------------------------------------------------
+
+ ** Use pkg-config if cant find odbc_config tool
+
 Summary of important user-visible changes for odbc 0.0.1:
 -------------------------------------------------------------------
 
- ** Initial release (TBD)
+ ** Initial release 
 
 </pre>

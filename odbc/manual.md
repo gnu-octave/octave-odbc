@@ -3,7 +3,7 @@ layout: "default"
 permalink: "/manual/"
 title: "Odbc Toolkit - Manual"
 pkg_name: "odbc"
-version: "0.0.1"
+version: "0.0.2"
 description: "Basic Octave implementation for ODBC database functionality"
 navigation:
 - id: "overview"
@@ -124,7 +124,7 @@ to successfully install the toolkit.
 the octave-odbc website using the following command within <abbr class="acronym">GNU</abbr> Octave:
 </p>
 <div class="example">
-<pre class="example-preformatted">pkg install https://github.com/gnu-octave/octave-odbc/releases/download/v0.0.1/octave-odbc-0.0.1.tar.gz
+<pre class="example-preformatted">pkg install https://github.com/gnu-octave/octave-odbc/releases/download/v0.0.2/octave-odbc-0.0.2.tar.gz
 </pre></div>
 <p>On Octave 7.2 and later, the package can be installed using the following command within
 <abbr class="acronym">GNU</abbr> Octave:
@@ -142,7 +142,7 @@ the octave-odbc website using the following command within <abbr class="acronym"
 <abbr class="acronym">GNU</abbr> Octave, the package can be installed using the following command within <abbr class="acronym">GNU</abbr> Octave:
 </p>
 <div class="example">
-<pre class="example-preformatted">pkg install octave-odbc-0.0.1.tar.gz
+<pre class="example-preformatted">pkg install octave-odbc-0.0.2.tar.gz
 </pre></div>
 </div>
 <div class="section-level-extent" id="Loading">
@@ -183,7 +183,7 @@ Next: <a href="#Function-Reference" accesskey="n" rel="next">Function Reference<
 <p>For Windows ODBC, to modify or add additional datasources. run the command <code class="code">configureODBCDataSource</code> to 
 open the system ODBC configraion tool.
 </p>
-<p>In Linux, configure using the configution files or tools  available for unixODBC.
+<p>In Linux, configure using the configuration files or tools available for unixODBC.
 </p>
 </div>
 <div class="section-level-extent" id="Database-Connection">
@@ -195,22 +195,22 @@ open the system ODBC configraion tool.
 or a DSNless connection string providing driver information to pass to a driver.
 </p>
 <h4 class="subsubheading" id="Example">Example</h4>
-<div class="example">
-<pre class="example-preformatted">Connection to MYSQL using DSN
-<code class="code">
+<p>Connection to MYSQL using DSN:
+</p><div class="example">
+<pre class="example-preformatted"><code class="code">
 # connection using DSN
 conn = odbc(&quot;MySQL ODBC&quot; ,&quot;username&quot;,&quot;password&quot;)
 </code>
 </pre></div>
-<div class="example">
-<pre class="example-preformatted">Connection using DSNless string
-<code class="code">
+<p>Connection using DSNless string:
+</p><div class="example">
+<pre class="example-preformatted"><code class="code">
 # connection to SQLITE using DSNless string
 conn = odbc(&quot;Driver=SQLite3;Database=mytest.db;&quot;, &quot;&quot;,&quot;&quot;)
 </code>
 </pre></div>
 <a class="index-entry-id" id="index-Read-a-table"></a>
-<p>To quickly read data from a table, use the sqlread function
+<p>To quickly read data from a table, use the sqlread function.
 </p>
 <h4 class="subsubheading" id="Example-1">Example</h4>
 <div class="example">
@@ -222,7 +222,7 @@ data = sqlread(conn, &quot;TestTable&quot;)
 <div class="section-level-extent" id="Close-the-database">
 <h3 class="section">2.3 Close the database</h3>
 <a class="index-entry-id" id="index-Close-the-database"></a>
-<p>To close the database, use the close function
+<p>To close the database, use the close function.
 </p>
 <h4 class="subsubheading" id="Example-2">Example</h4>
 <div class="example">
@@ -269,7 +269,8 @@ Next: <a href="#Importing-Data" accesskey="n" rel="next">Importing Data</a>, Up:
 <a class="index-entry-id" id="index-configureODBCDataSource"></a>
 <dl class="first-deftypefn">
 <dt class="deftypefn" id="index-configureODBCDataSource-1"><span class="category-def">: </span><span><strong class="def-name">configureODBCDataSource</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href='#index-configureODBCDataSource-1'></a></span></dt>
-<dd><p>Open the ODBC Datasource Administrator dialog box in Windows.
+<dd><p>Open the ODBC Datasource Administrator dialog box in Windows or
+ ODBCManageDataSources in Unix if available.
 </p>
 <h4 class="subsubheading" id="Inputs">Inputs</h4>
 <p>None

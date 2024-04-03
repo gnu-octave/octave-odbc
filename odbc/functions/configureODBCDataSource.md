@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/23_configureODBCDataSource/"
 pkg_name: "odbc"
-pkg_version: "0.0.1"
+pkg_version: "0.0.2"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - configureODBCDataSource"
 category: "ODBC connection"
@@ -38,7 +38,8 @@ navigation:
 ---
 <dl class="first-deftypefn">
 <dt class="deftypefn" id="index-configureODBCDataSource"><span class="category-def">: </span><span><strong class="def-name">configureODBCDataSource</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href='#index-configureODBCDataSource'></a></span></dt>
-<dd><p>Open the ODBC Datasource Administrator dialog box in Windows.
+<dd><p>Open the ODBC Datasource Administrator dialog box in Windows or
+ ODBCManageDataSources in Unix if available.
 </p>
 <h4 class="subsubheading" id="Inputs">Inputs</h4>
 <p>None
