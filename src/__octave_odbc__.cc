@@ -107,8 +107,6 @@ public:
 private:
   octave_odbc (const octave_odbc &);
 
-  //odbc3 *db;
-
   SQLHENV env;
   SQLHDBC dbc;
 
@@ -137,7 +135,8 @@ DEFINE_OV_TYPEID_FUNCTIONS_AND_DATA (octave_odbc, "octave_odbc", "octave_odbc");
 
 octave_odbc::octave_odbc ()
 {
-  dbc = 0;
+  dbc = SQL_NULL_HENV;
+  env = SQL_NULL_HENV;
 }
 
 octave_odbc::octave_odbc (const octave_odbc &s)
@@ -297,11 +296,40 @@ octave_odbc::create (const std::string &dbname, const std::string &username, con
   // Environment
   rc = SQLAllocHandle( SQL_HANDLE_ENV, SQL_NULL_HANDLE, &env);
 
+  if(rc == SQL_ERROR)
+    {
+      message = "Error allocating env handle.";
+      return false;
+    }
+
   // ODBC: Version: Set
   rc = SQLSetEnvAttr( env, SQL_ATTR_ODBC_VERSION, (void*)SQL_OV_ODBC3, 0);
 
   // DBC: Allocate
   rc = SQLAllocHandle( SQL_HANDLE_DBC, env, &dbc);
+
+  if (rc == SQL_SUCCESS_WITH_INFO || rc == SQL_ERROR)
+    {
+      SQLCHAR       SqlState[6], Msg[SQL_MAX_MESSAGE_LENGTH];
+      SQLINTEGER    NativeError;
+      SQLSMALLINT   i, MsgLen;
+      SQLRETURN     rc2;
+
+      i = 1;
+      while ((rc2 = SQLGetDiagRec(SQL_HANDLE_DBC, dbc, i, SqlState, &NativeError, Msg, sizeof(Msg), &MsgLen)) == SQL_SUCCESS || rc2 == SQL_SUCCESS_WITH_INFO)
+        {
+	  //printf("msg: %lu %s '%s'\n", (unsigned long)NativeError, SqlState, (char*)Msg); 
+	  i++;
+
+	  message = (char*)Msg;
+	}
+    }
+
+  if(! (rc == SQL_SUCCESS || rc == SQL_SUCCESS_WITH_INFO))
+    {
+      SQLFreeHandle( SQL_HANDLE_ENV, env ); 
+      return false;
+    }
 
   if (timeout > 0)
     {
@@ -332,7 +360,7 @@ octave_odbc::create (const std::string &dbname, const std::string &username, con
     }
   else
     {
-      rc =     SQLSetConnectAttr(dbc, SQL_ATTR_ACCESS_MODE, (SQLPOINTER)SQL_MODE_READ_WRITE, 0);
+      rc = SQLSetConnectAttr(dbc, SQL_ATTR_ACCESS_MODE, (SQLPOINTER)SQL_MODE_READ_WRITE, 0);
     }
 
   // connection string
@@ -424,11 +452,12 @@ octave_odbc::create (const std::string &dbname, const std::string &username, con
 void
 octave_odbc::close (void)
 {
-  if (dbc)
+  if (dbc != SQL_NULL_HENV)
     {
       SQLDisconnect( dbc );
       SQLFreeHandle( SQL_HANDLE_DBC, dbc );
       SQLFreeHandle( SQL_HANDLE_ENV, env ); 
+      dbc = SQL_NULL_HENV;
     }
 }
 
