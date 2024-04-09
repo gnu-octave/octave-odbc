@@ -3,7 +3,7 @@ layout: "default"
 permalink: "/news/"
 title: "Odbc Toolkit - News"
 pkg_name: "odbc"
-version: "0.0.2"
+version: "0.0.3"
 description: "Basic Octave implementation for ODBC database functionality"
 navigation:
 - id: "overview"
@@ -19,6 +19,13 @@ navigation:
   url: "/manual"
 ---
 <pre>
+Summary of important user-visible changes for odbc 0.0.3:
+-------------------------------------------------------------------
+
+ ** Minor doc updates
+
+ ** Additional error checking on creating a database connections 
+
 Summary of important user-visible changes for odbc 0.0.2:
 -------------------------------------------------------------------
 

@@ -3,7 +3,7 @@ layout: "default"
 permalink: "/manual/"
 title: "Odbc Toolkit - Manual"
 pkg_name: "odbc"
-version: "0.0.2"
+version: "0.0.3"
 description: "Basic Octave implementation for ODBC database functionality"
 navigation:
 - id: "overview"
@@ -124,7 +124,7 @@ to successfully install the toolkit.
 the octave-odbc website using the following command within <abbr class="acronym">GNU</abbr> Octave:
 </p>
 <div class="example">
-<pre class="example-preformatted">pkg install https://github.com/gnu-octave/octave-odbc/releases/download/v0.0.2/octave-odbc-0.0.2.tar.gz
+<pre class="example-preformatted">pkg install https://github.com/gnu-octave/octave-odbc/releases/download/v0.0.3/octave-odbc-0.0.3.tar.gz
 </pre></div>
 <p>On Octave 7.2 and later, the package can be installed using the following command within
 <abbr class="acronym">GNU</abbr> Octave:
@@ -142,7 +142,7 @@ the octave-odbc website using the following command within <abbr class="acronym"
 <abbr class="acronym">GNU</abbr> Octave, the package can be installed using the following command within <abbr class="acronym">GNU</abbr> Octave:
 </p>
 <div class="example">
-<pre class="example-preformatted">pkg install octave-odbc-0.0.2.tar.gz
+<pre class="example-preformatted">pkg install octave-odbc-0.0.3.tar.gz
 </pre></div>
 </div>
 <div class="section-level-extent" id="Loading">
@@ -181,7 +181,7 @@ Next: <a href="#Function-Reference" accesskey="n" rel="next">Function Reference<
 <p>The known datasources can be displayed by running the command <code class="code">listDataSources</code>
 </p>
 <p>For Windows ODBC, to modify or add additional datasources. run the command <code class="code">configureODBCDataSource</code> to 
-open the system ODBC configraion tool.
+open the system ODBC configuration tool.
 </p>
 <p>In Linux, configure using the configuration files or tools available for unixODBC.
 </p>
@@ -286,7 +286,7 @@ Next: <a href="#Importing-Data" accesskey="n" rel="next">Importing Data</a>, Up:
 <a class="index-entry-id" id="index-connection"></a>
 <dl class="first-deftp">
 <dt class="deftp" id="index-connection-1"><span class="category-def">Class: </span><span><strong class="def-name">connection</strong><a class="copiable-link" href='#index-connection-1'></a></span></dt>
-<dd><p>Connection class for a odbc database connection
+<dd><p>Connection class for a ODBC database connection
 </p><h4 class="subsubheading" id="Object-Properties">Object Properties</h4>
 <dl class="table">
 <dt>DataSource</dt>
@@ -448,7 +448,7 @@ Next: <a href="#Exporting-Data" accesskey="n" rel="next">Exporting Data</a>, Pre
 <h4 class="subsubheading" id="Outputs-4">Outputs</h4>
 <dl class="table">
 <dt><code class="code"><var class="var">results</var></code></dt>
-<dd><p>A struct with fields SQLQuery, Data and Message for each SAQL statement in the file.
+<dd><p>A struct with fields SQLQuery, Data and Message for each SQL statement in the file.
 </p></dd>
 </dl>
 </dd></dl>
@@ -594,7 +594,7 @@ Next: <a href="#Exporting-Data" accesskey="n" rel="next">Exporting Data</a>, Pre
  If no keys are provided, common named columns will be matched between the tables.
 </p></dd>
 <dt><var class="var">propertyname</var>, <var class="var">propertyvalue</var></dt>
-<dd><p>property name/value pairs where known properties are:
+<dd><p>Property name/value pairs where known properties are:
   </p><dl class="table">
 <dt>MaxRows</dt>
 <dd><p>Max number of rows to return.
@@ -615,9 +615,9 @@ Next: <a href="#Exporting-Data" accesskey="n" rel="next">Exporting Data</a>, Pre
 <h4 class="subsection">3.2.5 sqlouterjoin</h4>
 <a class="index-entry-id" id="index-sqlouterjoin"></a>
 <dl class="first-deftypefn">
-<dt class="deftypefn" id="index-sqloutjoin"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqloutjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>)</code><a class="copiable-link" href='#index-sqloutjoin'></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-sqlouterjoin-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlouterjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;Keys&quot;, <var class="var">keys</var>, &hellip;)</code><a class="copiable-link" href='#index-sqlouterjoin-1'></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-sqlouterjoin-2"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlouterjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;LeftKeys&quot;, <var class="var">keys</var>, &quot;RightKeys&quot;, <var class="var">keys</var>, &hellip;)</code><a class="copiable-link" href='#index-sqlouterjoin-2'></a></span></dt>
+<dt class="deftypefn" id="index-sqlouterjoin-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlouterjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>)</code><a class="copiable-link" href='#index-sqlouterjoin-1'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-sqlouterjoin-2"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlouterjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;Keys&quot;, <var class="var">keys</var>, &hellip;)</code><a class="copiable-link" href='#index-sqlouterjoin-2'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-sqlouterjoin-3"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlouterjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;LeftKeys&quot;, <var class="var">keys</var>, &quot;RightKeys&quot;, <var class="var">keys</var>, &hellip;)</code><a class="copiable-link" href='#index-sqlouterjoin-3'></a></span></dt>
 <dd><p>Perform an outerjoin on two tables.
 </p>
 <p>Performs an outerjoin equivalent to &rsquo;SELECT * from lefttable OUTER JOIN righttable ON lefttable.key = rightable.key&rsquo;.
@@ -794,7 +794,7 @@ Next: <a href="#Support-Functions" accesskey="n" rel="next">Support Functions</a
 <a class="index-entry-id" id="index-commit"></a>
 <dl class="first-deftypefn">
 <dt class="deftypefn" id="index-commit-1"><span class="category-def">: </span><span><strong class="def-name">commit</strong> <code class="def-code-arguments">(<var class="var">conn</var>)</code><a class="copiable-link" href='#index-commit-1'></a></span></dt>
-<dd><p>Make permanant changes to the database.
+<dd><p>Make permanent changes to the database.
 </p>
 <h4 class="subsubheading" id="Inputs-11">Inputs</h4>
 <dl class="table">
@@ -816,7 +816,7 @@ Next: <a href="#Support-Functions" accesskey="n" rel="next">Support Functions</a
 <h4 class="subsubheading" id="Inputs-12">Inputs</h4>
 <dl class="table">
 <dt><var class="var">db</var></dt>
-<dd><p>Previously created database cnnection object
+<dd><p>Previously created database connection object
 </p></dd>
 <dt><var class="var">sqlquery</var></dt>
 <dd><p>A valid non selecting SQL query string

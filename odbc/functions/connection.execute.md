@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/18_connectionexecute/"
 pkg_name: "odbc"
-pkg_version: "0.0.2"
+pkg_version: "0.0.3"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - connection.execute"
 category: "Database Operations"
@@ -43,7 +43,7 @@ navigation:
 <h4 class="subsubheading" id="Inputs">Inputs</h4>
 <dl class="table">
 <dt><var class="var">db</var></dt>
-<dd><p>Previously created database cnnection object
+<dd><p>Previously created database connection object
  </p></dd>
 <dt><var class="var">sqlquery</var></dt>
 <dd><p>A valid non selecting SQL query string

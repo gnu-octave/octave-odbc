@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/23_connectionsqlinnerjoin/"
 pkg_name: "odbc"
-pkg_version: "0.0.2"
+pkg_version: "0.0.3"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - connection.sqlinnerjoin"
 category: "Importing Data"
@@ -62,7 +62,7 @@ navigation:
  If no keys are provided, common named columns will be matched between the tables.
  </p></dd>
 <dt><var class="var">propertyname</var>, <var class="var">propertyvalue</var></dt>
-<dd><p>property name/value pairs where known properties are:
+<dd><p>Property name/value pairs where known properties are:
   </p><dl class="table">
 <dt>MaxRows</dt>
 <dd><p>Max number of rows to return.

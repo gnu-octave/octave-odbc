@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/27_connectionexecuteSQLScript/"
 pkg_name: "odbc"
-pkg_version: "0.0.2"
+pkg_version: "0.0.3"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - connection.executeSQLScript"
 category: "Importing Data"
@@ -53,7 +53,7 @@ navigation:
 <h4 class="subsubheading" id="Outputs">Outputs</h4>
 <dl class="table">
 <dt><code class="code"><var class="var">results</var></code></dt>
-<dd><p>A struct with fields SQLQuery, Data and Message for each SAQL statement in the file.
+<dd><p>A struct with fields SQLQuery, Data and Message for each SQL statement in the file.
  </p></dd>
 </dl>
 

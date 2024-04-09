@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/17_connectioncommit/"
 pkg_name: "odbc"
-pkg_version: "0.0.2"
+pkg_version: "0.0.3"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - connection.commit"
 category: "Database Operations"
@@ -38,7 +38,7 @@ navigation:
 ---
 <dl class="first-deftypefn">
 <dt class="deftypefn" id="index-commit"><span class="category-def">: </span><span><strong class="def-name">commit</strong> <code class="def-code-arguments">(<var class="var">conn</var>)</code><a class="copiable-link" href='#index-commit'></a></span></dt>
-<dd><p>Make permanant changes to the database.
+<dd><p>Make permanent changes to the database.
 </p>
 <h4 class="subsubheading" id="Inputs">Inputs</h4>
 <dl class="table">

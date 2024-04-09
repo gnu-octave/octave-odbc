@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/17_connectionupdate/"
 pkg_name: "odbc"
-pkg_version: "0.0.2"
+pkg_version: "0.0.3"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - connection.update"
 category: "Database Operations"
