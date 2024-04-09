@@ -17,7 +17,7 @@
 classdef connection < handle
   ## -*- texinfo -*-
   ## @deftp {Class} connection
-  ## Connection class for a odbc database connection
+  ## Connection class for a ODBC database connection
   ## @subsubheading Object Properties
   ## @table @asis
   ## @item DataSource
@@ -202,7 +202,7 @@ classdef connection < handle
     
     function data = sqlouterjoin (this, lefttable, righttable, varargin)
       ## -*- texinfo -*-
-      ## @deftypefn {} {@var{data} =} sqloutjoin (@var{db}, @var{lefttablename}, @var{righttablename})
+      ## @deftypefn {} {@var{data} =} sqlouterjoin (@var{db}, @var{lefttablename}, @var{righttablename})
       ## @deftypefnx {} {@var{data} =} sqlouterjoin (@var{db}, @var{lefttablename}, @var{righttablename}, "Keys", @var{keys}, @dots{})
       ## @deftypefnx {} {@var{data} =} sqlouterjoin (@var{db}, @var{lefttablename}, @var{righttablename}, "LeftKeys", @var{keys}, "RightKeys", @var{keys}, @dots{})
       ## Perform an outerjoin on two tables.
@@ -364,7 +364,7 @@ classdef connection < handle
       ## If specified as LeftKeys and RightKeys, keys will be used separately for each side of the table.
       ## If no keys are provided, common named columns will be matched between the tables.
       ## @item @var{propertyname}, @var{propertyvalue}
-      ##  property name/value pairs where known properties are:
+      ##  Property name/value pairs where known properties are:
       ##  @table @asis
       ##  @item MaxRows
       ##  Max number of rows to return.
@@ -648,7 +648,7 @@ classdef connection < handle
       ## @subsubheading Outputs
       ## @table @code
       ## @item @var{results}
-      ## A struct with fields SQLQuery, Data and Message for each SAQL statement in the file.
+      ## A struct with fields SQLQuery, Data and Message for each SQL statement in the file.
       ## @end table
       ##
       ## @end deftypefn
@@ -861,7 +861,7 @@ classdef connection < handle
       ## @subsubheading Inputs
       ## @table @asis
       ## @item @var{db}
-      ## Previously created database cnnection object
+      ## Previously created database connection object
       ## @item @var{sqlquery}
       ## A valid non selecting SQL query string
       ## @end table
@@ -962,7 +962,7 @@ classdef connection < handle
     function commit (this)
       ## -*- texinfo -*-
       ## @deftypefn {} {} commit (@var{conn})
-      ## Make permanant changes to the database.
+      ## Make permanent changes to the database.
       ##
       ## @subsubheading Inputs
       ## @table @asis

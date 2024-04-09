@@ -152,7 +152,7 @@ A ODBC driver and datasource must be configured in order to connect to it.
 The known datasources can be displayed by running the command @code{listDataSources}
 
 For Windows ODBC, to modify or add additional datasources. run the command @code{configureODBCDataSource} to 
-open the system ODBC configraion tool.
+open the system ODBC configuration tool.
 
 In Linux, configure using the configuration files or tools available for unixODBC.
 
