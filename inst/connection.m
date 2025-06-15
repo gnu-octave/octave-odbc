@@ -595,7 +595,7 @@ classdef connection < handle
           if isnumeric(v)
              v = num2str(v);
           else
-             v = ['"' v '"'];
+             v = ["'" v "'"];
           endif
           values = [values v];
 
@@ -604,7 +604,7 @@ classdef connection < handle
         if idx > 1
           sql = [sql ",\n"];
         endif
-        sql = [sql "(" values ")"];
+        sql = [sql "(" values ");"];
 
       endfor
 
@@ -624,7 +624,7 @@ classdef connection < handle
         endif
         tsql = [tsql sprintf("%s %s", cols{idx}, coltypes{idx})];
       endfor 
-      tsql = [tsql ")"];
+      tsql = [tsql ");"];
 
       execute(this, tsql);
 
@@ -1075,13 +1075,13 @@ classdef connection < handle
         if isnumeric(v)
            v = num2str(v);
         else
-           v = ['"' v '"'];
+           v = ["'" v "'"];
         endif
  
         sql = [sql colnames{col} " = " v];
       endfor
 
-      sql = [sql " " whereclause];
+      sql = [sql " " whereclause ";"];
  
       execute(conn, sql);
  
