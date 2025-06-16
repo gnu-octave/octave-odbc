@@ -4,7 +4,21 @@ GNU Octave database functionality using odbc
 This is a basic implementation of ODBC functionalty similar to MATLABS
 ODCB functionalilty.
 
-In linux, it uses unixODBC, in windows the native odbc interface.
+## Requirements
+
+### Linux
+
+In linux, the devel package for unixODBC must be installed.
+
+To use the configureODBCDataSource function, ODBCManageDataSources must
+be avalable from te Qt odbc packages
+
+### Windows
+
+In Windows, the native odbc interface is used.
+
+
+### Install and loading
 
 The toolkit can be installed in Octave 7.2+ using the command:
 
