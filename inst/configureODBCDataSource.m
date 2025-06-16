@@ -34,7 +34,10 @@ function configureODBCDataSource ()
   else
     # in unix, there are several possible programs we could use if installed
     
-    bin = file_in_path (getenv ("PATH"), "ODBCManageDataSourcesQ5");
+    bin = file_in_path (getenv ("PATH"), "ODBCManageDataSourcesQ6");
+    if isempty(bin)
+      bin = file_in_path (getenv ("PATH"), "ODBCManageDataSourcesQ5")
+    endif
     if isempty(bin)
       bin = file_in_path (getenv ("PATH"), "ODBCManageDataSourcesQ4")
     endif
