@@ -12,3 +12,4 @@ SystemRequirements: unixODBC
 License: GPLv3+
 Url: https://gnu-octave.github.io/octave-odbc/
 Repository: https://github.com/gnu-octave/octave-odbc/
+Tracker: https://github.com/gnu-octave/octave-odbc/issues/
