@@ -556,7 +556,7 @@ classdef connection < handle
           error ("Expected ColumnType to be a cell string");
         endif
 
-        if size(coltypes) != size(cols)
+        if size(coltypes, 2) != size(cols)
           error ("Expected ColumnType to match data column count size");
         endif
       endif
