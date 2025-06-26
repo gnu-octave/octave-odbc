@@ -481,7 +481,8 @@ octave_odbc::run (const std::string &query, octave_value &v)
 
   rc = SQLAllocHandle(SQL_HANDLE_STMT, dbc, &hstmt);  
 
-  SQLCHAR SQLStatement[1024];
+  unsigned int statement_size = query.length();
+  SQLCHAR SQLStatement[statement_size+1];
   strcpy((char *)SQLStatement, query.c_str());
 
   // Execute the statement.
@@ -510,6 +511,27 @@ octave_odbc::run (const std::string &query, octave_value &v)
 
   SQLSMALLINT cols = 0;
   rc = SQLNumResultCols(hstmt, &cols);
+
+  if (rc == SQL_SUCCESS_WITH_INFO || rc == SQL_ERROR)
+    {
+      SQLCHAR       SqlState[6], Msg[SQL_MAX_MESSAGE_LENGTH];
+      SQLINTEGER    NativeError;
+      SQLSMALLINT   i, MsgLen;
+      SQLRETURN     rc2;
+
+      i = 1;
+      while ((rc2 = SQLGetDiagRec(SQL_HANDLE_STMT, hstmt, i, SqlState, &NativeError, Msg, sizeof(Msg), &MsgLen)) == SQL_SUCCESS || rc2 == SQL_SUCCESS_WITH_INFO)
+        {
+	  i++;
+	  message = (char*)Msg;
+	}
+    }
+
+  if (rc == SQL_ERROR)
+    {
+      SQLFreeHandle( SQL_HANDLE_STMT, hstmt);
+      return false;
+    }
 
   if (cols != 0)
     {
