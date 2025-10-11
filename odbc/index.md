@@ -11,6 +11,7 @@ maintainer: "John Donoghue <john.donoghue@ieee.org>"
 license: "GPLv3+"
 pkg_url: "https://gnu-octave.github.io/octave-odbc/"
 repository: "https://github.com/gnu-octave/octave-odbc/"
+issues: "https://github.com/gnu-octave/octave-odbc/issues/"
 navigation:
 - id: "overview"
   name: "Overview"
