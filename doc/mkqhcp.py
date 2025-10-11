@@ -137,7 +137,6 @@ def process(name):
       fin.seek(0)
       for line in fin:
           line = line.strip()
-          print("L", line)
           e = tag_match1.match(line)
           if not e:
               e = tag_match2.match(line)
