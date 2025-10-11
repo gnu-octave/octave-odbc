@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/17_connectionselect/"
 pkg_name: "odbc"
-pkg_version: "0.0.3"
+pkg_version: "0.0.4"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - connection.select"
 category: "Importing Data"
@@ -36,11 +36,11 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-select"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">select</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>)</code><a class="copiable-link" href='#index-select'></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-select-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">select</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code><a class="copiable-link" href='#index-select-1'></a></span></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-select"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">select</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>)</code><a class="copiable-link" href="#index-select"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-select-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">select</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code><a class="copiable-link" href="#index-select-1"></a></span></dt>
 <dd><p>Perform SQL query <var class="var">query</var>, and return result
- </p><h4 class="subsubheading" id="Inputs">Inputs</h4>
+ </p><h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
 <dl class="table">
 <dt><var class="var">conn</var></dt>
 <dd><p>currently open database connection.
@@ -64,14 +64,14 @@ navigation:
 </dd>
 </dl>
 
-<h4 class="subsubheading" id="Outputs">Outputs</h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
 <dl class="table">
 <dt><var class="var">data</var></dt>
 <dd><p>a table containing the query result.
  </p></dd>
 </dl>
 
-<h4 class="subsubheading" id="Examples">Examples</h4>
+<h4 class="subsubheading" id="Examples"><span>Examples<a class="copiable-link" href="#Examples"></a></span></h4>
 <p>Select all rows of data from a database tables
  </p><div class="example">
 <pre class="example-preformatted"> <code class="code">

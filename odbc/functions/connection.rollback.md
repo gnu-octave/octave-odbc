@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/19_connectionrollback/"
 pkg_name: "odbc"
-pkg_version: "0.0.3"
+pkg_version: "0.0.4"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - connection.rollback"
 category: "Database Operations"
@@ -36,17 +36,17 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-rollback"><span class="category-def">: </span><span><strong class="def-name">rollback</strong> <code class="def-code-arguments">(<var class="var">conn</var>)</code><a class="copiable-link" href='#index-rollback'></a></span></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-rollback"><span class="category-def">: </span><span><strong class="def-name">rollback</strong> <code class="def-code-arguments">(<var class="var">conn</var>)</code><a class="copiable-link" href="#index-rollback"></a></span></dt>
 <dd><p>Rollback changes to the database.
 </p>
-<h4 class="subsubheading" id="Inputs">Inputs</h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
 <dl class="table">
 <dt><var class="var">conn</var></dt>
 <dd><p>currently open database.
  </p></dd>
 </dl>
 
-<h4 class="subsubheading" id="Outputs">Outputs</h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
 <p>None
  </p></dd></dl>

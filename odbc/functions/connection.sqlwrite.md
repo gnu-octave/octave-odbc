@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/19_connectionsqlwrite/"
 pkg_name: "odbc"
-pkg_version: "0.0.3"
+pkg_version: "0.0.4"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - connection.sqlwrite"
 category: "Exporting Data"
@@ -36,17 +36,17 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-sqlwrite"><span class="category-def">: </span><span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>)</code><a class="copiable-link" href='#index-sqlwrite'></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-sqlwrite-1"><span class="category-def">: </span><span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">columntypes</var>)</code><a class="copiable-link" href='#index-sqlwrite-1'></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-sqlwrite-2"><span class="category-def">: </span><span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code><a class="copiable-link" href='#index-sqlwrite-2'></a></span></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-sqlwrite"><span class="category-def">: </span><span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>)</code><a class="copiable-link" href="#index-sqlwrite"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlwrite-1"><span class="category-def">: </span><span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">columntypes</var>)</code><a class="copiable-link" href="#index-sqlwrite-1"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlwrite-2"><span class="category-def">: </span><span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code><a class="copiable-link" href="#index-sqlwrite-2"></a></span></dt>
 <dd><p>Insert rows of data into a table.
 </p>
 <p>Insert rows of data into a database table.
  If the table does not exist it will be created, using the ColumnType property if available
  otherwise, the type of input data will be used to determine field types.
 </p>
-<h4 class="subsubheading" id="Inputs">Inputs</h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
 <dl class="table">
 <dt><var class="var">db</var></dt>
 <dd><p>Previously created database connection object
@@ -72,7 +72,7 @@ navigation:
 </dd>
 </dl>
 
-<h4 class="subsubheading" id="Outputs">Outputs</h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
 <p>None
 </p>
 

@@ -3,7 +3,7 @@ layout: "default"
 permalink: "/news/"
 title: "Odbc Toolkit - News"
 pkg_name: "odbc"
-version: "0.0.3"
+version: "0.0.4"
 description: "Basic Octave implementation for ODBC database functionality"
 navigation:
 - id: "overview"
@@ -19,6 +19,15 @@ navigation:
   url: "/manual"
 ---
 <pre>
+Summary of important user-visible changes for odbc 0.0.4:
+-------------------------------------------------------------------
+
+ ** Minor doc updates
+
+ ** Minor bug fixes
+
+ ** Updates to support Qt6
+
 Summary of important user-visible changes for odbc 0.0.3:
 -------------------------------------------------------------------
 

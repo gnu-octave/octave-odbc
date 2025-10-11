@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/17_connectionupdate/"
 pkg_name: "odbc"
-pkg_version: "0.0.3"
+pkg_version: "0.0.4"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - connection.update"
 category: "Database Operations"
@@ -36,11 +36,11 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-update"><span class="category-def">: </span><span><strong class="def-name">update</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>, <var class="var">colnames</var>, <var class="var">data</var>, <var class="var">whereclause</var>)</code><a class="copiable-link" href='#index-update'></a></span></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-update"><span class="category-def">: </span><span><strong class="def-name">update</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>, <var class="var">colnames</var>, <var class="var">data</var>, <var class="var">whereclause</var>)</code><a class="copiable-link" href="#index-update"></a></span></dt>
 <dd><p>Update columns in database.
 </p>
-<h4 class="subsubheading" id="Inputs">Inputs</h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
 <dl class="table">
 <dt><var class="var">conn</var></dt>
 <dd><p>Previously created database connection object
@@ -59,10 +59,10 @@ navigation:
  </p></dd>
 </dl>
 
-<h4 class="subsubheading" id="Outputs">Outputs</h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
 <p>None
 </p>
-<h4 class="subsubheading" id="Examples">Examples</h4>
+<h4 class="subsubheading" id="Examples"><span>Examples<a class="copiable-link" href="#Examples"></a></span></h4>
 <p>Update a row in the database
  </p><div class="example">
 <pre class="example-preformatted"> <code class="code">

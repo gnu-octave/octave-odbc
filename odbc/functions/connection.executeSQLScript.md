@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/27_connectionexecuteSQLScript/"
 pkg_name: "odbc"
-pkg_version: "0.0.3"
+pkg_version: "0.0.4"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - connection.executeSQLScript"
 category: "Importing Data"
@@ -36,11 +36,11 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-executeSQLScript"><span class="category-def">: </span><span><code class="def-type"><var class="var">results</var> =</code> <strong class="def-name">executeSQLScript</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">scriptname</var>)</code><a class="copiable-link" href='#index-executeSQLScript'></a></span></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-executeSQLScript"><span class="category-def">: </span><span><code class="def-type"><var class="var">results</var> =</code> <strong class="def-name">executeSQLScript</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">scriptname</var>)</code><a class="copiable-link" href="#index-executeSQLScript"></a></span></dt>
 <dd><p>Run statements from a script file
 </p> 
-<h4 class="subsubheading" id="Inputs">Inputs</h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
 <dl class="table">
 <dt><code class="code"><var class="var">conn</var></code></dt>
 <dd><p>ODBC connection object
@@ -50,7 +50,7 @@ navigation:
  </p></dd>
 </dl>
 
-<h4 class="subsubheading" id="Outputs">Outputs</h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
 <dl class="table">
 <dt><code class="code"><var class="var">results</var></code></dt>
 <dd><p>A struct with fields SQLQuery, Data and Message for each SQL statement in the file.

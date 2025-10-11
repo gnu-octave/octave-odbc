@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/23_configureODBCDataSource/"
 pkg_name: "odbc"
-pkg_version: "0.0.3"
+pkg_version: "0.0.4"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - configureODBCDataSource"
 category: "ODBC connection"
@@ -36,15 +36,15 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-configureODBCDataSource"><span class="category-def">: </span><span><strong class="def-name">configureODBCDataSource</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href='#index-configureODBCDataSource'></a></span></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-configureODBCDataSource"><span class="category-def">: </span><span><strong class="def-name">configureODBCDataSource</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href="#index-configureODBCDataSource"></a></span></dt>
 <dd><p>Open the ODBC Datasource Administrator dialog box in Windows or
  ODBCManageDataSources in Unix if available.
 </p>
-<h4 class="subsubheading" id="Inputs">Inputs</h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
 <p>None
 </p>
-<h4 class="subsubheading" id="Outputs">Outputs</h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
 <p>None
 </p>
 

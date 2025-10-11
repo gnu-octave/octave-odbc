@@ -3,7 +3,7 @@ layout: "default"
 permalink: "/manual/"
 title: "Odbc Toolkit - Manual"
 pkg_name: "odbc"
-version: "0.0.3"
+version: "0.0.4"
 description: "Basic Octave implementation for ODBC database functionality"
 navigation:
 - id: "overview"
@@ -28,32 +28,28 @@ navigation:
   url: "/manual/#Function-Reference-1"
 ---
 <div class="top-level-extent" id="Top">
-<div class="nav-panel">
-<p>
-Next: <a href="#Installing-and-loading" accesskey="n" rel="next">Installing and loading</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
-</div>
 <h1 class="top" id="Introduction">Introduction</h1>
 <p>The Octave ODBC toolkit is a set of ODBC routines for GNU Octave
 </p>
-<div class="element-contents" id="SEC_Contents">
+<div class="region-contents" id="SEC_Contents">
 <h2 class="contents-heading">Table of Contents</h2>
 <div class="contents">
 <ul class="toc-numbered-mark">
-  <li><a id="toc-Installing-and-loading-1" href="#Installing-and-loading">1 Installing and loading</a>
+  <li><a id="toc-Installing-and-loading" href="#Installing-and-loading">1 Installing and loading</a>
   <ul class="toc-numbered-mark">
     <li><a id="toc-Online-Direct-install" href="#Online-Direct-install">1.1 Online Direct install</a></li>
     <li><a id="toc-Off_002dline-install" href="#Off_002dline-install">1.2 Off-line install</a></li>
     <li><a id="toc-Loading" href="#Loading">1.3 Loading</a></li>
   </ul></li>
-  <li><a id="toc-Basic-Usage-Overview-1" href="#Basic-Usage-Overview">2 Basic Usage Overview</a>
+  <li><a id="toc-Basic-Usage-Overview" href="#Basic-Usage-Overview">2 Basic Usage Overview</a>
   <ul class="toc-numbered-mark">
     <li><a id="toc-Database-Configuration" href="#Database-Configuration">2.1 Database Configuration</a></li>
     <li><a id="toc-Database-Connection" href="#Database-Connection">2.2 Database Connection</a></li>
     <li><a id="toc-Close-the-database" href="#Close-the-database">2.3 Close the database</a></li>
   </ul></li>
-  <li><a id="toc-Function-Reference-1" href="#Function-Reference">3 Function Reference</a>
+  <li><a id="toc-Function-Reference" href="#Function-Reference">3 Function Reference</a>
   <ul class="toc-numbered-mark">
-    <li><a id="toc-ODBC-connection-1" href="#ODBC-connection">3.1 ODBC connection</a>
+    <li><a id="toc-ODBC-connection" href="#ODBC-connection">3.1 ODBC connection</a>
     <ul class="toc-numbered-mark">
       <li><a id="toc-configureODBCDataSource" href="#configureODBCDataSource">3.1.1 configureODBCDataSource</a></li>
       <li><a id="toc-connection" href="#connection">3.1.2 connection</a></li>
@@ -61,7 +57,7 @@ Next: <a href="#Installing-and-loading" accesskey="n" rel="next">Installing and 
       <li><a id="toc-listDataSources" href="#listDataSources">3.1.4 listDataSources</a></li>
       <li><a id="toc-odbc" href="#odbc">3.1.5 odbc</a></li>
     </ul></li>
-    <li><a id="toc-Importing-Data-1" href="#Importing-Data">3.2 Importing Data</a>
+    <li><a id="toc-Importing-Data" href="#Importing-Data">3.2 Importing Data</a>
     <ul class="toc-numbered-mark">
       <li><a id="toc-executeSQLScript" href="#executeSQLScript">3.2.1 executeSQLScript</a></li>
       <li><a id="toc-fetch" href="#fetch">3.2.2 fetch</a></li>
@@ -70,11 +66,11 @@ Next: <a href="#Installing-and-loading" accesskey="n" rel="next">Installing and 
       <li><a id="toc-sqlouterjoin" href="#sqlouterjoin">3.2.5 sqlouterjoin</a></li>
       <li><a id="toc-sqlread" href="#sqlread">3.2.6 sqlread</a></li>
     </ul></li>
-    <li><a id="toc-Exporting-Data-1" href="#Exporting-Data">3.3 Exporting Data</a>
+    <li><a id="toc-Exporting-Data" href="#Exporting-Data">3.3 Exporting Data</a>
     <ul class="toc-numbered-mark">
       <li><a id="toc-sqlwrite" href="#sqlwrite">3.3.1 sqlwrite</a></li>
     </ul></li>
-    <li><a id="toc-Database-Operations-1" href="#Database-Operations">3.4 Database Operations</a>
+    <li><a id="toc-Database-Operations" href="#Database-Operations">3.4 Database Operations</a>
     <ul class="toc-numbered-mark">
       <li><a id="toc-commit" href="#commit">3.4.1 commit</a></li>
       <li><a id="toc-execute" href="#execute">3.4.2 execute</a></li>
@@ -82,22 +78,18 @@ Next: <a href="#Installing-and-loading" accesskey="n" rel="next">Installing and 
       <li><a id="toc-sqlupdate" href="#sqlupdate">3.4.4 sqlupdate</a></li>
       <li><a id="toc-update" href="#update">3.4.5 update</a></li>
     </ul></li>
-    <li><a id="toc-Support-Functions-1" href="#Support-Functions">3.5 Support Functions</a>
+    <li><a id="toc-Support-Functions" href="#Support-Functions">3.5 Support Functions</a>
     <ul class="toc-numbered-mark">
       <li><a id="toc-rowfilter" href="#rowfilter">3.5.1 rowfilter</a></li>
     </ul></li>
   </ul></li>
   <li><a id="toc-GNU-General-Public-License" href="#Copying">Appendix A GNU General Public License</a></li>
-  <li><a id="toc-Index-1" href="#Index" rel="index">Index</a></li>
+  <li><a id="toc-Index" href="#Index" rel="index">Index</a></li>
 </ul>
 </div>
 </div>
 <hr>
 <div class="chapter-level-extent" id="Installing-and-loading">
-<div class="nav-panel">
-<p>
-Next: <a href="#Basic-Usage-Overview" accesskey="n" rel="next">Basic Usage Overview</a>, Previous: <a href="#Top" accesskey="p" rel="prev">Introduction</a>, Up: <a href="#Top" accesskey="u" rel="up">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
-</div>
 <h2 class="chapter" id="Installing-and-loading-1">1 Installing and loading</h2>
 <a class="index-entry-id" id="index-Installing-and-loading"></a>
 <p>The toolkit must be installed and then loaded to be used.
@@ -112,11 +104,6 @@ to successfully install the toolkit.
 </p>
 <p>The toolkit must be then be loaded once per each <abbr class="acronym">GNU</abbr> Octave session in order to use its functionality.
 </p>
-<ul class="mini-toc">
-<li><a href="#Online-Direct-install" accesskey="1">Online Direct install</a></li>
-<li><a href="#Off_002dline-install" accesskey="2">Off-line install</a></li>
-<li><a href="#Loading" accesskey="3">Loading</a></li>
-</ul>
 <div class="section-level-extent" id="Online-Direct-install">
 <h3 class="section">1.1 Online Direct install</h3>
 <a class="index-entry-id" id="index-Online-install"></a>
@@ -124,7 +111,7 @@ to successfully install the toolkit.
 the octave-odbc website using the following command within <abbr class="acronym">GNU</abbr> Octave:
 </p>
 <div class="example">
-<pre class="example-preformatted">pkg install https://github.com/gnu-octave/octave-odbc/releases/download/v0.0.3/octave-odbc-0.0.3.tar.gz
+<pre class="example-preformatted">pkg install https://github.com/gnu-octave/octave-odbc/releases/download/v0.0.4/octave-odbc-0.0.4.tar.gz
 </pre></div>
 <p>On Octave 7.2 and later, the package can be installed using the following command within
 <abbr class="acronym">GNU</abbr> Octave:
@@ -142,7 +129,7 @@ the octave-odbc website using the following command within <abbr class="acronym"
 <abbr class="acronym">GNU</abbr> Octave, the package can be installed using the following command within <abbr class="acronym">GNU</abbr> Octave:
 </p>
 <div class="example">
-<pre class="example-preformatted">pkg install octave-odbc-0.0.3.tar.gz
+<pre class="example-preformatted">pkg install octave-odbc-0.0.4.tar.gz
 </pre></div>
 </div>
 <div class="section-level-extent" id="Loading">
@@ -162,17 +149,8 @@ the toolkit must be loaded using the pkg load command:
 </div>
 </div>
 <div class="chapter-level-extent" id="Basic-Usage-Overview">
-<div class="nav-panel">
-<p>
-Next: <a href="#Function-Reference" accesskey="n" rel="next">Function Reference</a>, Previous: <a href="#Installing-and-loading" accesskey="p" rel="prev">Installing and loading</a>, Up: <a href="#Top" accesskey="u" rel="up">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
-</div>
 <h2 class="chapter" id="Basic-Usage-Overview-1">2 Basic Usage Overview</h2>
 <a class="index-entry-id" id="index-Basic-Usage-Overview"></a>
-<ul class="mini-toc">
-<li><a href="#Database-Configuration" accesskey="1">Database Configuration</a></li>
-<li><a href="#Database-Connection" accesskey="2">Database Connection</a></li>
-<li><a href="#Close-the-database" accesskey="3">Close the database</a></li>
-</ul>
 <div class="section-level-extent" id="Database-Configuration">
 <h3 class="section">2.1 Database Configuration</h3>
 <a class="index-entry-id" id="index-Database-Configuration"></a>
@@ -234,41 +212,19 @@ close(conn)
 </div>
 </div>
 <div class="chapter-level-extent" id="Function-Reference">
-<div class="nav-panel">
-<p>
-Next: <a href="#Copying" accesskey="n" rel="next">GNU General Public License</a>, Previous: <a href="#Basic-Usage-Overview" accesskey="p" rel="prev">Basic Usage Overview</a>, Up: <a href="#Top" accesskey="u" rel="up">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
-</div>
 <h2 class="chapter" id="Function-Reference-1">3 Function Reference</h2>
 <a class="index-entry-id" id="index-Function-Reference"></a>
 <p>The functions currently available in the toolkit are described below;
 </p>
-<ul class="mini-toc">
-<li><a href="#ODBC-connection" accesskey="1">ODBC connection</a></li>
-<li><a href="#Importing-Data" accesskey="2">Importing Data</a></li>
-<li><a href="#Exporting-Data" accesskey="3">Exporting Data</a></li>
-<li><a href="#Database-Operations" accesskey="4">Database Operations</a></li>
-<li><a href="#Support-Functions" accesskey="5">Support Functions</a></li>
-</ul>
 <hr>
 <div class="section-level-extent" id="ODBC-connection">
-<div class="nav-panel">
-<p>
-Next: <a href="#Importing-Data" accesskey="n" rel="next">Importing Data</a>, Up: <a href="#Function-Reference" accesskey="u" rel="up">Function Reference</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
-</div>
 <h3 class="section" id="ODBC-connection-1">3.1 ODBC connection</h3>
 <a class="index-entry-id" id="index-ODBC-connection"></a>
-<ul class="mini-toc">
-<li><a href="#configureODBCDataSource" accesskey="1">configureODBCDataSource</a></li>
-<li><a href="#connection" accesskey="2">connection</a></li>
-<li><a href="#database" accesskey="3">database</a></li>
-<li><a href="#listDataSources" accesskey="4">listDataSources</a></li>
-<li><a href="#odbc" accesskey="5">odbc</a></li>
-</ul>
 <div class="subsection-level-extent" id="configureODBCDataSource">
 <h4 class="subsection">3.1.1 configureODBCDataSource</h4>
 <a class="index-entry-id" id="index-configureODBCDataSource"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-configureODBCDataSource-1"><span class="category-def">: </span><span><strong class="def-name">configureODBCDataSource</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href='#index-configureODBCDataSource-1'></a></span></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-configureODBCDataSource-1"><span class="category-def">: </span><strong class="def-name">configureODBCDataSource</strong> <code class="def-code-arguments">()</code></dt>
 <dd><p>Open the ODBC Datasource Administrator dialog box in Windows or
  ODBCManageDataSources in Unix if available.
 </p>
@@ -284,8 +240,8 @@ Next: <a href="#Importing-Data" accesskey="n" rel="next">Importing Data</a>, Up:
 <div class="subsection-level-extent" id="connection">
 <h4 class="subsection">3.1.2 connection</h4>
 <a class="index-entry-id" id="index-connection"></a>
-<dl class="first-deftp">
-<dt class="deftp" id="index-connection-1"><span class="category-def">Class: </span><span><strong class="def-name">connection</strong><a class="copiable-link" href='#index-connection-1'></a></span></dt>
+<dl class="first-deftp def-block">
+<dt class="deftp def-line" id="index-connection-1"><span class="category-def">Class: </span><strong class="def-name">connection</strong></dt>
 <dd><p>Connection class for a ODBC database connection
 </p><h4 class="subsubheading" id="Object-Properties">Object Properties</h4>
 <dl class="table">
@@ -322,9 +278,9 @@ Next: <a href="#Importing-Data" accesskey="n" rel="next">Importing Data</a>, Up:
 <div class="subsection-level-extent" id="database">
 <h4 class="subsection">3.1.3 database</h4>
 <a class="index-entry-id" id="index-database"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-database-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">conn</var> =</code> <strong class="def-name">database</strong> <code class="def-code-arguments">(<var class="var">dbname</var>, <var class="var">username</var>, <var class="var">password</var>)</code><a class="copiable-link" href='#index-database-1'></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-database-2"><span class="category-def">: </span><span><code class="def-type"><var class="var">conn</var> =</code> <strong class="def-name">database</strong> <code class="def-code-arguments">(<var class="var">dbname</var>, <var class="var">username</var>, <var class="var">password</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code><a class="copiable-link" href='#index-database-2'></a></span></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-database-1"><span class="category-def">: </span><code class="def-type"><var class="var">conn</var> =</code> <strong class="def-name">database</strong> <code class="def-code-arguments">(<var class="var">dbname</var>, <var class="var">username</var>, <var class="var">password</var>)</code></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-database-2"><span class="category-def">: </span><code class="def-type"><var class="var">conn</var> =</code> <strong class="def-name">database</strong> <code class="def-code-arguments">(<var class="var">dbname</var>, <var class="var">username</var>, <var class="var">password</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></dt>
 <dd><p>Create a odbc database connection
 </p>
 <h4 class="subsubheading" id="Inputs-1">Inputs</h4>
@@ -358,8 +314,8 @@ Next: <a href="#Importing-Data" accesskey="n" rel="next">Importing Data</a>, Up:
 <div class="subsection-level-extent" id="listDataSources">
 <h4 class="subsection">3.1.4 listDataSources</h4>
 <a class="index-entry-id" id="index-listDataSources"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-listDataSources-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">src</var> =</code> <strong class="def-name">listDataSources</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href='#index-listDataSources-1'></a></span></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-listDataSources-1"><span class="category-def">: </span><code class="def-type"><var class="var">src</var> =</code> <strong class="def-name">listDataSources</strong> <code class="def-code-arguments">()</code></dt>
 <dd><p>List available odbc datasources
 </p>
 <h4 class="subsubheading" id="Inputs-2">Inputs</h4>
@@ -378,10 +334,10 @@ Next: <a href="#Importing-Data" accesskey="n" rel="next">Importing Data</a>, Up:
 <div class="subsection-level-extent" id="odbc">
 <h4 class="subsection">3.1.5 odbc</h4>
 <a class="index-entry-id" id="index-odbc"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-odbc-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">conn</var> =</code> <strong class="def-name">odbc</strong> <code class="def-code-arguments">(<var class="var">dbname</var>, <var class="var">username</var>, <var class="var">password</var>)</code><a class="copiable-link" href='#index-odbc-1'></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-odbc-2"><span class="category-def">: </span><span><code class="def-type"><var class="var">conn</var> =</code> <strong class="def-name">odbc</strong> <code class="def-code-arguments">(<var class="var">dbname</var>, <var class="var">username</var>, <var class="var">password</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code><a class="copiable-link" href='#index-odbc-2'></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-odbc-3"><span class="category-def">: </span><span><code class="def-type"><var class="var">conn</var> =</code> <strong class="def-name">odbc</strong> <code class="def-code-arguments">(<var class="var">dsnconnectstr</var>)</code><a class="copiable-link" href='#index-odbc-3'></a></span></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-odbc-1"><span class="category-def">: </span><code class="def-type"><var class="var">conn</var> =</code> <strong class="def-name">odbc</strong> <code class="def-code-arguments">(<var class="var">dbname</var>, <var class="var">username</var>, <var class="var">password</var>)</code></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-odbc-2"><span class="category-def">: </span><code class="def-type"><var class="var">conn</var> =</code> <strong class="def-name">odbc</strong> <code class="def-code-arguments">(<var class="var">dbname</var>, <var class="var">username</var>, <var class="var">password</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-odbc-3"><span class="category-def">: </span><code class="def-type"><var class="var">conn</var> =</code> <strong class="def-name">odbc</strong> <code class="def-code-arguments">(<var class="var">dsnconnectstr</var>)</code></dt>
 <dd><p>Create an ODBC database connection
 </p>
 <h4 class="subsubheading" id="Inputs-3">Inputs</h4>
@@ -415,25 +371,13 @@ Next: <a href="#Importing-Data" accesskey="n" rel="next">Importing Data</a>, Up:
 </div>
 </div>
 <div class="section-level-extent" id="Importing-Data">
-<div class="nav-panel">
-<p>
-Next: <a href="#Exporting-Data" accesskey="n" rel="next">Exporting Data</a>, Previous: <a href="#ODBC-connection" accesskey="p" rel="prev">ODBC connection</a>, Up: <a href="#Function-Reference" accesskey="u" rel="up">Function Reference</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
-</div>
 <h3 class="section" id="Importing-Data-1">3.2 Importing Data</h3>
 <a class="index-entry-id" id="index-Importing-Data"></a>
-<ul class="mini-toc">
-<li><a href="#executeSQLScript" accesskey="1">executeSQLScript</a></li>
-<li><a href="#fetch" accesskey="2">fetch</a></li>
-<li><a href="#select" accesskey="3">select</a></li>
-<li><a href="#sqlinnerjoin" accesskey="4">sqlinnerjoin</a></li>
-<li><a href="#sqlouterjoin" accesskey="5">sqlouterjoin</a></li>
-<li><a href="#sqlread" accesskey="6">sqlread</a></li>
-</ul>
 <div class="subsection-level-extent" id="executeSQLScript">
 <h4 class="subsection">3.2.1 executeSQLScript</h4>
 <a class="index-entry-id" id="index-executeSQLScript"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-executeSQLScript-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">results</var> =</code> <strong class="def-name">executeSQLScript</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">scriptname</var>)</code><a class="copiable-link" href='#index-executeSQLScript-1'></a></span></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-executeSQLScript-1"><span class="category-def">: </span><code class="def-type"><var class="var">results</var> =</code> <strong class="def-name">executeSQLScript</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">scriptname</var>)</code></dt>
 <dd><p>Run statements from a script file
 </p>
 <h4 class="subsubheading" id="Inputs-4">Inputs</h4>
@@ -456,9 +400,9 @@ Next: <a href="#Exporting-Data" accesskey="n" rel="next">Exporting Data</a>, Pre
 <div class="subsection-level-extent" id="fetch">
 <h4 class="subsection">3.2.2 fetch</h4>
 <a class="index-entry-id" id="index-fetch"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-fetch-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">fetch</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>)</code><a class="copiable-link" href='#index-fetch-1'></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-fetch-2"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">fetch</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code><a class="copiable-link" href='#index-fetch-2'></a></span></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-fetch-1"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">fetch</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>)</code></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fetch-2"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">fetch</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></dt>
 <dd><p>Perform SQL query <var class="var">query</var>, and return result
 </p><h4 class="subsubheading" id="Inputs-5">Inputs</h4>
 <dl class="table">
@@ -512,9 +456,9 @@ Next: <a href="#Exporting-Data" accesskey="n" rel="next">Exporting Data</a>, Pre
 <div class="subsection-level-extent" id="select">
 <h4 class="subsection">3.2.3 select</h4>
 <a class="index-entry-id" id="index-select"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-select-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">select</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>)</code><a class="copiable-link" href='#index-select-1'></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-select-2"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">select</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code><a class="copiable-link" href='#index-select-2'></a></span></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-select-1"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">select</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>)</code></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-select-2"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">select</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></dt>
 <dd><p>Perform SQL query <var class="var">query</var>, and return result
 </p><h4 class="subsubheading" id="Inputs-6">Inputs</h4>
 <dl class="table">
@@ -568,10 +512,10 @@ Next: <a href="#Exporting-Data" accesskey="n" rel="next">Exporting Data</a>, Pre
 <div class="subsection-level-extent" id="sqlinnerjoin">
 <h4 class="subsection">3.2.4 sqlinnerjoin</h4>
 <a class="index-entry-id" id="index-sqlinnerjoin"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-sqlinnerjoin-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>)</code><a class="copiable-link" href='#index-sqlinnerjoin-1'></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-sqlinnerjoin-2"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;Keys&quot;, <var class="var">keys</var>, &hellip;)</code><a class="copiable-link" href='#index-sqlinnerjoin-2'></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-sqlinnerjoin-3"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;LeftKeys&quot;, <var class="var">keys</var>, &quot;RightKeys&quot;, <var class="var">keys</var>, &hellip;)</code><a class="copiable-link" href='#index-sqlinnerjoin-3'></a></span></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-sqlinnerjoin-1"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>)</code></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlinnerjoin-2"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;Keys&quot;, <var class="var">keys</var>, &hellip;)</code></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlinnerjoin-3"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;LeftKeys&quot;, <var class="var">keys</var>, &quot;RightKeys&quot;, <var class="var">keys</var>, &hellip;)</code></dt>
 <dd><p>Perform an innerjoin on two tables.
 </p>
 <p>Performs an innerjoin equivalent to &rsquo;SELECT * from lefttable INNER JOIN righttable ON lefttable.key = rightable.key&rsquo;.
@@ -614,10 +558,10 @@ Next: <a href="#Exporting-Data" accesskey="n" rel="next">Exporting Data</a>, Pre
 <div class="subsection-level-extent" id="sqlouterjoin">
 <h4 class="subsection">3.2.5 sqlouterjoin</h4>
 <a class="index-entry-id" id="index-sqlouterjoin"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-sqlouterjoin-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlouterjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>)</code><a class="copiable-link" href='#index-sqlouterjoin-1'></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-sqlouterjoin-2"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlouterjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;Keys&quot;, <var class="var">keys</var>, &hellip;)</code><a class="copiable-link" href='#index-sqlouterjoin-2'></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-sqlouterjoin-3"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlouterjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;LeftKeys&quot;, <var class="var">keys</var>, &quot;RightKeys&quot;, <var class="var">keys</var>, &hellip;)</code><a class="copiable-link" href='#index-sqlouterjoin-3'></a></span></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-sqlouterjoin-1"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlouterjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>)</code></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlouterjoin-2"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlouterjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;Keys&quot;, <var class="var">keys</var>, &hellip;)</code></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlouterjoin-3"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlouterjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;LeftKeys&quot;, <var class="var">keys</var>, &quot;RightKeys&quot;, <var class="var">keys</var>, &hellip;)</code></dt>
 <dd><p>Perform an outerjoin on two tables.
 </p>
 <p>Performs an outerjoin equivalent to &rsquo;SELECT * from lefttable OUTER JOIN righttable ON lefttable.key = rightable.key&rsquo;.
@@ -660,9 +604,9 @@ Next: <a href="#Exporting-Data" accesskey="n" rel="next">Exporting Data</a>, Pre
 <div class="subsection-level-extent" id="sqlread">
 <h4 class="subsection">3.2.6 sqlread</h4>
 <a class="index-entry-id" id="index-sqlread"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-sqlread-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlread</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>)</code><a class="copiable-link" href='#index-sqlread-1'></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-sqlread-2"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlread</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>, <var class="var">propertryname</var>, <var class="var">propertyvalue</var>)</code><a class="copiable-link" href='#index-sqlread-2'></a></span></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-sqlread-1"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlread</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>)</code></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlread-2"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlread</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>, <var class="var">propertryname</var>, <var class="var">propertyvalue</var>)</code></dt>
 <dd><p>Read data from table <var class="var">tablename</var>
 </p>
 <p>Return rows of data from table <var class="var">tablename</var> in a database.
@@ -720,22 +664,15 @@ Next: <a href="#Exporting-Data" accesskey="n" rel="next">Exporting Data</a>, Pre
 </div>
 </div>
 <div class="section-level-extent" id="Exporting-Data">
-<div class="nav-panel">
-<p>
-Next: <a href="#Database-Operations" accesskey="n" rel="next">Database Operations</a>, Previous: <a href="#Importing-Data" accesskey="p" rel="prev">Importing Data</a>, Up: <a href="#Function-Reference" accesskey="u" rel="up">Function Reference</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
-</div>
 <h3 class="section" id="Exporting-Data-1">3.3 Exporting Data</h3>
 <a class="index-entry-id" id="index-Exporting-Data"></a>
-<ul class="mini-toc">
-<li><a href="#sqlwrite" accesskey="1">sqlwrite</a></li>
-</ul>
 <div class="subsection-level-extent" id="sqlwrite">
 <h4 class="subsection">3.3.1 sqlwrite</h4>
 <a class="index-entry-id" id="index-sqlwrite"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-sqlwrite-1"><span class="category-def">: </span><span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>)</code><a class="copiable-link" href='#index-sqlwrite-1'></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-sqlwrite-2"><span class="category-def">: </span><span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">columntypes</var>)</code><a class="copiable-link" href='#index-sqlwrite-2'></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-sqlwrite-3"><span class="category-def">: </span><span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code><a class="copiable-link" href='#index-sqlwrite-3'></a></span></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-sqlwrite-1"><span class="category-def">: </span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>)</code></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlwrite-2"><span class="category-def">: </span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">columntypes</var>)</code></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlwrite-3"><span class="category-def">: </span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></dt>
 <dd><p>Insert rows of data into a table.
 </p>
 <p>Insert rows of data into a database table.
@@ -776,24 +713,13 @@ Next: <a href="#Database-Operations" accesskey="n" rel="next">Database Operation
 </div>
 </div>
 <div class="section-level-extent" id="Database-Operations">
-<div class="nav-panel">
-<p>
-Next: <a href="#Support-Functions" accesskey="n" rel="next">Support Functions</a>, Previous: <a href="#Exporting-Data" accesskey="p" rel="prev">Exporting Data</a>, Up: <a href="#Function-Reference" accesskey="u" rel="up">Function Reference</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
-</div>
 <h3 class="section" id="Database-Operations-1">3.4 Database Operations</h3>
 <a class="index-entry-id" id="index-Database-Operations"></a>
-<ul class="mini-toc">
-<li><a href="#commit" accesskey="1">commit</a></li>
-<li><a href="#execute" accesskey="2">execute</a></li>
-<li><a href="#rollback" accesskey="3">rollback</a></li>
-<li><a href="#sqlupdate" accesskey="4">sqlupdate</a></li>
-<li><a href="#update" accesskey="5">update</a></li>
-</ul>
 <div class="subsection-level-extent" id="commit">
 <h4 class="subsection">3.4.1 commit</h4>
 <a class="index-entry-id" id="index-commit"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-commit-1"><span class="category-def">: </span><span><strong class="def-name">commit</strong> <code class="def-code-arguments">(<var class="var">conn</var>)</code><a class="copiable-link" href='#index-commit-1'></a></span></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-commit-1"><span class="category-def">: </span><strong class="def-name">commit</strong> <code class="def-code-arguments">(<var class="var">conn</var>)</code></dt>
 <dd><p>Make permanent changes to the database.
 </p>
 <h4 class="subsubheading" id="Inputs-11">Inputs</h4>
@@ -809,8 +735,8 @@ Next: <a href="#Support-Functions" accesskey="n" rel="next">Support Functions</a
 <div class="subsection-level-extent" id="execute">
 <h4 class="subsection">3.4.2 execute</h4>
 <a class="index-entry-id" id="index-execute"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-execute-1"><span class="category-def">: </span><span><strong class="def-name">execute</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>)</code><a class="copiable-link" href='#index-execute-1'></a></span></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-execute-1"><span class="category-def">: </span><strong class="def-name">execute</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>)</code></dt>
 <dd><p>Perform SQL query <var class="var">query</var>, that does not return result
 </p>
 <h4 class="subsubheading" id="Inputs-12">Inputs</h4>
@@ -842,8 +768,8 @@ Next: <a href="#Support-Functions" accesskey="n" rel="next">Support Functions</a
 <div class="subsection-level-extent" id="rollback">
 <h4 class="subsection">3.4.3 rollback</h4>
 <a class="index-entry-id" id="index-rollback"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-rollback-1"><span class="category-def">: </span><span><strong class="def-name">rollback</strong> <code class="def-code-arguments">(<var class="var">conn</var>)</code><a class="copiable-link" href='#index-rollback-1'></a></span></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-rollback-1"><span class="category-def">: </span><strong class="def-name">rollback</strong> <code class="def-code-arguments">(<var class="var">conn</var>)</code></dt>
 <dd><p>Rollback changes to the database.
 </p>
 <h4 class="subsubheading" id="Inputs-13">Inputs</h4>
@@ -859,9 +785,9 @@ Next: <a href="#Support-Functions" accesskey="n" rel="next">Support Functions</a
 <div class="subsection-level-extent" id="sqlupdate">
 <h4 class="subsection">3.4.4 sqlupdate</h4>
 <a class="index-entry-id" id="index-sqlupdate"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-sqlupdate-1"><span class="category-def">: </span><span><strong class="def-name">sqlupdate</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">filter</var>)</code><a class="copiable-link" href='#index-sqlupdate-1'></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-sqlupdate-2"><span class="category-def">: </span><span><strong class="def-name">sqlupdate</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">filter</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code><a class="copiable-link" href='#index-sqlupdate-2'></a></span></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-sqlupdate-1"><span class="category-def">: </span><strong class="def-name">sqlupdate</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">filter</var>)</code></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlupdate-2"><span class="category-def">: </span><strong class="def-name">sqlupdate</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">filter</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></dt>
 <dd><p>Update rows of data in database.
 </p>
 <h4 class="subsubheading" id="Inputs-14">Inputs</h4>
@@ -913,8 +839,8 @@ Next: <a href="#Support-Functions" accesskey="n" rel="next">Support Functions</a
 <div class="subsection-level-extent" id="update">
 <h4 class="subsection">3.4.5 update</h4>
 <a class="index-entry-id" id="index-update"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-update-1"><span class="category-def">: </span><span><strong class="def-name">update</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>, <var class="var">colnames</var>, <var class="var">data</var>, <var class="var">whereclause</var>)</code><a class="copiable-link" href='#index-update-1'></a></span></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-update-1"><span class="category-def">: </span><strong class="def-name">update</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>, <var class="var">colnames</var>, <var class="var">data</var>, <var class="var">whereclause</var>)</code></dt>
 <dd><p>Update columns in database.
 </p>
 <h4 class="subsubheading" id="Inputs-15">Inputs</h4>
@@ -955,21 +881,14 @@ Next: <a href="#Support-Functions" accesskey="n" rel="next">Support Functions</a
 </div>
 </div>
 <div class="section-level-extent" id="Support-Functions">
-<div class="nav-panel">
-<p>
-Previous: <a href="#Database-Operations" accesskey="p" rel="prev">Database Operations</a>, Up: <a href="#Function-Reference" accesskey="u" rel="up">Function Reference</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
-</div>
 <h3 class="section" id="Support-Functions-1">3.5 Support Functions</h3>
 <a class="index-entry-id" id="index-Support-Functions"></a>
-<ul class="mini-toc">
-<li><a href="#rowfilter" accesskey="1">rowfilter</a></li>
-</ul>
 <div class="subsection-level-extent" id="rowfilter">
 <h4 class="subsection">3.5.1 rowfilter</h4>
 <a class="index-entry-id" id="index-rowfilter"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-rowfilter_0028C_0029"><span class="category-def">: </span><span><code class="def-type"><var class="var">rowfilt</var> =</code> <strong class="def-name">rowfilter(<var class="var">C</var>)</strong><a class="copiable-link" href='#index-rowfilter_0028C_0029'></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-rowfilter_0028T_0029"><span class="category-def">: </span><span><code class="def-type"><var class="var">rowfilt</var> =</code> <strong class="def-name">rowfilter(<var class="var">T</var>)</strong><a class="copiable-link" href='#index-rowfilter_0028T_0029'></a></span></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-rowfilter_0028C_0029"><span class="category-def">: </span><code class="def-type"><var class="var">rowfilt</var> =</code> <strong class="def-name">rowfilter(<var class="var">C</var>)</strong></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-rowfilter_0028T_0029"><span class="category-def">: </span><code class="def-type"><var class="var">rowfilt</var> =</code> <strong class="def-name">rowfilter(<var class="var">T</var>)</strong></dt>
 <dd><p>Create an unconstrained rowfilter object with columns names.
 </p>
 <h4 class="subsubheading" id="Inputs-16">Inputs</h4>
@@ -1008,10 +927,6 @@ Previous: <a href="#Database-Operations" accesskey="p" rel="prev">Database Opera
 </div>
 </div>
 <div class="appendix-level-extent" id="Copying">
-<div class="nav-panel">
-<p>
-Next: <a href="#Index" accesskey="n" rel="next">Index</a>, Previous: <a href="#Function-Reference" accesskey="p" rel="prev">Function Reference</a>, Up: <a href="#Top" accesskey="u" rel="up">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
-</div>
 <h2 class="appendix" id="GNU-General-Public-License">Appendix A GNU General Public License</h2>
 <a class="index-entry-id" id="index-warranty"></a>
 <a class="index-entry-id" id="index-copyright"></a>
@@ -1671,10 +1586,6 @@ first, please read <a class="url" href="http://www.gnu.org/philosophy/why-not-lg
 <hr>
 </div>
 <div class="unnumbered-level-extent" id="Index">
-<div class="nav-panel">
-<p>
-Previous: <a href="#Copying" accesskey="p" rel="prev">GNU General Public License</a>, Up: <a href="#Top" accesskey="u" rel="up">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
-</div>
 <h2 class="unnumbered" id="Index-1">Index</h2>
  
 <div class="printindex cp-printindex">
@@ -1703,68 +1614,68 @@ Previous: <a href="#Copying" accesskey="p" rel="prev">GNU General Public License
 <a class="summary-letter-printindex" href="#Index_cp_letter-W"><b>W</b></a>
  &nbsp; 
 </td></tr></table>
-<table class="cp-entries-printindex" border="0">
-<tr><td></td><th class="entries-header-printindex">Index Entry</th><td>&nbsp;</td><th class="sections-header-printindex"> Section</th></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Index_cp_letter-B">B</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Basic-Usage-Overview">Basic Usage Overview</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Basic-Usage-Overview">Basic Usage Overview</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Index_cp_letter-C">C</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Close-the-database">Close the database</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Basic-Usage-Overview">Basic Usage Overview</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-commit">commit</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Database-Operations">Database Operations</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-configureODBCDataSource">configureODBCDataSource</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#ODBC-connection">ODBC connection</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-connection">connection</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#ODBC-connection">ODBC connection</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-copyright">copyright</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Copying">Copying</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Index_cp_letter-D">D</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-database">database</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#ODBC-connection">ODBC connection</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Database-Configuration">Database Configuration</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Basic-Usage-Overview">Basic Usage Overview</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Database-Connection">Database Connection</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Basic-Usage-Overview">Basic Usage Overview</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Database-Operations">Database Operations</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Database-Operations">Database Operations</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Index_cp_letter-E">E</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-execute">execute</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Database-Operations">Database Operations</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-executeSQLScript">executeSQLScript</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Importing-Data">Importing Data</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Exporting-Data">Exporting Data</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Exporting-Data">Exporting Data</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Index_cp_letter-F">F</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-fetch">fetch</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Importing-Data">Importing Data</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Function-Reference">Function Reference</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Function-Reference">Function Reference</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Index_cp_letter-I">I</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Importing-Data">Importing Data</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Importing-Data">Importing Data</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Installing-and-loading">Installing and loading</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Installing-and-loading">Installing and loading</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Index_cp_letter-L">L</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-listDataSources">listDataSources</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#ODBC-connection">ODBC connection</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Loading">Loading</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Installing-and-loading">Installing and loading</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Index_cp_letter-O">O</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-odbc">odbc</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#ODBC-connection">ODBC connection</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-ODBC-connection">ODBC connection</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#ODBC-connection">ODBC connection</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Off_002dline-install">Off-line install</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Installing-and-loading">Installing and loading</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Online-install">Online install</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Installing-and-loading">Installing and loading</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Index_cp_letter-R">R</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Read-a-table">Read a table</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Basic-Usage-Overview">Basic Usage Overview</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-rollback">rollback</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Database-Operations">Database Operations</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-rowfilter">rowfilter</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Support-Functions">Support Functions</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Index_cp_letter-S">S</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-select">select</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Importing-Data">Importing Data</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-sqlinnerjoin">sqlinnerjoin</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Importing-Data">Importing Data</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-sqlouterjoin">sqlouterjoin</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Importing-Data">Importing Data</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-sqlread">sqlread</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Importing-Data">Importing Data</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-sqlupdate">sqlupdate</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Database-Operations">Database Operations</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-sqlwrite">sqlwrite</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Exporting-Data">Exporting Data</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Support-Functions">Support Functions</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Support-Functions">Support Functions</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Index_cp_letter-U">U</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-update">update</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Database-Operations">Database Operations</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Index_cp_letter-W">W</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-warranty">warranty</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Copying">Copying</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
+<table class="cp-entries-printindex">
+<tr><td></td><th class="entries-header-printindex">Index Entry</th><th class="sections-header-printindex">Section</th></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Index_cp_letter-B">B</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Basic-Usage-Overview">Basic Usage Overview</a></td><td class="printindex-index-section"><a href="#Basic-Usage-Overview">Basic Usage Overview</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Index_cp_letter-C">C</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Close-the-database">Close the database</a></td><td class="printindex-index-section"><a href="#Basic-Usage-Overview">Basic Usage Overview</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-commit">commit</a></td><td class="printindex-index-section"><a href="#Database-Operations">Database Operations</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-configureODBCDataSource">configureODBCDataSource</a></td><td class="printindex-index-section"><a href="#ODBC-connection">ODBC connection</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-connection">connection</a></td><td class="printindex-index-section"><a href="#ODBC-connection">ODBC connection</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-copyright">copyright</a></td><td class="printindex-index-section"><a href="#Copying">Copying</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Index_cp_letter-D">D</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-database">database</a></td><td class="printindex-index-section"><a href="#ODBC-connection">ODBC connection</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Database-Configuration">Database Configuration</a></td><td class="printindex-index-section"><a href="#Basic-Usage-Overview">Basic Usage Overview</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Database-Connection">Database Connection</a></td><td class="printindex-index-section"><a href="#Basic-Usage-Overview">Basic Usage Overview</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Database-Operations">Database Operations</a></td><td class="printindex-index-section"><a href="#Database-Operations">Database Operations</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Index_cp_letter-E">E</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-execute">execute</a></td><td class="printindex-index-section"><a href="#Database-Operations">Database Operations</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-executeSQLScript">executeSQLScript</a></td><td class="printindex-index-section"><a href="#Importing-Data">Importing Data</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Exporting-Data">Exporting Data</a></td><td class="printindex-index-section"><a href="#Exporting-Data">Exporting Data</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Index_cp_letter-F">F</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-fetch">fetch</a></td><td class="printindex-index-section"><a href="#Importing-Data">Importing Data</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Function-Reference">Function Reference</a></td><td class="printindex-index-section"><a href="#Function-Reference">Function Reference</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Index_cp_letter-I">I</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Importing-Data">Importing Data</a></td><td class="printindex-index-section"><a href="#Importing-Data">Importing Data</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Installing-and-loading">Installing and loading</a></td><td class="printindex-index-section"><a href="#Installing-and-loading">Installing and loading</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Index_cp_letter-L">L</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-listDataSources">listDataSources</a></td><td class="printindex-index-section"><a href="#ODBC-connection">ODBC connection</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Loading">Loading</a></td><td class="printindex-index-section"><a href="#Installing-and-loading">Installing and loading</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Index_cp_letter-O">O</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-odbc">odbc</a></td><td class="printindex-index-section"><a href="#ODBC-connection">ODBC connection</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-ODBC-connection">ODBC connection</a></td><td class="printindex-index-section"><a href="#ODBC-connection">ODBC connection</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Off_002dline-install">Off-line install</a></td><td class="printindex-index-section"><a href="#Installing-and-loading">Installing and loading</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Online-install">Online install</a></td><td class="printindex-index-section"><a href="#Installing-and-loading">Installing and loading</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Index_cp_letter-R">R</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Read-a-table">Read a table</a></td><td class="printindex-index-section"><a href="#Basic-Usage-Overview">Basic Usage Overview</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-rollback">rollback</a></td><td class="printindex-index-section"><a href="#Database-Operations">Database Operations</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-rowfilter">rowfilter</a></td><td class="printindex-index-section"><a href="#Support-Functions">Support Functions</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Index_cp_letter-S">S</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-select">select</a></td><td class="printindex-index-section"><a href="#Importing-Data">Importing Data</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-sqlinnerjoin">sqlinnerjoin</a></td><td class="printindex-index-section"><a href="#Importing-Data">Importing Data</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-sqlouterjoin">sqlouterjoin</a></td><td class="printindex-index-section"><a href="#Importing-Data">Importing Data</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-sqlread">sqlread</a></td><td class="printindex-index-section"><a href="#Importing-Data">Importing Data</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-sqlupdate">sqlupdate</a></td><td class="printindex-index-section"><a href="#Database-Operations">Database Operations</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-sqlwrite">sqlwrite</a></td><td class="printindex-index-section"><a href="#Exporting-Data">Exporting Data</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Support-Functions">Support Functions</a></td><td class="printindex-index-section"><a href="#Support-Functions">Support Functions</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Index_cp_letter-U">U</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-update">update</a></td><td class="printindex-index-section"><a href="#Database-Operations">Database Operations</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Index_cp_letter-W">W</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-warranty">warranty</a></td><td class="printindex-index-section"><a href="#Copying">Copying</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
 </table>
 <table class="cp-letters-footer-printindex"><tr><th>Jump to: &nbsp; </th><td><a class="summary-letter-printindex" href="#Index_cp_letter-B"><b>B</b></a>
  &nbsp; 
