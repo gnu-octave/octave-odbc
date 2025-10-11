@@ -18,12 +18,12 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Octave SQLITE Toolkit
+title: Octave ODBC Toolkit
 email: "John Donoghue <john.donoghue@ieee.org>"
 author: "John Donoghue <john.donoghue@ieee.org>"
 logo: "/assets/octave-odbc.svg"
 description: >- # this means to ignore newlines until "baseurl:"
-  SQLite Toolkit for GNU Octave
+  ODBC Toolkit for GNU Octave
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://gnu-octave.github.io/octave-odbc/"
 twitter_username: jekyllrb
