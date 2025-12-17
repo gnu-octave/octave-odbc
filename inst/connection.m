@@ -608,7 +608,7 @@ classdef connection < handle
 
       endfor
 
-      # create table if ne need to ?
+      # create table if we need to ?
       if isempty(coltypes)
         coltypes = {};
         # currently assign all columns to numeric if not specified as it will
@@ -626,9 +626,12 @@ classdef connection < handle
       endfor 
       tsql = [tsql ");"];
 
-      execute(this, tsql);
-
-      execute(this, sql);
+      if !isempty(coltypes)
+        execute(this, tsql);
+      endif
+      if length(data.(cols{1}))
+        execute(this, sql);
+      endif
 
     endfunction
    
@@ -1341,6 +1344,13 @@ endclassdef
 %! sqlwrite(db, "Test1", t);
 %! tbl = sqlread(db , "Test1", "DataReturnFormat", "structure");
 %! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [2 2]);
+
+%!xtest
+%! # write no data but have columns
+%! t = struct("Id", [], "Name", []);
+%! sqlwrite(db, "Testnodata", t);
+%! tbl = sqlread(db , "Testnodata", "DataReturnFormat", "structure");
+%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [2 0]);
 
 %!xtest
 %! # test sqlupdate
