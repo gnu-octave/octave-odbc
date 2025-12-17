@@ -479,19 +479,18 @@ octave_odbc::find (const std::string &infilter, octave_value &v)
   SQLRETURN rc;
   SQLHSTMT hstmt;  
 
-  if (infilter == "")
-    infilter = "%";
-
   SQLCHAR filter[1024];
-  strcpy((char*)filter, infilter.c_str());
+  if (infilter == "")
+    strcpy((char*)filter, "%");
+  else
+    strcpy((char*)filter, infilter.c_str());
 
   rc = SQLAllocHandle(SQL_HANDLE_STMT, dbc, &hstmt);  
 
   rc = SQLTables(hstmt,
     NULL, 0,
     NULL, 0,
-    (SQLCHAR*)filter, infilter.length(),
-    //(SQLCHAR*)"", SQL_NTS
+    (SQLCHAR*)filter, SQL_NTS,
     NULL, 0
   );
 
