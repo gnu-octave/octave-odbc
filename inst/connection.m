@@ -1175,6 +1175,65 @@ classdef connection < handle
       update(conn, tablename, cols, data, ["WHERE " char(filter)]);
     endfunction
 
+    function data = sqlfind (this, pattern, varargin)
+      ## -*- texinfo -*-
+      ## @deftypefn {} {@var{data} =} sqlfind (@var{db}, @var{pattern})
+      ## @deftypefnx {} {@var{data} =} sqlfind (@var{db}, @var{pattern}, @var{propertyname}, @var{propertyvalue} @dots{})
+      ## Find information about table types in a database.
+      ##
+      ## @subsubheading Inputs
+      ## @table @asis
+      ## @item @var{db}
+      ##  currently open database.
+      ## @item @var{pattern}
+      ##  Name or pattern to match table in database. Use '' to match match all tables.
+      ## @item @var{propertyname}, @var{propertyvalue}
+      ##  property name/value pairs where known properties are:
+      ##  @table @asis
+      ##  @item Catalog
+      ##   catalog value to match
+      ##  @item Schema
+      ##   schema value to match
+      ##  @end table
+      ## @end table
+      ##
+      ## Note: currently the property values are not used in the filter process.
+      ##
+      ## @subsubheading Outputs
+      ## @table @asis
+      ## @item @var{data}
+      ##  a table containing the query result. Table columns are
+      ## 'Catalog', 'Schema', 'Table', 'Columns', 'Type'.
+      ## @end table
+      ##
+      ## @subsubheading Examples
+      ## Show all tables in the database.
+      ## @example
+      ## @code {
+      ## # create sql connection to an existing database
+      ## db = database("default", "", "");
+      ## # list all tables
+      ## data = sqlfind(db, '');
+      ## }
+      ## @end example
+      ##
+      ## Show information about TestTable
+      ## @example
+      ## @code {
+      ## # create sql connection
+      ## db = database("default", "", "");
+      ## # list matching tables
+      ## data = sqlfind(db, 'TestTable');
+      ## }
+      ## @end example
+      ##
+      ## @seealso{database, sqlread}
+      ## @end deftypefn
+
+      xdata = __odbc_find__(this.dbhandle, pattern);
+      data = format_data(this, xdata);
+    endfunction
+ 
     function disp(this)
       ## Display information about the database
       
@@ -1243,24 +1302,29 @@ classdef connection < handle
       ## private function to interface to oct file
       data = __odbc_run__(this.dbhandle, sqlquery);
       if nargout > 0
-        if strcmp(format, "table")
-          # create table ?
-          if exist ("struct2table") != 0
-            rdata = struct2table(data);
-          elseif exist ("struct2dbtable") != 0
-            # sqlite provides a dbtable
-            rdata = struct2dbtable(data);
-          else
-            rdata = data;
-          endif
-        elseif strcmp(format, "structure")
-          rdata = data;
-        elseif strcmp(format, "cellarray")
-          rdata = struct2cell(data);
-        else
-          error ("Unknown returnformat '%s'", format);
-        endif
+        rdata = format_data(this, data, format);
       endif
+    endfunction
+
+    function rdata = format_data(this, data, format="table")
+      if strcmp(format, "table")
+        # create table ?
+        if exist ("struct2table") != 0
+          rdata = struct2table(data);
+        elseif exist ("struct2dbtable") != 0
+          # sqlite provides a dbtable
+          rdata = struct2dbtable(data);
+        else
+          rdata = data;
+        endif
+      elseif strcmp(format, "structure")
+        rdata = data;
+      elseif strcmp(format, "cellarray")
+        rdata = struct2cell(data);
+      else
+        error ("Unknown returnformat '%s'", format);
+      endif
+ 
     endfunction
 
     function type = calc_type(this, n)

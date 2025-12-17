@@ -67,6 +67,7 @@ public:
   bool run (const std::string &query, octave_value &v);
   bool rollback ();
   bool commit ();
+  bool find (const std::string &filter, octave_value &v);
   std::string getMessage() const;
 
   /**
@@ -470,6 +471,172 @@ octave_odbc::is_open () const
     return false;
 }
 
+bool
+octave_odbc::find (const std::string &infilter, octave_value &v)
+{
+  v = Cell();
+
+  SQLRETURN rc;
+  SQLHSTMT hstmt;  
+
+  if (infilter == "")
+    infilter = "%";
+
+  SQLCHAR filter[1024];
+  strcpy((char*)filter, infilter.c_str());
+
+  rc = SQLAllocHandle(SQL_HANDLE_STMT, dbc, &hstmt);  
+
+  rc = SQLTables(hstmt,
+    NULL, 0,
+    NULL, 0,
+    (SQLCHAR*)filter, infilter.length(),
+    //(SQLCHAR*)"", SQL_NTS
+    NULL, 0
+  );
+
+  if (rc == SQL_SUCCESS_WITH_INFO || rc == SQL_ERROR)
+    {
+      SQLCHAR       SqlState[6], Msg[SQL_MAX_MESSAGE_LENGTH];
+      SQLINTEGER    NativeError;
+      SQLSMALLINT   i, MsgLen;
+      SQLRETURN     rc2;
+
+      i = 1;
+      while ((rc2 = SQLGetDiagRec(SQL_HANDLE_STMT, hstmt, i, SqlState, &NativeError, Msg, sizeof(Msg), &MsgLen)) == SQL_SUCCESS || rc2 == SQL_SUCCESS_WITH_INFO)
+        {
+	  i++;
+	  message = (char*)Msg;
+	}
+    }
+
+  if (rc == SQL_ERROR)
+    {
+      SQLFreeHandle( SQL_HANDLE_STMT, hstmt);
+      return false;
+    }
+
+  SQLSMALLINT cols = 0;
+  rc = SQLNumResultCols(hstmt, &cols);
+
+  if (rc == SQL_SUCCESS_WITH_INFO || rc == SQL_ERROR)
+    {
+      SQLCHAR       SqlState[6], Msg[SQL_MAX_MESSAGE_LENGTH];
+      SQLINTEGER    NativeError;
+      SQLSMALLINT   i, MsgLen;
+      SQLRETURN     rc2;
+
+      i = 1;
+      while ((rc2 = SQLGetDiagRec(SQL_HANDLE_STMT, hstmt, i, SqlState, &NativeError, Msg, sizeof(Msg), &MsgLen)) == SQL_SUCCESS || rc2 == SQL_SUCCESS_WITH_INFO)
+        {
+	  i++;
+	  message = (char*)Msg;
+	}
+    }
+
+  if (rc == SQL_ERROR)
+    {
+      SQLFreeHandle( SQL_HANDLE_STMT, hstmt);
+      return false;
+    }
+
+  if (cols != 0)
+    {
+      octave_map om;
+      Cell coldata[cols];
+      SQLSMALLINT col_type[cols];
+      std::string col_name[cols];
+
+      // TODO: we could probally just use the SQLColumns function and instead of SQLTables first
+      // and combine data since it will be sortedby table
+
+      // we only want 4 known columns that are at fixed indexes
+      cols = 4;
+      col_name[0] = "Catalog";
+      col_type[0] = SQL_C_CHAR;
+      col_name[1] = "Schema";
+      col_type[1] = SQL_C_CHAR;
+      col_name[2] = "Table";
+      col_type[2] = SQL_C_CHAR;
+      col_name[3] = "Type";
+      col_type[3] = SQL_C_CHAR;
+
+      // get rows
+      octave_idx_type row = 0;
+      while((rc = SQLFetch(hstmt)) == SQL_SUCCESS_WITH_INFO || rc == SQL_SUCCESS)
+        {
+          octave_value value;
+
+          for (SQLSMALLINT c =1; c <= cols; c++)
+            {
+              SQLCHAR      szName[256];
+              SQLLEN  cbName;
+	      szName[0] = 0;
+              rc = SQLGetData(hstmt, c, SQL_C_CHAR, szName, sizeof(szName), &cbName);  
+              value = octave_value((char *)szName);
+
+              if (coldata[c-1].numel() <= row)
+                {
+                  coldata[c-1].resize(dim_vector(row+20, 1));
+                }
+
+              coldata[c-1](row) = value;
+	    }
+
+          row++;
+        }
+  
+      SQLCloseCursor(hstmt);
+
+      // what was/would have been the 5th on (COmment, we replace here)
+      col_name[4] = "Columns";
+      coldata[4] = Cell(dim_vector(row, 1));
+      cols++;
+
+      for(octave_idx_type r = 0; r < row; r++)
+        {
+          // now get the column data
+	  std::string catalog = coldata[0](r).string_value();
+	  std::string schema = coldata[1](r).string_value();
+	  std::string table = coldata[2](r).string_value();
+	  std::list<std::string> columns; 
+          rc = SQLColumns(hstmt,
+            (SQLCHAR*)catalog.c_str(), catalog.length(),
+	    (SQLCHAR*)schema.c_str(), schema.length(),
+	    (SQLCHAR*)table.c_str(), table.length(), // SQL_NTS
+	    NULL, 0
+          );
+	  SQLCHAR column_name[1024+1];
+	  SQLLEN column_size;
+          SQLBindCol(hstmt, 4, SQL_C_CHAR, column_name, 1024, &column_size);
+
+          while (rc == SQL_SUCCESS)
+            {
+              column_name[0] = 0;
+              rc = SQLFetch(hstmt);  
+              if(column_name[0])
+                columns.push_back((char*)column_name);
+            }
+      
+          SQLCloseCursor(hstmt);
+
+          coldata[4](r) = Cell(columns);
+        }
+
+      // set the data struct
+      for (SQLSMALLINT c =1; c <= cols; c++)
+        {
+          coldata[c-1].resize(dim_vector(row, 1));
+          om.assign(col_name[c-1], octave_value(coldata[c-1]));
+        }
+
+      v = om;
+    }
+  else
+    SQLCloseCursor(hstmt);
+
+  return true;
+}
 
 bool
 octave_odbc::run (const std::string &query, octave_value &v)
@@ -591,7 +758,7 @@ octave_odbc::run (const std::string &query, octave_value &v)
                 }
               else
                 {
-                  SQLCHAR      szName[256];
+                  SQLCHAR szName[1024];
                   SQLLEN  cbName;
 	          szName[0] = 0;
                   rc = SQLGetData(hstmt, c, SQL_C_CHAR, szName, sizeof(szName), &cbName);  
@@ -887,7 +1054,7 @@ Private function\n \
 // PKG_ADD: autoload ("__odbc_list__", "__octave_odbc__.oct");
 DEFUN_DLD(__odbc_list__, args, nargout,
 "-*- texinfo -*-\n \
-@deftypefn {Function File} {} __odbc_run__\n \
+@deftypefn {Function File} {} __odbc_list__\n \
 Private function\n \
 @end deftypefn")
 {
@@ -957,5 +1124,59 @@ Private function\n \
   SQLFreeHandle( SQL_HANDLE_ENV, env ); 
 
   return octave_value(om);
+}
+
+// PKG_ADD: autoload ("__odbc_find__", "__octave_odbc__.oct");
+DEFUN_DLD(__odbc_find__, args, nargout,
+"-*- texinfo -*-\n \
+@deftypefn {Function File} {} __odbc_find__\n \
+Private function\n \
+@end deftypefn")
+{
+  init_types ();
+
+  if (args.length () < 1 || 
+      args(0).type_id () != octave_odbc::static_type_id ())
+    {
+      print_usage ();
+      return octave_value (false);  
+    }
+
+  std::string filter = "";
+  if (args.length () > 1)
+    {
+      if (!args(1).is_string())
+        {
+          error ("Expected filtername as a string");
+          return octave_value();
+        }
+      else
+        {
+          filter = args(1).string_value();
+        }
+    }
+
+  octave_odbc * db = NULL;
+
+  const octave_base_value& rep = args (0).get_rep ();
+
+  db = &((octave_odbc &)rep);
+
+  octave_value ret;
+
+  db->find(filter, ret);
+
+  return octave_value (ret);
+  /*
+  if(db->commit())
+    {
+      return octave_value ();
+    }
+  else
+    {
+      error ("Could not run commit: %s", db->getMessage().c_str());
+      return octave_value();
+    }
+  */
 }
 
