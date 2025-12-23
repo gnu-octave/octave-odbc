@@ -1230,7 +1230,40 @@ classdef connection < handle
       ## @seealso{database, sqlread}
       ## @end deftypefn
 
-      xdata = __odbc_find__(this.dbhandle, pattern);
+      if numel(varargin) > 0
+        if mod (numel(varargin), 2) != 0
+          error ("expected property name, value pairs");
+        endif
+        if !iscellstr (varargin (1:2:numel(varargin)))
+          error ("expected property names to be strings");
+        endif
+      endif
+
+      catalog = "%";
+      schema = "%"
+      if isempty(pattern)
+        pattern = "%";
+      endif
+
+      for idx=1:2:numel(varargin)
+        n = varargin{idx};
+        v = varargin{idx+1};
+        if strcmp(n, "Catalog")
+          if !ischar(v)
+            error ("Expected Catalog property value to be a string");
+          endif
+          catalog = v;
+        elseif strcmp(n, "Schema")
+          if !ischar(v)
+            error ("Expected Schema property value to be a string");
+          endif
+          schema = v;
+        else
+          error ("Unknown property name '%s'", n);
+        endif
+      endfor
+ 
+      xdata = __odbc_find__(this.dbhandle, pattern, catalog, schema);
       data = format_data(this, xdata);
     endfunction
  

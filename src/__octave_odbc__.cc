@@ -67,7 +67,7 @@ public:
   bool run (const std::string &query, octave_value &v);
   bool rollback ();
   bool commit ();
-  bool find (const std::string &filter, octave_value &v);
+  bool find (const std::string &filter, const std::string &catalog, const std::string &schema, octave_value &v);
   std::string getMessage() const;
 
   /**
@@ -472,7 +472,7 @@ octave_odbc::is_open () const
 }
 
 bool
-octave_odbc::find (const std::string &infilter, octave_value &v)
+octave_odbc::find (const std::string &infilter, const std::string &catalog, const std::string &schema, octave_value &v)
 {
   v = Cell();
 
@@ -487,9 +487,11 @@ octave_odbc::find (const std::string &infilter, octave_value &v)
 
   rc = SQLAllocHandle(SQL_HANDLE_STMT, dbc, &hstmt);  
 
+  //printf("C '%s' | '%s' | '%s'\n", infilter.c_str(), catalog.c_str(), schema.c_str());
+
   rc = SQLTables(hstmt,
-    NULL, 0,
-    NULL, 0,
+    (SQLCHAR*)catalog.c_str(), SQL_NTS,
+    (SQLCHAR*)schema.c_str(), SQL_NTS,
     (SQLCHAR*)filter, SQL_NTS,
     NULL, 0
   );
@@ -1134,27 +1136,17 @@ Private function\n \
 {
   init_types ();
 
-  if (args.length () < 1 || 
+  if (args.length () != 4 || 
       args(0).type_id () != octave_odbc::static_type_id ())
     {
       print_usage ();
       return octave_value (false);  
     }
 
-  std::string filter = "";
-  if (args.length () > 1)
-    {
-      if (!args(1).is_string())
-        {
-          error ("Expected filtername as a string");
-          return octave_value();
-        }
-      else
-        {
-          filter = args(1).string_value();
-        }
-    }
-
+  std::string filter = args(1).string_value();
+  std::string catalog = args(2).string_value();
+  std::string schema = args(3).string_value();
+  
   octave_odbc * db = NULL;
 
   const octave_base_value& rep = args (0).get_rep ();
@@ -1163,19 +1155,8 @@ Private function\n \
 
   octave_value ret;
 
-  db->find(filter, ret);
+  db->find(filter, catalog, schema, ret);
 
   return octave_value (ret);
-  /*
-  if(db->commit())
-    {
-      return octave_value ();
-    }
-  else
-    {
-      error ("Could not run commit: %s", db->getMessage().c_str());
-      return octave_value();
-    }
-  */
 }
 
