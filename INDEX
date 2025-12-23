@@ -5,6 +5,7 @@ ODBC connection
   connection
   listDataSources
   configureODBCDataSource
+  connection.sqlfind
 Importing Data
   connection.fetch
   connection.sqlinnerjoin
