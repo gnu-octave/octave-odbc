@@ -1,5 +1,5 @@
 \input texinfo @c -*-texinfo-*-
-@c Copyright (c) 2024, John Donoghue <john.donoghue@ieee.org>
+@c Copyright (c) 2024-2025, John Donoghue <john.donoghue@ieee.org>
 @c Octave ODBC Toolkit - Basic ODBC implementation of Database Toolkit
 
 @c For manually generating the documentation use
@@ -11,7 +11,6 @@
 @afourpaper
 @paragraphindent 0
 @finalout
-@set COPYRIGHT_DATE 2024
 @c @afourwide
 @c %*** End of the HEADER
 
@@ -27,7 +26,7 @@
 @author John Donoghue
 @page
 @vskip 0pt plus 1filll
-Copyright @copyright{} @value{COPYRIGHT_DATE} John Donoghue
+Copyright @copyright{} 2024-@value{YEAR} John Donoghue
 
 Permission is granted to make and distribute verbatim copies of
 this manual provided the copyright notice and this permission notice
