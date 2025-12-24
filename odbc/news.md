@@ -3,7 +3,7 @@ layout: "default"
 permalink: "/news/"
 title: "Odbc Toolkit - News"
 pkg_name: "odbc"
-version: "0.0.4"
+version: "0.0.5"
 description: "Basic Octave implementation for ODBC database functionality"
 navigation:
 - id: "overview"
@@ -19,6 +19,15 @@ navigation:
   url: "/manual"
 ---
 <pre>
+Summary of important user-visible changes for odbc 0.0.5:
+-------------------------------------------------------------------
+
+ ** sqlfind: new function
+
+ ** sqlwrite: bug fix when empty table data provided
+
+ ** Minor doc updates
+
 Summary of important user-visible changes for odbc 0.0.4:
 -------------------------------------------------------------------
 

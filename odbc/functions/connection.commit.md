@@ -2,10 +2,10 @@
 layout: "default"
 permalink: "/functions/17_connectioncommit/"
 pkg_name: "odbc"
-pkg_version: "0.0.4"
+pkg_version: "0.0.5"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - connection.commit"
-category: "Database Operations"
+category: "Support Functions"
 func_name: "connection.commit"
 navigation:
 - id: "overview"
@@ -17,18 +17,23 @@ navigation:
 - id: "15_ODBCconnection"
   name: "&nbsp;&nbsp;ODBC connection"
   url: "/functions/#15_ODBCconnection"
+  subitems:
 - id: "14_ImportingData"
   name: "&nbsp;&nbsp;Importing Data"
   url: "/functions/#14_ImportingData"
+  subitems:
 - id: "14_ExportingData"
   name: "&nbsp;&nbsp;Exporting Data"
   url: "/functions/#14_ExportingData"
+  subitems:
 - id: "19_DatabaseOperations"
   name: "&nbsp;&nbsp;Database Operations"
   url: "/functions/#19_DatabaseOperations"
+  subitems:
 - id: "17_SupportFunctions"
   name: "&nbsp;&nbsp;Support Functions"
   url: "/functions/#17_SupportFunctions"
+  subitems:
 - id: "news"
   name: "News"
   url: "/news"

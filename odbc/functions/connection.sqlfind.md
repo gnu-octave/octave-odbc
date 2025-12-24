@@ -1,12 +1,12 @@
 ---
 layout: "default"
-permalink: "/functions/17_connectionselect/"
+permalink: "/functions/18_connectionsqlfind/"
 pkg_name: "odbc"
 pkg_version: "0.0.5"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
-title: "Odbc Toolkit - connection.select"
+title: "Odbc Toolkit - connection.sqlfind"
 category: "Support Functions"
-func_name: "connection.select"
+func_name: "connection.sqlfind"
 navigation:
 - id: "overview"
   name: "Overview"
@@ -42,59 +42,62 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-select"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">select</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>)</code><a class="copiable-link" href="#index-select"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-select-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">select</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code><a class="copiable-link" href="#index-select-1"></a></span></dt>
-<dd><p>Perform SQL query <var class="var">query</var>, and return result
- </p><h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
+<dt class="deftypefn def-line" id="index-sqlfind"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlfind</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">pattern</var>)</code><a class="copiable-link" href="#index-sqlfind"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlfind-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlfind</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">pattern</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code><a class="copiable-link" href="#index-sqlfind-1"></a></span></dt>
+<dd><p>Find information about table types in a database.
+</p>
+<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
 <dl class="table">
-<dt><var class="var">conn</var></dt>
-<dd><p>currently open database connection.
+<dt><var class="var">db</var></dt>
+<dd><p>currently open database.
  </p></dd>
-<dt><var class="var">query</var></dt>
-<dd><p>String containing a valid select SQL query.
+<dt><var class="var">pattern</var></dt>
+<dd><p>Name or pattern to match table in database. Use &rdquo; to match match all tables.
  </p></dd>
 <dt><var class="var">propertyname</var>, <var class="var">propertyvalue</var></dt>
 <dd><p>property name/value pairs where known properties are:
   </p><dl class="table">
-<dt>MaxRows</dt>
-<dd><p>Integer value of max number of rows in the query
+<dt>Catalog</dt>
+<dd><p>catalog value to match
   </p></dd>
-<dt>VariableNamingRule</dt>
-<dd><p>String value &rsquo;preserve&rsquo; (default) or &rsquo;modify&rsquo; to flag renaming of variable names (currently ignored)
-  </p></dd>
-<dt>RowFilter</dt>
-<dd><p>rowfilter object to filter results
+<dt>Schema</dt>
+<dd><p>schema value to match
   </p></dd>
 </dl>
 </dd>
 </dl>
 
+<p>Note: currently the property values are not used in the filter process.
+</p>
 <h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
 <dl class="table">
 <dt><var class="var">data</var></dt>
-<dd><p>a table containing the query result.
+<dd><p>a table containing the query result. Table columns are
+ &rsquo;Catalog&rsquo;, &rsquo;Schema&rsquo;, &rsquo;Table&rsquo;, &rsquo;Columns&rsquo;, &rsquo;Type&rsquo;.
  </p></dd>
 </dl>
 
 <h4 class="subsubheading" id="Examples"><span>Examples<a class="copiable-link" href="#Examples"></a></span></h4>
-<p>Select all rows of data from a database tables
+<p>Show all tables in the database.
+ </p><div class="example">
+<pre class="example-preformatted"> <code class="code">
+ # create sql connection to an existing database
+ db = database(&quot;default&quot;, &quot;&quot;, &quot;&quot;);
+ # list all tables
+ data = sqlfind(db, '');
+ </code>
+ </pre></div>
+
+<p>Show information about TestTable
  </p><div class="example">
 <pre class="example-preformatted"> <code class="code">
  # create sql connection
  db = database(&quot;default&quot;, &quot;&quot;, &quot;&quot;);
- data = fetch(db, 'SELECT * FROM TestTable');
- </code>
- </pre></div>
-
-<p>Select 5 rows of data from a database tables
- </p><div class="example">
-<pre class="example-preformatted"> <code class="code">
- # create sql connection
- db = database(&quot;default&quot;, &quot;&quot;, &quot;&quot;);
- data = fetch(db, 'SELECT * FROM TestTable', &quot;MaxRows&quot;, 5);
+ # list matching tables
+ data = sqlfind(db, 'TestTable');
  </code>
  </pre></div>
 
 
-<p><strong class="strong">See also:</strong> database, connection.
+<p><strong class="strong">See also:</strong> database, sqlread.
  </p></dd></dl>

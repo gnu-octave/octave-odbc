@@ -3,7 +3,7 @@ layout: "function_list"
 permalink: "/functions/"
 title: "Odbc Toolkit - Functions"
 pkg_name: "odbc"
-version: "0.0.4"
+version: "0.0.5"
 description: "Basic Octave implementation for ODBC database functionality"
 categories:
 - id: "15_ODBCconnection"
@@ -29,6 +29,11 @@ categories:
     name: "configureODBCDataSource"
     description: "Open the ODBC Datasource Administrator dialog box in Windows or ODBCManageDat..."
     url: "/functions/23_configureODBCDataSource/"
+  - id: "18_connectionsqlfind"
+    name: "connection.sqlfind"
+    description: "Find information about table types in a database."
+    url: "/functions/18_connectionsqlfind/"
+  groups:
 - id: "14_ImportingData"
   description: "Importing Data"
   functions:
@@ -56,6 +61,7 @@ categories:
     name: "connection.executeSQLScript"
     description: "Run statements from a script file"
     url: "/functions/27_connectionexecuteSQLScript/"
+  groups:
 - id: "14_ExportingData"
   description: "Exporting Data"
   functions:
@@ -63,6 +69,7 @@ categories:
     name: "connection.sqlwrite"
     description: "Insert rows of data into a table."
     url: "/functions/19_connectionsqlwrite/"
+  groups:
 - id: "19_DatabaseOperations"
   description: "Database Operations"
   functions:
@@ -86,6 +93,7 @@ categories:
     name: "connection.update"
     description: "Update columns in database."
     url: "/functions/17_connectionupdate/"
+  groups:
 - id: "17_SupportFunctions"
   description: "Support Functions"
   functions:
@@ -93,6 +101,7 @@ categories:
     name: "rowfilter"
     description: "Create an unconstrained rowfilter object with columns names."
     url: "/functions/9_rowfilter/"
+  groups:
 navigation:
 - id: "overview"
   name: "Overview"
@@ -102,18 +111,23 @@ navigation:
 - id: "15_ODBCconnection"
   name: "&nbsp;&nbsp;ODBC connection"
   url: "/functions/#15_ODBCconnection"
+  subitems:
 - id: "14_ImportingData"
   name: "&nbsp;&nbsp;Importing Data"
   url: "/functions/#14_ImportingData"
+  subitems:
 - id: "14_ExportingData"
   name: "&nbsp;&nbsp;Exporting Data"
   url: "/functions/#14_ExportingData"
+  subitems:
 - id: "19_DatabaseOperations"
   name: "&nbsp;&nbsp;Database Operations"
   url: "/functions/#19_DatabaseOperations"
+  subitems:
 - id: "17_SupportFunctions"
   name: "&nbsp;&nbsp;Support Functions"
   url: "/functions/#17_SupportFunctions"
+  subitems:
 - id: "news"
   name: "News"
   url: "/news"

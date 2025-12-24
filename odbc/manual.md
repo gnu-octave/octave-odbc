@@ -3,7 +3,7 @@ layout: "default"
 permalink: "/manual/"
 title: "Odbc Toolkit - Manual"
 pkg_name: "odbc"
-version: "0.0.4"
+version: "0.0.5"
 description: "Basic Octave implementation for ODBC database functionality"
 navigation:
 - id: "overview"
@@ -53,9 +53,10 @@ navigation:
     <ul class="toc-numbered-mark">
       <li><a id="toc-configureODBCDataSource" href="#configureODBCDataSource">3.1.1 configureODBCDataSource</a></li>
       <li><a id="toc-connection" href="#connection">3.1.2 connection</a></li>
-      <li><a id="toc-database" href="#database">3.1.3 database</a></li>
-      <li><a id="toc-listDataSources" href="#listDataSources">3.1.4 listDataSources</a></li>
-      <li><a id="toc-odbc" href="#odbc">3.1.5 odbc</a></li>
+      <li><a id="toc-sqlfind" href="#sqlfind">3.1.3 sqlfind</a></li>
+      <li><a id="toc-database" href="#database">3.1.4 database</a></li>
+      <li><a id="toc-listDataSources" href="#listDataSources">3.1.5 listDataSources</a></li>
+      <li><a id="toc-odbc" href="#odbc">3.1.6 odbc</a></li>
     </ul></li>
     <li><a id="toc-Importing-Data" href="#Importing-Data">3.2 Importing Data</a>
     <ul class="toc-numbered-mark">
@@ -111,7 +112,7 @@ to successfully install the toolkit.
 the octave-odbc website using the following command within <abbr class="acronym">GNU</abbr> Octave:
 </p>
 <div class="example">
-<pre class="example-preformatted">pkg install https://github.com/gnu-octave/octave-odbc/releases/download/v0.0.4/octave-odbc-0.0.4.tar.gz
+<pre class="example-preformatted">pkg install https://github.com/gnu-octave/octave-odbc/releases/download/v0.0.5/octave-odbc-0.0.5.tar.gz
 </pre></div>
 <p>On Octave 7.2 and later, the package can be installed using the following command within
 <abbr class="acronym">GNU</abbr> Octave:
@@ -129,7 +130,7 @@ the octave-odbc website using the following command within <abbr class="acronym"
 <abbr class="acronym">GNU</abbr> Octave, the package can be installed using the following command within <abbr class="acronym">GNU</abbr> Octave:
 </p>
 <div class="example">
-<pre class="example-preformatted">pkg install octave-odbc-0.0.4.tar.gz
+<pre class="example-preformatted">pkg install octave-odbc-0.0.5.tar.gz
 </pre></div>
 </div>
 <div class="section-level-extent" id="Loading">
@@ -275,15 +276,74 @@ close(conn)
 <p><strong class="strong">See also:</strong> odbc, database.
 </p></dd></dl>
 </div>
+<div class="subsection-level-extent" id="sqlfind">
+<h4 class="subsection">3.1.3 sqlfind</h4>
+<a class="index-entry-id" id="index-sqlfind"></a>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-sqlfind-1"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlfind</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">pattern</var>)</code></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlfind-2"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlfind</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">pattern</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></dt>
+<dd><p>Find information about table types in a database.
+</p>
+<h4 class="subsubheading" id="Inputs-1">Inputs</h4>
+<dl class="table">
+<dt><var class="var">db</var></dt>
+<dd><p>currently open database.
+</p></dd>
+<dt><var class="var">pattern</var></dt>
+<dd><p>Name or pattern to match table in database. Use &rdquo; to match match all tables.
+</p></dd>
+<dt><var class="var">propertyname</var>, <var class="var">propertyvalue</var></dt>
+<dd><p>property name/value pairs where known properties are:
+  </p><dl class="table">
+<dt>Catalog</dt>
+<dd><p>catalog value to match
+  </p></dd>
+<dt>Schema</dt>
+<dd><p>schema value to match
+  </p></dd>
+</dl>
+</dd>
+</dl>
+<p>Note: currently the property values are not used in the filter process.
+</p>
+<h4 class="subsubheading" id="Outputs-1">Outputs</h4>
+<dl class="table">
+<dt><var class="var">data</var></dt>
+<dd><p>a table containing the query result. Table columns are
+ &rsquo;Catalog&rsquo;, &rsquo;Schema&rsquo;, &rsquo;Table&rsquo;, &rsquo;Columns&rsquo;, &rsquo;Type&rsquo;.
+</p></dd>
+</dl>
+<h4 class="subsubheading" id="Examples">Examples</h4>
+<p>Show all tables in the database.
+</p><div class="example">
+<pre class="example-preformatted"><code class="code">
+ # create sql connection to an existing database
+ db = database(&quot;default&quot;, &quot;&quot;, &quot;&quot;);
+ # list all tables
+ data = sqlfind(db, '');
+ </code>
+</pre></div>
+<p>Show information about TestTable
+</p><div class="example">
+<pre class="example-preformatted"><code class="code">
+ # create sql connection
+ db = database(&quot;default&quot;, &quot;&quot;, &quot;&quot;);
+ # list matching tables
+ data = sqlfind(db, 'TestTable');
+ </code>
+</pre></div>
+<p><strong class="strong">See also:</strong> database, sqlread.
+</p></dd></dl>
+</div>
 <div class="subsection-level-extent" id="database">
-<h4 class="subsection">3.1.3 database</h4>
+<h4 class="subsection">3.1.4 database</h4>
 <a class="index-entry-id" id="index-database"></a>
 <dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-database-1"><span class="category-def">: </span><code class="def-type"><var class="var">conn</var> =</code> <strong class="def-name">database</strong> <code class="def-code-arguments">(<var class="var">dbname</var>, <var class="var">username</var>, <var class="var">password</var>)</code></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-database-2"><span class="category-def">: </span><code class="def-type"><var class="var">conn</var> =</code> <strong class="def-name">database</strong> <code class="def-code-arguments">(<var class="var">dbname</var>, <var class="var">username</var>, <var class="var">password</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></dt>
 <dd><p>Create a odbc database connection
 </p>
-<h4 class="subsubheading" id="Inputs-1">Inputs</h4>
+<h4 class="subsubheading" id="Inputs-2">Inputs</h4>
 <dl class="table">
 <dt><code class="code"><var class="var">dbname</var></code></dt>
 <dd><p>ODBC DSN connection name, or connection string
@@ -295,13 +355,13 @@ close(conn)
 <dd><p>Password for connecting to database.
 </p></dd>
 </dl>
-<h4 class="subsubheading" id="Outputs-1">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-2">Outputs</h4>
 <dl class="table">
 <dt><code class="code"><var class="var">conn</var></code></dt>
 <dd><p>A connection object for the connected database
 </p></dd>
 </dl>
-<h4 class="subsubheading" id="Examples">Examples</h4>
+<h4 class="subsubheading" id="Examples-1">Examples</h4>
 <p>Open a a preconfigured default database, using blank username and password.
 </p><div class="example">
 <pre class="example-preformatted"><code class="code">
@@ -312,16 +372,16 @@ close(conn)
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="listDataSources">
-<h4 class="subsection">3.1.4 listDataSources</h4>
+<h4 class="subsection">3.1.5 listDataSources</h4>
 <a class="index-entry-id" id="index-listDataSources"></a>
 <dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-listDataSources-1"><span class="category-def">: </span><code class="def-type"><var class="var">src</var> =</code> <strong class="def-name">listDataSources</strong> <code class="def-code-arguments">()</code></dt>
 <dd><p>List available odbc datasources
 </p>
-<h4 class="subsubheading" id="Inputs-2">Inputs</h4>
+<h4 class="subsubheading" id="Inputs-3">Inputs</h4>
 <p>None
 </p>
-<h4 class="subsubheading" id="Outputs-2">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-3">Outputs</h4>
 <dl class="table">
 <dt><code class="code"><var class="var">src</var></code></dt>
 <dd><p>A table or cell structure of available data sources. The result contains fields for
@@ -332,7 +392,7 @@ close(conn)
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="odbc">
-<h4 class="subsection">3.1.5 odbc</h4>
+<h4 class="subsection">3.1.6 odbc</h4>
 <a class="index-entry-id" id="index-odbc"></a>
 <dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-odbc-1"><span class="category-def">: </span><code class="def-type"><var class="var">conn</var> =</code> <strong class="def-name">odbc</strong> <code class="def-code-arguments">(<var class="var">dbname</var>, <var class="var">username</var>, <var class="var">password</var>)</code></dt>
@@ -340,7 +400,7 @@ close(conn)
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-odbc-3"><span class="category-def">: </span><code class="def-type"><var class="var">conn</var> =</code> <strong class="def-name">odbc</strong> <code class="def-code-arguments">(<var class="var">dsnconnectstr</var>)</code></dt>
 <dd><p>Create an ODBC database connection
 </p>
-<h4 class="subsubheading" id="Inputs-3">Inputs</h4>
+<h4 class="subsubheading" id="Inputs-4">Inputs</h4>
 <dl class="table">
 <dt><code class="code"><var class="var">dbname</var></code></dt>
 <dd><p>ODBC DSN connection name, or connection string
@@ -352,13 +412,13 @@ close(conn)
 <dd><p>Password for connecting to database.
 </p></dd>
 </dl>
-<h4 class="subsubheading" id="Outputs-3">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-4">Outputs</h4>
 <dl class="table">
 <dt><code class="code"><var class="var">conn</var></code></dt>
 <dd><p>A connection object for the connected database
 </p></dd>
 </dl>
-<h4 class="subsubheading" id="Examples-1">Examples</h4>
+<h4 class="subsubheading" id="Examples-2">Examples</h4>
 <p>Open a a preconfigured default database, using blank username and password.
 </p><div class="example">
 <pre class="example-preformatted"><code class="code">
@@ -380,7 +440,7 @@ close(conn)
 <dt class="deftypefn def-line" id="index-executeSQLScript-1"><span class="category-def">: </span><code class="def-type"><var class="var">results</var> =</code> <strong class="def-name">executeSQLScript</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">scriptname</var>)</code></dt>
 <dd><p>Run statements from a script file
 </p>
-<h4 class="subsubheading" id="Inputs-4">Inputs</h4>
+<h4 class="subsubheading" id="Inputs-5">Inputs</h4>
 <dl class="table">
 <dt><code class="code"><var class="var">conn</var></code></dt>
 <dd><p>ODBC connection object
@@ -389,7 +449,7 @@ close(conn)
 <dd><p>Filename to read statements from. NOTE: currently the file is expected to contain one statement per line.
 </p></dd>
 </dl>
-<h4 class="subsubheading" id="Outputs-4">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-5">Outputs</h4>
 <dl class="table">
 <dt><code class="code"><var class="var">results</var></code></dt>
 <dd><p>A struct with fields SQLQuery, Data and Message for each SQL statement in the file.
@@ -404,68 +464,12 @@ close(conn)
 <dt class="deftypefn def-line" id="index-fetch-1"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">fetch</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>)</code></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fetch-2"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">fetch</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></dt>
 <dd><p>Perform SQL query <var class="var">query</var>, and return result
-</p><h4 class="subsubheading" id="Inputs-5">Inputs</h4>
-<dl class="table">
-<dt><var class="var">conn</var></dt>
-<dd><p>currently open database connection.
-</p></dd>
-<dt><var class="var">sqlquery</var></dt>
-<dd><p>String containing a valid select SQL query.
-</p></dd>
-<dt><var class="var">propertyname</var>, <var class="var">propertyvalue</var></dt>
-<dd><p>property name/value pairs where known properties are:
-  </p><dl class="table">
-<dt>MaxRows</dt>
-<dd><p>Integer value of max number of rows in the query
-  </p></dd>
-<dt>VariableNamingRule</dt>
-<dd><p>String value &rsquo;preserve&rsquo; (default) or &rsquo;modify&rsquo; to flag renaming of variable names (currently ignored)
-  </p></dd>
-<dt>RowFilter</dt>
-<dd><p>rowfilter object to filter results
-  </p></dd>
-</dl>
-</dd>
-</dl>
-<h4 class="subsubheading" id="Outputs-5">Outputs</h4>
-<dl class="table">
-<dt><var class="var">data</var></dt>
-<dd><p>a table containing the query result.
-</p></dd>
-</dl>
-<h4 class="subsubheading" id="Examples-2">Examples</h4>
-<p>Select all rows of data from a database tables
-</p><div class="example">
-<pre class="example-preformatted"><code class="code">
- # create sql connection
- db = database(&quot;default&quot;, &quot;&quot;, &quot;&quot;);
- data = fetch(db, 'SELECT * FROM TestTable');
- </code>
-</pre></div>
-<p>Select 5 rows of data from a database tables
-</p><div class="example">
-<pre class="example-preformatted"><code class="code">
- # create sql connection
- db = database(&quot;default&quot;, &quot;&quot;, &quot;&quot;);
- data = fetch(db, 'SELECT * FROM TestTable', &quot;MaxRows&quot;, 5);
- </code>
-</pre></div>
-<p><strong class="strong">See also:</strong> database, connection.
-</p></dd></dl>
-</div>
-<div class="subsection-level-extent" id="select">
-<h4 class="subsection">3.2.3 select</h4>
-<a class="index-entry-id" id="index-select"></a>
-<dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-select-1"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">select</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-select-2"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">select</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></dt>
-<dd><p>Perform SQL query <var class="var">query</var>, and return result
 </p><h4 class="subsubheading" id="Inputs-6">Inputs</h4>
 <dl class="table">
 <dt><var class="var">conn</var></dt>
 <dd><p>currently open database connection.
 </p></dd>
-<dt><var class="var">query</var></dt>
+<dt><var class="var">sqlquery</var></dt>
 <dd><p>String containing a valid select SQL query.
 </p></dd>
 <dt><var class="var">propertyname</var>, <var class="var">propertyvalue</var></dt>
@@ -509,6 +513,62 @@ close(conn)
 <p><strong class="strong">See also:</strong> database, connection.
 </p></dd></dl>
 </div>
+<div class="subsection-level-extent" id="select">
+<h4 class="subsection">3.2.3 select</h4>
+<a class="index-entry-id" id="index-select"></a>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-select-1"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">select</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>)</code></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-select-2"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">select</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></dt>
+<dd><p>Perform SQL query <var class="var">query</var>, and return result
+</p><h4 class="subsubheading" id="Inputs-7">Inputs</h4>
+<dl class="table">
+<dt><var class="var">conn</var></dt>
+<dd><p>currently open database connection.
+</p></dd>
+<dt><var class="var">query</var></dt>
+<dd><p>String containing a valid select SQL query.
+</p></dd>
+<dt><var class="var">propertyname</var>, <var class="var">propertyvalue</var></dt>
+<dd><p>property name/value pairs where known properties are:
+  </p><dl class="table">
+<dt>MaxRows</dt>
+<dd><p>Integer value of max number of rows in the query
+  </p></dd>
+<dt>VariableNamingRule</dt>
+<dd><p>String value &rsquo;preserve&rsquo; (default) or &rsquo;modify&rsquo; to flag renaming of variable names (currently ignored)
+  </p></dd>
+<dt>RowFilter</dt>
+<dd><p>rowfilter object to filter results
+  </p></dd>
+</dl>
+</dd>
+</dl>
+<h4 class="subsubheading" id="Outputs-7">Outputs</h4>
+<dl class="table">
+<dt><var class="var">data</var></dt>
+<dd><p>a table containing the query result.
+</p></dd>
+</dl>
+<h4 class="subsubheading" id="Examples-4">Examples</h4>
+<p>Select all rows of data from a database tables
+</p><div class="example">
+<pre class="example-preformatted"><code class="code">
+ # create sql connection
+ db = database(&quot;default&quot;, &quot;&quot;, &quot;&quot;);
+ data = fetch(db, 'SELECT * FROM TestTable');
+ </code>
+</pre></div>
+<p>Select 5 rows of data from a database tables
+</p><div class="example">
+<pre class="example-preformatted"><code class="code">
+ # create sql connection
+ db = database(&quot;default&quot;, &quot;&quot;, &quot;&quot;);
+ data = fetch(db, 'SELECT * FROM TestTable', &quot;MaxRows&quot;, 5);
+ </code>
+</pre></div>
+<p><strong class="strong">See also:</strong> database, connection.
+</p></dd></dl>
+</div>
 <div class="subsection-level-extent" id="sqlinnerjoin">
 <h4 class="subsection">3.2.4 sqlinnerjoin</h4>
 <a class="index-entry-id" id="index-sqlinnerjoin"></a>
@@ -520,7 +580,7 @@ close(conn)
 </p>
 <p>Performs an innerjoin equivalent to &rsquo;SELECT * from lefttable INNER JOIN righttable ON lefttable.key = rightable.key&rsquo;.
 </p>
-<h4 class="subsubheading" id="Inputs-7">Inputs</h4>
+<h4 class="subsubheading" id="Inputs-8">Inputs</h4>
 <dl class="table">
 <dt><var class="var">db</var></dt>
 <dd><p>Previously created connection object
@@ -549,7 +609,7 @@ close(conn)
 </dl>
 </dd>
 </dl>
-<h4 class="subsubheading" id="Outputs-7">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-8">Outputs</h4>
 <p>None
 </p>
 <p><strong class="strong">See also:</strong> database, odbc, fetch, sqlouterjoin.
@@ -566,7 +626,7 @@ close(conn)
 </p>
 <p>Performs an outerjoin equivalent to &rsquo;SELECT * from lefttable OUTER JOIN righttable ON lefttable.key = rightable.key&rsquo;.
 </p>
-<h4 class="subsubheading" id="Inputs-8">Inputs</h4>
+<h4 class="subsubheading" id="Inputs-9">Inputs</h4>
 <dl class="table">
 <dt><var class="var">db</var></dt>
 <dd><p>Previously created connection object
@@ -595,7 +655,7 @@ close(conn)
 </dl>
 </dd>
 </dl>
-<h4 class="subsubheading" id="Outputs-8">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-9">Outputs</h4>
 <p>None
 </p>
 <p><strong class="strong">See also:</strong> database, odbc, fetch, sqlinnerjoin.
@@ -612,7 +672,7 @@ close(conn)
 <p>Return rows of data from table <var class="var">tablename</var> in a database.
  This function is the equivalent of running SELECT * FROM <var class="var">table</var>.
 </p>
-<h4 class="subsubheading" id="Inputs-9">Inputs</h4>
+<h4 class="subsubheading" id="Inputs-10">Inputs</h4>
 <dl class="table">
 <dt><var class="var">conn</var></dt>
 <dd><p>currently open database.
@@ -635,13 +695,13 @@ close(conn)
 </dl>
 </dd>
 </dl>
-<h4 class="subsubheading" id="Outputs-9">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-10">Outputs</h4>
 <dl class="table">
 <dt><var class="var">data</var></dt>
 <dd><p>a table containing the query result.
 </p></dd>
 </dl>
-<h4 class="subsubheading" id="Examples-4">Examples</h4>
+<h4 class="subsubheading" id="Examples-5">Examples</h4>
 <p>Select all rows of data from a database table
 </p><div class="example">
 <pre class="example-preformatted"><code class="code">
@@ -679,7 +739,7 @@ close(conn)
  If the table does not exist it will be created, using the ColumnType property if available
  otherwise, the type of input data will be used to determine field types.
 </p>
-<h4 class="subsubheading" id="Inputs-10">Inputs</h4>
+<h4 class="subsubheading" id="Inputs-11">Inputs</h4>
 <dl class="table">
 <dt><var class="var">db</var></dt>
 <dd><p>Previously created database connection object
@@ -704,7 +764,7 @@ close(conn)
 </dl>
 </dd>
 </dl>
-<h4 class="subsubheading" id="Outputs-10">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-11">Outputs</h4>
 <p>None
 </p>
 <p><strong class="strong">See also:</strong> database, odbc, sqlread.
@@ -722,13 +782,13 @@ close(conn)
 <dt class="deftypefn def-line" id="index-commit-1"><span class="category-def">: </span><strong class="def-name">commit</strong> <code class="def-code-arguments">(<var class="var">conn</var>)</code></dt>
 <dd><p>Make permanent changes to the database.
 </p>
-<h4 class="subsubheading" id="Inputs-11">Inputs</h4>
+<h4 class="subsubheading" id="Inputs-12">Inputs</h4>
 <dl class="table">
 <dt><var class="var">conn</var></dt>
 <dd><p>currently open database.
 </p></dd>
 </dl>
-<h4 class="subsubheading" id="Outputs-11">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-12">Outputs</h4>
 <p>None
 </p></dd></dl>
 </div>
@@ -739,7 +799,7 @@ close(conn)
 <dt class="deftypefn def-line" id="index-execute-1"><span class="category-def">: </span><strong class="def-name">execute</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>)</code></dt>
 <dd><p>Perform SQL query <var class="var">query</var>, that does not return result
 </p>
-<h4 class="subsubheading" id="Inputs-12">Inputs</h4>
+<h4 class="subsubheading" id="Inputs-13">Inputs</h4>
 <dl class="table">
 <dt><var class="var">db</var></dt>
 <dd><p>Previously created database connection object
@@ -748,10 +808,10 @@ close(conn)
 <dd><p>A valid non selecting SQL query string
 </p></dd>
 </dl>
-<h4 class="subsubheading" id="Outputs-12">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-13">Outputs</h4>
 <p>None
 </p>
-<h4 class="subsubheading" id="Examples-5">Examples</h4>
+<h4 class="subsubheading" id="Examples-6">Examples</h4>
 <p>Create a database table and insert a row
 </p><div class="example">
 <pre class="example-preformatted"><code class="code">
@@ -772,13 +832,13 @@ close(conn)
 <dt class="deftypefn def-line" id="index-rollback-1"><span class="category-def">: </span><strong class="def-name">rollback</strong> <code class="def-code-arguments">(<var class="var">conn</var>)</code></dt>
 <dd><p>Rollback changes to the database.
 </p>
-<h4 class="subsubheading" id="Inputs-13">Inputs</h4>
+<h4 class="subsubheading" id="Inputs-14">Inputs</h4>
 <dl class="table">
 <dt><var class="var">conn</var></dt>
 <dd><p>currently open database.
 </p></dd>
 </dl>
-<h4 class="subsubheading" id="Outputs-13">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-14">Outputs</h4>
 <p>None
 </p></dd></dl>
 </div>
@@ -790,7 +850,7 @@ close(conn)
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlupdate-2"><span class="category-def">: </span><strong class="def-name">sqlupdate</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">filter</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></dt>
 <dd><p>Update rows of data in database.
 </p>
-<h4 class="subsubheading" id="Inputs-14">Inputs</h4>
+<h4 class="subsubheading" id="Inputs-15">Inputs</h4>
 <dl class="table">
 <dt><var class="var">db</var></dt>
 <dd><p>Previously created database connection object
@@ -816,10 +876,10 @@ close(conn)
 </dl>
 </dd>
 </dl>
-<h4 class="subsubheading" id="Outputs-14">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-15">Outputs</h4>
 <p>None
 </p>
-<h4 class="subsubheading" id="Examples-6">Examples</h4>
+<h4 class="subsubheading" id="Examples-7">Examples</h4>
 <p>Update db where id &gt; 1
 </p><div class="example">
 <pre class="example-preformatted"><code class="code">
@@ -843,7 +903,7 @@ close(conn)
 <dt class="deftypefn def-line" id="index-update-1"><span class="category-def">: </span><strong class="def-name">update</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>, <var class="var">colnames</var>, <var class="var">data</var>, <var class="var">whereclause</var>)</code></dt>
 <dd><p>Update columns in database.
 </p>
-<h4 class="subsubheading" id="Inputs-15">Inputs</h4>
+<h4 class="subsubheading" id="Inputs-16">Inputs</h4>
 <dl class="table">
 <dt><var class="var">conn</var></dt>
 <dd><p>Previously created database connection object
@@ -861,10 +921,10 @@ close(conn)
 <dd><p>String WHERE condition to meet for updates.
 </p></dd>
 </dl>
-<h4 class="subsubheading" id="Outputs-15">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-16">Outputs</h4>
 <p>None
 </p>
-<h4 class="subsubheading" id="Examples-7">Examples</h4>
+<h4 class="subsubheading" id="Examples-8">Examples</h4>
 <p>Update a row in the database
 </p><div class="example">
 <pre class="example-preformatted"><code class="code">
@@ -891,7 +951,7 @@ close(conn)
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-rowfilter_0028T_0029"><span class="category-def">: </span><code class="def-type"><var class="var">rowfilt</var> =</code> <strong class="def-name">rowfilter(<var class="var">T</var>)</strong></dt>
 <dd><p>Create an unconstrained rowfilter object with columns names.
 </p>
-<h4 class="subsubheading" id="Inputs-16">Inputs</h4>
+<h4 class="subsubheading" id="Inputs-17">Inputs</h4>
 <dl class="table">
 <dt><var class="var">C</var></dt>
 <dd><p>A column name, cell array of column names.
@@ -900,7 +960,7 @@ close(conn)
 <dd><p>A table to use for column names.
 </p></dd>
 </dl>
-<h4 class="subsubheading" id="Outputs-16">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-17">Outputs</h4>
 <dl class="table">
 <dt><var class="var">rowfilt</var></dt>
 <dd><p>a rowfilter object
@@ -912,7 +972,7 @@ close(conn)
 <p>Constraints can be set on a specific field of the filter by setting a
  comparison value for the variable name.
 </p>
-<h4 class="subsubheading" id="Examples-8">Examples</h4>
+<h4 class="subsubheading" id="Examples-9">Examples</h4>
 <div class="example">
 <pre class="example-preformatted"><code class="code">
  # create a rowfilter with 2 columns
@@ -1663,6 +1723,7 @@ first, please read <a class="url" href="http://www.gnu.org/philosophy/why-not-lg
 <tr><td colspan="3"><hr></td></tr>
 <tr><th id="Index_cp_letter-S">S</th></tr>
 <tr><td></td><td class="printindex-index-entry"><a href="#index-select">select</a></td><td class="printindex-index-section"><a href="#Importing-Data">Importing Data</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-sqlfind">sqlfind</a></td><td class="printindex-index-section"><a href="#ODBC-connection">ODBC connection</a></td></tr>
 <tr><td></td><td class="printindex-index-entry"><a href="#index-sqlinnerjoin">sqlinnerjoin</a></td><td class="printindex-index-section"><a href="#Importing-Data">Importing Data</a></td></tr>
 <tr><td></td><td class="printindex-index-entry"><a href="#index-sqlouterjoin">sqlouterjoin</a></td><td class="printindex-index-section"><a href="#Importing-Data">Importing Data</a></td></tr>
 <tr><td></td><td class="printindex-index-entry"><a href="#index-sqlread">sqlread</a></td><td class="printindex-index-section"><a href="#Importing-Data">Importing Data</a></td></tr>
