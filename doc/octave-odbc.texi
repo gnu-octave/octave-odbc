@@ -136,7 +136,9 @@ pkg load odbc
 
 The toolkit must be loaded on each @acronym{GNU} Octave session.
 
-The toolkit will also load the tablicious toolkit if available to provide table support.
+During load of the toolkit, if a table class/function is not available,
+the toolkit will also load the tablicious or datatypes toolkit (if available)
+to provide table support.
 
 @c -------------------------------------------------------------------------
 @node Basic Usage Overview

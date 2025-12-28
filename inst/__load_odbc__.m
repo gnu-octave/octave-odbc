@@ -39,13 +39,19 @@ function __load_odbc__ ()
   end_try_catch
 
   try
-    # attempt to load tabilicious if can 
-    # we are doing this currently to make using tablicious an optional
-    # requirement
-    x = pkg("list", "tablicious");
-    if !isempty(x)
-      if x{1}.loaded == 0
-        pkg("load", "tablicious");
+    if exist ("table") == 0
+      # no table stuff loaded yet
+      p = {};
+      
+      # attempt to load tabilicious, or datatypes if can
+      # we are doing this currently to make using tablicious and datatypes am
+      # optional requirement to get a table datatype
+      x = pkg("list", "tablicious", "datatypes");
+
+      if !isempty(x)
+        if x{1}.loaded == 0
+          pkg("load", x{1}.name);
+        endif
       endif
     endif
   catch

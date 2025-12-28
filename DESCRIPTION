@@ -7,6 +7,7 @@ Title: Octave ODBC Toolkit
 Description: Basic Octave implementation for ODBC database functionality
 Categories: Database
 Depends: octave (>= 6.0.0)
+OptionalDepends: tablicious, datatypes
 #BuildRequires: unixODBC-dev
 SystemRequirements: unixODBC
 License: GPLv3+
