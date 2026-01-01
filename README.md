@@ -1,5 +1,4 @@
-GNU Octave database functionality using odbc
---------------------------------------------
+# GNU Octave database functionality using odbc
 
 This is a basic implementation of ODBC functionality similar to MATLAB'S
 ODBC functionality.
