@@ -1,38 +1,39 @@
 # http://www.gnu.org/software/automake
 
 Makefile.in
-/ar-lib
-/mdate-sh
-/py-compile
-/test-driver
-/ylwrap
+ar-lib
+mdate-sh
+py-compile
+test-driver
+ylwrap
 
 # http://www.gnu.org/software/autoconf
 
 autom4te.cache
-/autoscan.log
-/autoscan-*.log
-/aclocal.m4
-/compile
-/config.guess
-/config.h.in
-/config.log
-/config.status
-/config.sub
-/configure
-/configure.scan
-/depcomp
-/install-sh
-/missing
-/stamp-h1
+autoscan.log
+autoscan-*.log
+aclocal.m4
+compile
+config.guess
+config.h*
+config.log
+config.status
+config.sub
+configure
+configure.scan
+depcomp
+install-sh
+missing
+stamp-h1
+
 
 # https://www.gnu.org/software/libtool/
 
-/ltmain.sh
+ltmain.sh
 
 # http://www.gnu.org/software/texinfo
 
-/texinfo.tex
+texinfo.tex
 
 # http://www.gnu.org/software/m4/
 
@@ -46,4 +47,29 @@ m4/lt~obsolete.m4
 # (meta build system like autotools, 
 # can automatically generate from config.status script
 # (which is called by configure script))
-Makefile
+src/Makefile
+
+# vi backup
+*.swp
+*.swo
+*.swn
+
+# test
+fntests.log
+
+# doc generated files
+doc/*.qch
+doc/*.qhc
+doc/*.html
+doc/*.pdf
+doc/*.info
+doc/version.texi
+doc/functions.texi
+
+# release
+target/
+release/
+
+# other generated
+src/oct-alt-includes.h
+
