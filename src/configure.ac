@@ -202,7 +202,15 @@ else
  else
    PKG_CHECK_MODULES([ODBC], [odbc])
  fi
+ save_CPPFLAGS=$CPPFLAGS
+ CPPFLAGS=$CPPFLAGS $ODBC_CFLAGS1
+ AC_CHECK_HEADERS([sql.h])
+ CPPFLAGS=$save_CPPFLAGS
 fi
+if [ test "$ac_cv_header_sql_h" = "no" ]; then
+ AC_MSG_ERROR([*** Could not find sql.h - development headers not installed?])
+fi
+
 AC_SUBST([ODBC_LIBS])
 AC_SUBST([ODBC_CFLAGS])
 
