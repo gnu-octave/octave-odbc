@@ -171,7 +171,6 @@ ifneq (,$(wildcard src/configure))
 endif
 ifneq (,$(wildcard doc/mkfuncdocs.py))
 	$(MAKE) -C "$@" docs
-	cd "$@" && $(RM) -f doc/mkfuncdocs.py doc/mkqhcp.py
 endif
 	${FIX_PERMISSIONS} "$@"
 
