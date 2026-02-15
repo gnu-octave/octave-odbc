@@ -1413,8 +1413,6 @@ endclassdef
 %!xtest
 %! # test sqlread - using structure return format to ensure we know what we are getting
 %! tbl = db.sqlread("TestTable", "DataReturnFormat", "structure");
-%! fieldnames(tbl)
-%! tbl.Id
 %! assert([size(fieldnames(tbl),1), size(tbl.Id,1)], [2 3]);
 %! tbl = db.sqlread("TestTable", "MaxRows", 1, "DataReturnFormat", "structure");
 %! assert([size(fieldnames(tbl),1), size(tbl.Id,1)], [2 1]);
