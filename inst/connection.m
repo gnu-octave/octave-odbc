@@ -777,7 +777,7 @@ classdef connection < handle
           # TODO
           #
         elseif strcmp(n, "RowFilter")
-          if !isa(v, "rowfilter")
+          if !isa(v, "rowfilter") && !isa(v, "dbrowfilter")
             error ("Expected RowFilter to be a rowfilter class");
           endif
           rowfilter = v;
