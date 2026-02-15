@@ -604,9 +604,10 @@ classdef connection < handle
         if idx > 1
           sql = [sql ",\n"];
         endif
-        sql = [sql "(" values ");"];
+        sql = [sql "(" values ")"];
 
       endfor
+      sql = [sql ";"];
 
       # create table if we need to ?
       if isempty(coltypes)
@@ -1412,42 +1413,44 @@ endclassdef
 %!xtest
 %! # test sqlread - using structure return format to ensure we know what we are getting
 %! tbl = db.sqlread("TestTable", "DataReturnFormat", "structure");
-%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [3 2]);
+%! fieldnames(tbl)
+%! tbl.Id
+%! assert([size(fieldnames(tbl),1), size(tbl.Id,1)], [2 3]);
 %! tbl = db.sqlread("TestTable", "MaxRows", 1, "DataReturnFormat", "structure");
-%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [1 2]);
+%! assert([size(fieldnames(tbl),1), size(tbl.Id,1)], [2 1]);
 %! filter = rowfilter("Id") > 1;
 %! tbl = db.sqlread("TestTable", "RowFilter", filter, "DataReturnFormat", "structure");
-%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [2 2]);
+%! assert([size(fieldnames(tbl),1), size(tbl.Id,1)], [2 2]);
 
 %!xtest
 %! # test fetch
 %! tbl = db.fetch("SELECT * FROM TestTable", "DataReturnFormat", "structure");
-%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [3 2]);
+%! assert([size(fieldnames(tbl),1), size(tbl.Id,1)], [2 3]);
 %! tbl = db.fetch("SELECT * FROM TestTable", "MaxRows", 1, "DataReturnFormat", "structure");
-%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [1 2]);
+%! assert([size(fieldnames(tbl),1), size(tbl.Id,1)], [2 1]);
 %! filter = rowfilter("Id") > '1';
 %! tbl = db.fetch("SELECT * FROM TestTable", "RowFilter", filter, "DataReturnFormat", "structure");
-%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [2 2]);
+%! assert([size(fieldnames(tbl),1), size(tbl.Id,1)], [2 2]);
 
 %!xtest
 %! # test select
 %! tbl = db.select("SELECT * FROM TestTable", "DataReturnFormat", "structure");
-%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [3 2]);
+%! assert([size(fieldnames(tbl),1), size(tbl.Id,1)], [2 3]);
 %! tbl = db.select("SELECT * FROM TestTable", "MaxRows", 1, "DataReturnFormat", "structure");
-%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [1 2]);
+%! assert([size(fieldnames(tbl),1), size(tbl.Id,1)], [2 1]);
 
 %!xtest
 %! t = struct("Id", [1;2], "Name", ['Name1';'Name2']);
 %! sqlwrite(db, "Test1", t);
 %! tbl = sqlread(db , "Test1", "DataReturnFormat", "structure");
-%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [2 2]);
+%! assert([size(fieldnames(tbl),1), size(tbl.Id,1)], [2 2]);
 
 %!xtest
 %! # write no data but have columns
 %! t = struct("Id", [], "Name", []);
 %! sqlwrite(db, "Testnodata", t);
 %! tbl = sqlread(db , "Testnodata", "DataReturnFormat", "structure");
-%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [2 0]);
+%! assert([size(fieldnames(tbl),1), size(tbl.Id,1)], [2 0]);
 
 %!xtest
 %! # test sqlupdate
@@ -1510,20 +1513,20 @@ endclassdef
 %! db.AutoCommit = 'off';
 %! assert(db.AutoCommit, 'off');
 %! tbl = db.select("SELECT * FROM TestTable", "DataReturnFormat", "structure");
-%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [3 2]);
+%! assert([size(fieldnames(tbl),1), size(tbl.Id,1)], [2 3]);
 %! db.execute("INSERT INTO TestTable (Id,Name) VALUES (4, 'Name4');");
 %! tbl = db.select("SELECT * FROM TestTable", "DataReturnFormat", "structure");
-%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [4 2]);
+%! assert([size(fieldnames(tbl),1), size(tbl.Id,1)], [2 4]);
 %! rollback(db);
 %! tbl = db.select("SELECT * FROM TestTable", "DataReturnFormat", "structure");
-%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [3 2]);
+%! assert([size(fieldnames(tbl),1), size(tbl.Id,1)], [2 3]);
 %!
 %! db.execute("INSERT INTO TestTable (Id,Name) VALUES (4, 'Name4');");
 %! tbl = db.select("SELECT * FROM TestTable", "DataReturnFormat", "structure");
-%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [4 2]);
+%! assert([size(fieldnames(tbl),1), size(tbl.Id,1)], [2 4]);
 %! commit(db);
 %! tbl = db.select("SELECT * FROM TestTable", "DataReturnFormat", "structure");
-%! assert(size(fieldnames(tbl),1), size(tbl.Id,1), [4 2]);
+%! assert([size(fieldnames(tbl),1), size(tbl.Id,1)], [2 4]);
 %! db.AutoCommit = 'off';
 
 %!test
