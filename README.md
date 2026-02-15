@@ -29,6 +29,15 @@ After installation, load the package in order to use it.
 
 **Note:** The package needs to loaded each time Octave is run in order to use the package. 
 
+### Running tests
+
+The test suite can be run in octave using the command:
+
+   pkg test odbc
+
+**Note:** The tests assume that there the sqlite3 odbs driver is installed and that a octave_odbc_test
+DSN can open successfully.
+
 ## Documentation
 
 On newer versions of Octave, on loading the package the documentation will be available in the
