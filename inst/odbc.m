@@ -57,6 +57,8 @@ function conn = odbc(databasename, varargin)
 endfunction
 
 %!xtest
+%! # NOTE: assumes we have a dsn in out odbc.ini that matches or this
+%! # will fail
 %! a = odbc("octave_odbc_test");
 %! assert(isopen(a));
 %! close(a);

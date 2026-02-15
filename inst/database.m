@@ -52,13 +52,25 @@ function conn = database(databasename, username, password, varargin)
 
 endfunction
 
-%!error database("octave_odbc_test");
-%!error database("octave_odbc_test", "");
-%!error database("octave_odbc_test", "", "X", "");
+%!shared dbname, dsn
+%! # test connection, isopen, properties and execute
+%! # assumes we have a Sqlite3 driver installed
+%! dbname = tempname;
+%! if ispc
+%! dsn = ["driver={SQLite3 ODBC Driver};Database=" dbname ';'];
+%! else
+%! dsn = ["driver=SQLite3;Database=" dbname ';'];
+%! endif
+
+%!error database(dsn);
+%!error database(dsn);
+%!error database(dsn);
 
 %!xtest
-%! a = database("octave_odbc_test", "test", "");
+%! a = database(dsn, "test", "");
 %! assert(isopen(a));
 %! assert(a.UserName, "test");
 %! close(a);
 
+%!test
+%! delete(dbname);
