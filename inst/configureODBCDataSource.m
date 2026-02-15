@@ -36,17 +36,17 @@ function configureODBCDataSource ()
     
     bin = file_in_path (getenv ("PATH"), "ODBCManageDataSourcesQ6");
     if isempty(bin)
-      bin = file_in_path (getenv ("PATH"), "ODBCManageDataSourcesQ5")
+      bin = file_in_path (getenv ("PATH"), "ODBCManageDataSourcesQ5");
     endif
     if isempty(bin)
-      bin = file_in_path (getenv ("PATH"), "ODBCManageDataSourcesQ4")
+      bin = file_in_path (getenv ("PATH"), "ODBCManageDataSourcesQ4");
     endif
     if isempty(bin)
       bin = file_in_path (getenv ("PATH"), "ODBCManageDataSources");
     endif
 
     if isempty(bin)
-      error ("Couldnt find ODBCManageDataSources in path")
+      error ("Couldnt find ODBCManageDataSources in path - is unixODBC-gui installed?")
     endif
 
     system (bin);
