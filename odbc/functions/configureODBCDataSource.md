@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/23_configureODBCDataSource/"
 pkg_name: "odbc"
-pkg_version: "0.0.5"
+pkg_version: "0.0.6"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - configureODBCDataSource"
 category: "Support Functions"
@@ -42,14 +42,14 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-configureODBCDataSource"><span class="category-def">: </span><span><strong class="def-name">configureODBCDataSource</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href="#index-configureODBCDataSource"></a></span></dt>
+<dt class="deftypefn def-line" id="index-configureODBCDataSource"><span><strong class="def-name">configureODBCDataSource</strong> <code class="def-code-arguments">()</code></span></dt>
 <dd><p>Open the ODBC Datasource Administrator dialog box in Windows or
  ODBCManageDataSources in Unix if available.
 </p>
-<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <p>None
 </p>
-<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs</span></h4>
 <p>None
 </p>
 

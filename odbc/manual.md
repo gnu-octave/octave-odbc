@@ -3,7 +3,7 @@ layout: "default"
 permalink: "/manual/"
 title: "Odbc Toolkit - Manual"
 pkg_name: "odbc"
-version: "0.0.5"
+version: "0.0.6"
 description: "Basic Octave implementation for ODBC database functionality"
 navigation:
 - id: "overview"
@@ -112,7 +112,7 @@ to successfully install the toolkit.
 the octave-odbc website using the following command within <abbr class="acronym">GNU</abbr> Octave:
 </p>
 <div class="example">
-<pre class="example-preformatted">pkg install https://github.com/gnu-octave/octave-odbc/releases/download/v0.0.5/octave-odbc-0.0.5.tar.gz
+<pre class="example-preformatted">pkg install https://github.com/gnu-octave/octave-odbc/releases/download/v0.0.6/octave-odbc-0.0.6.tar.gz
 </pre></div>
 <p>On Octave 7.2 and later, the package can be installed using the following command within
 <abbr class="acronym">GNU</abbr> Octave:
@@ -130,7 +130,7 @@ the octave-odbc website using the following command within <abbr class="acronym"
 <abbr class="acronym">GNU</abbr> Octave, the package can be installed using the following command within <abbr class="acronym">GNU</abbr> Octave:
 </p>
 <div class="example">
-<pre class="example-preformatted">pkg install octave-odbc-0.0.5.tar.gz
+<pre class="example-preformatted">pkg install octave-odbc-0.0.6.tar.gz
 </pre></div>
 </div>
 <div class="section-level-extent" id="Loading">
@@ -144,7 +144,9 @@ the toolkit must be loaded using the pkg load command:
 </pre></div>
 <p>The toolkit must be loaded on each <abbr class="acronym">GNU</abbr> Octave session.
 </p>
-<p>The toolkit will also load the tablicious toolkit if available to provide table support.
+<p>During load of the toolkit, if a table class/function is not available,
+the toolkit will also load the tablicious or datatypes toolkit (if available)
+to provide table support.
 </p>
 <hr>
 </div>
@@ -225,7 +227,7 @@ close(conn)
 <h4 class="subsection">3.1.1 configureODBCDataSource</h4>
 <a class="index-entry-id" id="index-configureODBCDataSource"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-configureODBCDataSource-1"><span class="category-def">: </span><strong class="def-name">configureODBCDataSource</strong> <code class="def-code-arguments">()</code></dt>
+<dt class="deftypefn def-line" id="index-configureODBCDataSource-1"><span><strong class="def-name">configureODBCDataSource</strong> <code class="def-code-arguments">()</code></span></dt>
 <dd><p>Open the ODBC Datasource Administrator dialog box in Windows or
  ODBCManageDataSources in Unix if available.
 </p>
@@ -242,7 +244,7 @@ close(conn)
 <h4 class="subsection">3.1.2 connection</h4>
 <a class="index-entry-id" id="index-connection"></a>
 <dl class="first-deftp def-block">
-<dt class="deftp def-line" id="index-connection-1"><span class="category-def">Class: </span><strong class="def-name">connection</strong></dt>
+<dt class="deftp def-line" id="index-connection-1"><span class="category-def">Class: </span><span><strong class="def-name">connection</strong></span></dt>
 <dd><p>Connection class for a ODBC database connection
 </p><h4 class="subsubheading" id="Object-Properties">Object Properties</h4>
 <dl class="table">
@@ -280,8 +282,8 @@ close(conn)
 <h4 class="subsection">3.1.3 sqlfind</h4>
 <a class="index-entry-id" id="index-sqlfind"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sqlfind-1"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlfind</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">pattern</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlfind-2"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlfind</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">pattern</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></dt>
+<dt class="deftypefn def-line" id="index-sqlfind-1"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlfind</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">pattern</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlfind-2"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlfind</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">pattern</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></span></dt>
 <dd><p>Find information about table types in a database.
 </p>
 <h4 class="subsubheading" id="Inputs-1">Inputs</h4>
@@ -339,8 +341,8 @@ close(conn)
 <h4 class="subsection">3.1.4 database</h4>
 <a class="index-entry-id" id="index-database"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-database-1"><span class="category-def">: </span><code class="def-type"><var class="var">conn</var> =</code> <strong class="def-name">database</strong> <code class="def-code-arguments">(<var class="var">dbname</var>, <var class="var">username</var>, <var class="var">password</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-database-2"><span class="category-def">: </span><code class="def-type"><var class="var">conn</var> =</code> <strong class="def-name">database</strong> <code class="def-code-arguments">(<var class="var">dbname</var>, <var class="var">username</var>, <var class="var">password</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></dt>
+<dt class="deftypefn def-line" id="index-database-1"><span><code class="def-type"><var class="var">conn</var> =</code> <strong class="def-name">database</strong> <code class="def-code-arguments">(<var class="var">dbname</var>, <var class="var">username</var>, <var class="var">password</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-database-2"><span><code class="def-type"><var class="var">conn</var> =</code> <strong class="def-name">database</strong> <code class="def-code-arguments">(<var class="var">dbname</var>, <var class="var">username</var>, <var class="var">password</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></span></dt>
 <dd><p>Create a odbc database connection
 </p>
 <h4 class="subsubheading" id="Inputs-2">Inputs</h4>
@@ -375,7 +377,7 @@ close(conn)
 <h4 class="subsection">3.1.5 listDataSources</h4>
 <a class="index-entry-id" id="index-listDataSources"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-listDataSources-1"><span class="category-def">: </span><code class="def-type"><var class="var">src</var> =</code> <strong class="def-name">listDataSources</strong> <code class="def-code-arguments">()</code></dt>
+<dt class="deftypefn def-line" id="index-listDataSources-1"><span><code class="def-type"><var class="var">src</var> =</code> <strong class="def-name">listDataSources</strong> <code class="def-code-arguments">()</code></span></dt>
 <dd><p>List available odbc datasources
 </p>
 <h4 class="subsubheading" id="Inputs-3">Inputs</h4>
@@ -395,9 +397,9 @@ close(conn)
 <h4 class="subsection">3.1.6 odbc</h4>
 <a class="index-entry-id" id="index-odbc"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-odbc-1"><span class="category-def">: </span><code class="def-type"><var class="var">conn</var> =</code> <strong class="def-name">odbc</strong> <code class="def-code-arguments">(<var class="var">dbname</var>, <var class="var">username</var>, <var class="var">password</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-odbc-2"><span class="category-def">: </span><code class="def-type"><var class="var">conn</var> =</code> <strong class="def-name">odbc</strong> <code class="def-code-arguments">(<var class="var">dbname</var>, <var class="var">username</var>, <var class="var">password</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-odbc-3"><span class="category-def">: </span><code class="def-type"><var class="var">conn</var> =</code> <strong class="def-name">odbc</strong> <code class="def-code-arguments">(<var class="var">dsnconnectstr</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-odbc-1"><span><code class="def-type"><var class="var">conn</var> =</code> <strong class="def-name">odbc</strong> <code class="def-code-arguments">(<var class="var">dbname</var>, <var class="var">username</var>, <var class="var">password</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-odbc-2"><span><code class="def-type"><var class="var">conn</var> =</code> <strong class="def-name">odbc</strong> <code class="def-code-arguments">(<var class="var">dbname</var>, <var class="var">username</var>, <var class="var">password</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-odbc-3"><span><code class="def-type"><var class="var">conn</var> =</code> <strong class="def-name">odbc</strong> <code class="def-code-arguments">(<var class="var">dsnconnectstr</var>)</code></span></dt>
 <dd><p>Create an ODBC database connection
 </p>
 <h4 class="subsubheading" id="Inputs-4">Inputs</h4>
@@ -437,7 +439,7 @@ close(conn)
 <h4 class="subsection">3.2.1 executeSQLScript</h4>
 <a class="index-entry-id" id="index-executeSQLScript"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-executeSQLScript-1"><span class="category-def">: </span><code class="def-type"><var class="var">results</var> =</code> <strong class="def-name">executeSQLScript</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">scriptname</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-executeSQLScript-1"><span><code class="def-type"><var class="var">results</var> =</code> <strong class="def-name">executeSQLScript</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">scriptname</var>)</code></span></dt>
 <dd><p>Run statements from a script file
 </p>
 <h4 class="subsubheading" id="Inputs-5">Inputs</h4>
@@ -461,8 +463,8 @@ close(conn)
 <h4 class="subsection">3.2.2 fetch</h4>
 <a class="index-entry-id" id="index-fetch"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-fetch-1"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">fetch</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fetch-2"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">fetch</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></dt>
+<dt class="deftypefn def-line" id="index-fetch-1"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">fetch</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fetch-2"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">fetch</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></span></dt>
 <dd><p>Perform SQL query <var class="var">query</var>, and return result
 </p><h4 class="subsubheading" id="Inputs-6">Inputs</h4>
 <dl class="table">
@@ -517,8 +519,8 @@ close(conn)
 <h4 class="subsection">3.2.3 select</h4>
 <a class="index-entry-id" id="index-select"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-select-1"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">select</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-select-2"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">select</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></dt>
+<dt class="deftypefn def-line" id="index-select-1"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">select</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-select-2"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">select</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></span></dt>
 <dd><p>Perform SQL query <var class="var">query</var>, and return result
 </p><h4 class="subsubheading" id="Inputs-7">Inputs</h4>
 <dl class="table">
@@ -573,9 +575,9 @@ close(conn)
 <h4 class="subsection">3.2.4 sqlinnerjoin</h4>
 <a class="index-entry-id" id="index-sqlinnerjoin"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sqlinnerjoin-1"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlinnerjoin-2"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;Keys&quot;, <var class="var">keys</var>, &hellip;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlinnerjoin-3"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;LeftKeys&quot;, <var class="var">keys</var>, &quot;RightKeys&quot;, <var class="var">keys</var>, &hellip;)</code></dt>
+<dt class="deftypefn def-line" id="index-sqlinnerjoin-1"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlinnerjoin-2"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;Keys&quot;, <var class="var">keys</var>, &hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlinnerjoin-3"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;LeftKeys&quot;, <var class="var">keys</var>, &quot;RightKeys&quot;, <var class="var">keys</var>, &hellip;)</code></span></dt>
 <dd><p>Perform an innerjoin on two tables.
 </p>
 <p>Performs an innerjoin equivalent to &rsquo;SELECT * from lefttable INNER JOIN righttable ON lefttable.key = rightable.key&rsquo;.
@@ -619,9 +621,9 @@ close(conn)
 <h4 class="subsection">3.2.5 sqlouterjoin</h4>
 <a class="index-entry-id" id="index-sqlouterjoin"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sqlouterjoin-1"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlouterjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlouterjoin-2"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlouterjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;Keys&quot;, <var class="var">keys</var>, &hellip;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlouterjoin-3"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlouterjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;LeftKeys&quot;, <var class="var">keys</var>, &quot;RightKeys&quot;, <var class="var">keys</var>, &hellip;)</code></dt>
+<dt class="deftypefn def-line" id="index-sqlouterjoin-1"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlouterjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlouterjoin-2"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlouterjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;Keys&quot;, <var class="var">keys</var>, &hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlouterjoin-3"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlouterjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;LeftKeys&quot;, <var class="var">keys</var>, &quot;RightKeys&quot;, <var class="var">keys</var>, &hellip;)</code></span></dt>
 <dd><p>Perform an outerjoin on two tables.
 </p>
 <p>Performs an outerjoin equivalent to &rsquo;SELECT * from lefttable OUTER JOIN righttable ON lefttable.key = rightable.key&rsquo;.
@@ -665,8 +667,8 @@ close(conn)
 <h4 class="subsection">3.2.6 sqlread</h4>
 <a class="index-entry-id" id="index-sqlread"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sqlread-1"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlread</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlread-2"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlread</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>, <var class="var">propertryname</var>, <var class="var">propertyvalue</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-sqlread-1"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlread</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlread-2"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlread</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>, <var class="var">propertryname</var>, <var class="var">propertyvalue</var>)</code></span></dt>
 <dd><p>Read data from table <var class="var">tablename</var>
 </p>
 <p>Return rows of data from table <var class="var">tablename</var> in a database.
@@ -730,9 +732,9 @@ close(conn)
 <h4 class="subsection">3.3.1 sqlwrite</h4>
 <a class="index-entry-id" id="index-sqlwrite"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sqlwrite-1"><span class="category-def">: </span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlwrite-2"><span class="category-def">: </span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">columntypes</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlwrite-3"><span class="category-def">: </span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></dt>
+<dt class="deftypefn def-line" id="index-sqlwrite-1"><span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlwrite-2"><span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">columntypes</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlwrite-3"><span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></span></dt>
 <dd><p>Insert rows of data into a table.
 </p>
 <p>Insert rows of data into a database table.
@@ -779,7 +781,7 @@ close(conn)
 <h4 class="subsection">3.4.1 commit</h4>
 <a class="index-entry-id" id="index-commit"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-commit-1"><span class="category-def">: </span><strong class="def-name">commit</strong> <code class="def-code-arguments">(<var class="var">conn</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-commit-1"><span><strong class="def-name">commit</strong> <code class="def-code-arguments">(<var class="var">conn</var>)</code></span></dt>
 <dd><p>Make permanent changes to the database.
 </p>
 <h4 class="subsubheading" id="Inputs-12">Inputs</h4>
@@ -796,7 +798,7 @@ close(conn)
 <h4 class="subsection">3.4.2 execute</h4>
 <a class="index-entry-id" id="index-execute"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-execute-1"><span class="category-def">: </span><strong class="def-name">execute</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-execute-1"><span><strong class="def-name">execute</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>)</code></span></dt>
 <dd><p>Perform SQL query <var class="var">query</var>, that does not return result
 </p>
 <h4 class="subsubheading" id="Inputs-13">Inputs</h4>
@@ -829,7 +831,7 @@ close(conn)
 <h4 class="subsection">3.4.3 rollback</h4>
 <a class="index-entry-id" id="index-rollback"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-rollback-1"><span class="category-def">: </span><strong class="def-name">rollback</strong> <code class="def-code-arguments">(<var class="var">conn</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-rollback-1"><span><strong class="def-name">rollback</strong> <code class="def-code-arguments">(<var class="var">conn</var>)</code></span></dt>
 <dd><p>Rollback changes to the database.
 </p>
 <h4 class="subsubheading" id="Inputs-14">Inputs</h4>
@@ -846,8 +848,8 @@ close(conn)
 <h4 class="subsection">3.4.4 sqlupdate</h4>
 <a class="index-entry-id" id="index-sqlupdate"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sqlupdate-1"><span class="category-def">: </span><strong class="def-name">sqlupdate</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">filter</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlupdate-2"><span class="category-def">: </span><strong class="def-name">sqlupdate</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">filter</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></dt>
+<dt class="deftypefn def-line" id="index-sqlupdate-1"><span><strong class="def-name">sqlupdate</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">filter</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlupdate-2"><span><strong class="def-name">sqlupdate</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">filter</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></span></dt>
 <dd><p>Update rows of data in database.
 </p>
 <h4 class="subsubheading" id="Inputs-15">Inputs</h4>
@@ -900,7 +902,7 @@ close(conn)
 <h4 class="subsection">3.4.5 update</h4>
 <a class="index-entry-id" id="index-update"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-update-1"><span class="category-def">: </span><strong class="def-name">update</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>, <var class="var">colnames</var>, <var class="var">data</var>, <var class="var">whereclause</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-update-1"><span><strong class="def-name">update</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>, <var class="var">colnames</var>, <var class="var">data</var>, <var class="var">whereclause</var>)</code></span></dt>
 <dd><p>Update columns in database.
 </p>
 <h4 class="subsubheading" id="Inputs-16">Inputs</h4>
@@ -947,8 +949,8 @@ close(conn)
 <h4 class="subsection">3.5.1 rowfilter</h4>
 <a class="index-entry-id" id="index-rowfilter"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-rowfilter_0028C_0029"><span class="category-def">: </span><code class="def-type"><var class="var">rowfilt</var> =</code> <strong class="def-name">rowfilter(<var class="var">C</var>)</strong></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-rowfilter_0028T_0029"><span class="category-def">: </span><code class="def-type"><var class="var">rowfilt</var> =</code> <strong class="def-name">rowfilter(<var class="var">T</var>)</strong></dt>
+<dt class="deftypefn def-line" id="index-rowfilter_0028C_0029"><span><code class="def-type"><var class="var">rowfilt</var> =</code> <strong class="def-name">rowfilter(<var class="var">C</var>)</strong></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-rowfilter_0028T_0029"><span><code class="def-type"><var class="var">rowfilt</var> =</code> <strong class="def-name">rowfilter(<var class="var">T</var>)</strong></span></dt>
 <dd><p>Create an unconstrained rowfilter object with columns names.
 </p>
 <h4 class="subsubheading" id="Inputs-17">Inputs</h4>

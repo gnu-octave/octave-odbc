@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/9_rowfilter/"
 pkg_name: "odbc"
-pkg_version: "0.0.5"
+pkg_version: "0.0.6"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - rowfilter"
 category: "Support Functions"
@@ -42,11 +42,11 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-rowfilter_0028C_0029"><span class="category-def">: </span><span><code class="def-type"><var class="var">rowfilt</var> =</code> <strong class="def-name">rowfilter(<var class="var">C</var>)</strong><a class="copiable-link" href="#index-rowfilter_0028C_0029"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-rowfilter_0028T_0029"><span class="category-def">: </span><span><code class="def-type"><var class="var">rowfilt</var> =</code> <strong class="def-name">rowfilter(<var class="var">T</var>)</strong><a class="copiable-link" href="#index-rowfilter_0028T_0029"></a></span></dt>
+<dt class="deftypefn def-line" id="index-rowfilter_0028C_0029"><span><code class="def-type"><var class="var">rowfilt</var> =</code> <strong class="def-name">rowfilter(<var class="var">C</var>)</strong></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-rowfilter_0028T_0029"><span><code class="def-type"><var class="var">rowfilt</var> =</code> <strong class="def-name">rowfilter(<var class="var">T</var>)</strong></span></dt>
 <dd><p>Create an unconstrained rowfilter object with columns names.
 </p>
-<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <dl class="table">
 <dt><var class="var">C</var></dt>
 <dd><p>A column name, cell array of column names.
@@ -56,20 +56,20 @@ navigation:
  </p></dd>
 </dl>
 
-<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs</span></h4>
 <dl class="table">
 <dt><var class="var">rowfilt</var></dt>
 <dd><p>a rowfilter object
  </p></dd>
 </dl>
 
-<h4 class="subsubheading" id="Object-Properties"><span>Object Properties<a class="copiable-link" href="#Object-Properties"></a></span></h4>
+<h4 class="subsubheading" id="Object-Properties"><span>Object Properties</span></h4>
 <p>Object properties are the names of the columns on creation of the filter.
 </p>
 <p>Constraints can be set on a specific field of the filter by setting a
  comparison value for the variable name.
 </p>
-<h4 class="subsubheading" id="Examples"><span>Examples<a class="copiable-link" href="#Examples"></a></span></h4>
+<h4 class="subsubheading" id="Examples"><span>Examples</span></h4>
 <div class="example">
 <pre class="example-preformatted"> <code class="code">
  # create a rowfilter with 2 columns

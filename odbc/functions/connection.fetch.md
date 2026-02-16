@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/16_connectionfetch/"
 pkg_name: "odbc"
-pkg_version: "0.0.5"
+pkg_version: "0.0.6"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - connection.fetch"
 category: "Support Functions"
@@ -42,10 +42,10 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-fetch"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">fetch</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>)</code><a class="copiable-link" href="#index-fetch"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fetch-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">fetch</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code><a class="copiable-link" href="#index-fetch-1"></a></span></dt>
+<dt class="deftypefn def-line" id="index-fetch"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">fetch</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fetch-1"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">fetch</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></span></dt>
 <dd><p>Perform SQL query <var class="var">query</var>, and return result
- </p><h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
+ </p><h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <dl class="table">
 <dt><var class="var">conn</var></dt>
 <dd><p>currently open database connection.
@@ -69,14 +69,14 @@ navigation:
 </dd>
 </dl>
 
-<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs</span></h4>
 <dl class="table">
 <dt><var class="var">data</var></dt>
 <dd><p>a table containing the query result.
  </p></dd>
 </dl>
 
-<h4 class="subsubheading" id="Examples"><span>Examples<a class="copiable-link" href="#Examples"></a></span></h4>
+<h4 class="subsubheading" id="Examples"><span>Examples</span></h4>
 <p>Select all rows of data from a database tables
  </p><div class="example">
 <pre class="example-preformatted"> <code class="code">

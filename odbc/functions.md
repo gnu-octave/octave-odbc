@@ -3,7 +3,7 @@ layout: "function_list"
 permalink: "/functions/"
 title: "Odbc Toolkit - Functions"
 pkg_name: "odbc"
-version: "0.0.5"
+version: "0.0.6"
 description: "Basic Octave implementation for ODBC database functionality"
 categories:
 - id: "15_ODBCconnection"

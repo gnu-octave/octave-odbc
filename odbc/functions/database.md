@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/8_database/"
 pkg_name: "odbc"
-pkg_version: "0.0.5"
+pkg_version: "0.0.6"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - database"
 category: "Support Functions"
@@ -42,11 +42,11 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-database"><span class="category-def">: </span><span><code class="def-type"><var class="var">conn</var> =</code> <strong class="def-name">database</strong> <code class="def-code-arguments">(<var class="var">dbname</var>, <var class="var">username</var>, <var class="var">password</var>)</code><a class="copiable-link" href="#index-database"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-database-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">conn</var> =</code> <strong class="def-name">database</strong> <code class="def-code-arguments">(<var class="var">dbname</var>, <var class="var">username</var>, <var class="var">password</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code><a class="copiable-link" href="#index-database-1"></a></span></dt>
+<dt class="deftypefn def-line" id="index-database"><span><code class="def-type"><var class="var">conn</var> =</code> <strong class="def-name">database</strong> <code class="def-code-arguments">(<var class="var">dbname</var>, <var class="var">username</var>, <var class="var">password</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-database-1"><span><code class="def-type"><var class="var">conn</var> =</code> <strong class="def-name">database</strong> <code class="def-code-arguments">(<var class="var">dbname</var>, <var class="var">username</var>, <var class="var">password</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></span></dt>
 <dd><p>Create a odbc database connection
 </p>
-<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <dl class="table">
 <dt><code class="code"><var class="var">dbname</var></code></dt>
 <dd><p>ODBC DSN connection name, or connection string
@@ -59,14 +59,14 @@ navigation:
  </p></dd>
 </dl>
 
-<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs</span></h4>
 <dl class="table">
 <dt><code class="code"><var class="var">conn</var></code></dt>
 <dd><p>A connection object for the connected database
  </p></dd>
 </dl>
 
-<h4 class="subsubheading" id="Examples"><span>Examples<a class="copiable-link" href="#Examples"></a></span></h4>
+<h4 class="subsubheading" id="Examples"><span>Examples</span></h4>
 <p>Open a a preconfigured default database, using blank username and password.
  </p><div class="example">
 <pre class="example-preformatted"> <code class="code">

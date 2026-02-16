@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/15_listDataSources/"
 pkg_name: "odbc"
-pkg_version: "0.0.5"
+pkg_version: "0.0.6"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - listDataSources"
 category: "Support Functions"
@@ -42,13 +42,13 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-listDataSources"><span class="category-def">: </span><span><code class="def-type"><var class="var">src</var> =</code> <strong class="def-name">listDataSources</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href="#index-listDataSources"></a></span></dt>
+<dt class="deftypefn def-line" id="index-listDataSources"><span><code class="def-type"><var class="var">src</var> =</code> <strong class="def-name">listDataSources</strong> <code class="def-code-arguments">()</code></span></dt>
 <dd><p>List available odbc datasources
 </p>
-<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <p>None
 </p>
-<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs</span></h4>
 <dl class="table">
 <dt><code class="code"><var class="var">src</var></code></dt>
 <dd><p>A table or cell structure of available data sources. The result contains fields for 

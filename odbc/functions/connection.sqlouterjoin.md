@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/23_connectionsqlouterjoin/"
 pkg_name: "odbc"
-pkg_version: "0.0.5"
+pkg_version: "0.0.6"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - connection.sqlouterjoin"
 category: "Support Functions"

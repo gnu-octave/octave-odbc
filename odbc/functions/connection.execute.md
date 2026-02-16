@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/18_connectionexecute/"
 pkg_name: "odbc"
-pkg_version: "0.0.5"
+pkg_version: "0.0.6"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - connection.execute"
 category: "Support Functions"
@@ -42,10 +42,10 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-execute"><span class="category-def">: </span><span><strong class="def-name">execute</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>)</code><a class="copiable-link" href="#index-execute"></a></span></dt>
+<dt class="deftypefn def-line" id="index-execute"><span><strong class="def-name">execute</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">query</var>)</code></span></dt>
 <dd><p>Perform SQL query <var class="var">query</var>, that does not return result
 </p>
-<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <dl class="table">
 <dt><var class="var">db</var></dt>
 <dd><p>Previously created database connection object
@@ -55,10 +55,10 @@ navigation:
  </p></dd>
 </dl>
 
-<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs</span></h4>
 <p>None
 </p>
-<h4 class="subsubheading" id="Examples"><span>Examples<a class="copiable-link" href="#Examples"></a></span></h4>
+<h4 class="subsubheading" id="Examples"><span>Examples</span></h4>
 <p>Create a database table and insert a row
  </p><div class="example">
 <pre class="example-preformatted"> <code class="code">

@@ -3,7 +3,7 @@ layout: "default"
 permalink: "/news/"
 title: "Odbc Toolkit - News"
 pkg_name: "odbc"
-version: "0.0.5"
+version: "0.0.6"
 description: "Basic Octave implementation for ODBC database functionality"
 navigation:
 - id: "overview"
@@ -19,6 +19,19 @@ navigation:
   url: "/manual"
 ---
 <pre>
+Summary of important user-visible changes for odbc 0.0.6:
+-------------------------------------------------------------------
+
+ ** add optional depends on tablicious, datatypes or sqlite for table support
+
+ ** rowfilter: allow use of real table type input
+
+ ** Add Qt6 support
+
+ ** sqlwrite: bugfix write of multiline tables
+
+ ** Minor doc updates
+
 Summary of important user-visible changes for odbc 0.0.5:
 -------------------------------------------------------------------
 

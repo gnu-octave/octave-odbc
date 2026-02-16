@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/17_connectioncommit/"
 pkg_name: "odbc"
-pkg_version: "0.0.5"
+pkg_version: "0.0.6"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - connection.commit"
 category: "Support Functions"
@@ -42,16 +42,16 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-commit"><span class="category-def">: </span><span><strong class="def-name">commit</strong> <code class="def-code-arguments">(<var class="var">conn</var>)</code><a class="copiable-link" href="#index-commit"></a></span></dt>
+<dt class="deftypefn def-line" id="index-commit"><span><strong class="def-name">commit</strong> <code class="def-code-arguments">(<var class="var">conn</var>)</code></span></dt>
 <dd><p>Make permanent changes to the database.
 </p>
-<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <dl class="table">
 <dt><var class="var">conn</var></dt>
 <dd><p>currently open database.
  </p></dd>
 </dl>
 
-<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs</span></h4>
 <p>None
  </p></dd></dl>

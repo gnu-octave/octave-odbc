@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/10_connection/"
 pkg_name: "odbc"
-pkg_version: "0.0.5"
+pkg_version: "0.0.6"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - connection"
 category: "Support Functions"
@@ -42,9 +42,9 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftp def-block">
-<dt class="deftp def-line" id="index-connection"><span class="category-def">Class: </span><span><strong class="def-name">connection</strong><a class="copiable-link" href="#index-connection"></a></span></dt>
+<dt class="deftp def-line" id="index-connection"><span class="category-def">Class: </span><span><strong class="def-name">connection</strong></span></dt>
 <dd><p>Connection class for a ODBC database connection
- </p><h4 class="subsubheading" id="Object-Properties"><span>Object Properties<a class="copiable-link" href="#Object-Properties"></a></span></h4>
+ </p><h4 class="subsubheading" id="Object-Properties"><span>Object Properties</span></h4>
 <dl class="table">
 <dt>DataSource</dt>
 <dd><p>Datasource value as passed during creation

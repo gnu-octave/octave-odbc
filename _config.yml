@@ -25,6 +25,7 @@ logo: "/assets/octave-odbc.svg"
 description: >- # this means to ignore newlines until "baseurl:"
   ODBC Toolkit for GNU Octave
 baseurl: "" # the subpath of your site, e.g. /blog
+pkg: odbc
 url: "https://gnu-octave.github.io/octave-odbc/"
 twitter_username: jekyllrb
 github_username:  jekyll

@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/23_connectionsqlinnerjoin/"
 pkg_name: "odbc"
-pkg_version: "0.0.5"
+pkg_version: "0.0.6"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - connection.sqlinnerjoin"
 category: "Support Functions"
@@ -42,14 +42,14 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sqlinnerjoin"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>)</code><a class="copiable-link" href="#index-sqlinnerjoin"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlinnerjoin-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;Keys&quot;, <var class="var">keys</var>, &hellip;)</code><a class="copiable-link" href="#index-sqlinnerjoin-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlinnerjoin-2"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;LeftKeys&quot;, <var class="var">keys</var>, &quot;RightKeys&quot;, <var class="var">keys</var>, &hellip;)</code><a class="copiable-link" href="#index-sqlinnerjoin-2"></a></span></dt>
+<dt class="deftypefn def-line" id="index-sqlinnerjoin"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlinnerjoin-1"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;Keys&quot;, <var class="var">keys</var>, &hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlinnerjoin-2"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;LeftKeys&quot;, <var class="var">keys</var>, &quot;RightKeys&quot;, <var class="var">keys</var>, &hellip;)</code></span></dt>
 <dd><p>Perform an innerjoin on two tables.
 </p> 
 <p>Performs an innerjoin equivalent to &rsquo;SELECT * from lefttable INNER JOIN righttable ON lefttable.key = rightable.key&rsquo;.
 </p>
-<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <dl class="table">
 <dt><var class="var">db</var></dt>
 <dd><p>Previously created connection object
@@ -79,7 +79,7 @@ navigation:
 </dd>
 </dl>
 
-<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs</span></h4>
 <p>None
 </p>
 
