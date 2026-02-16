@@ -44,11 +44,19 @@ function __load_odbc__ ()
       p = {};
       
       # attempt to load tabilicious, or datatypes if can
-      # we are doing this currently to make using tablicious and datatypes and sqlite an
+      # we are doing this currently to make using tablicious and datatypes and sqlite as an
       # optional requirement to get a table datatype
       x = pkg("list", "tablicious", "datatypes", "sqlite");
 
       if !isempty(x)
+        # any loaded already ?
+        for idx=1:length(x)
+          if x{idx}.loaded == 1
+            x{1} = x{idx};
+            break;
+          endif
+        endfor
+        # not loaded, then load
         if x{1}.loaded == 0
           pkg("load", x{1}.name);
         endif
