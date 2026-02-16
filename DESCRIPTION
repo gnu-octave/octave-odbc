@@ -1,6 +1,6 @@
 Name: odbc
-Version: 0.0.5
-Date: 2025-12-24
+Version: 0.0.6
+Date: 2026-02-16
 Author: John Donoghue <john.donoghue@ieee.org>
 Maintainer: John Donoghue <john.donoghue@ieee.org>
 Title: Octave ODBC Toolkit

@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 #
-### Copyright (C) 2022-2024 John Donoghue <john.donoghue@ieee.org>
+### Copyright (C) 2022-2026 John Donoghue <john.donoghue@ieee.org>
 ###
 ### This program is free software; you can redistribute it and/or
 ### modify it under the terms of the GNU General Public License as
@@ -18,7 +18,7 @@
 ### <http://www.gnu.org/licenses/>.
 
 AC_PREREQ([2.67])
-AC_INIT([Octave ODBC], [0.0.5])
+AC_INIT([Octave ODBC], [0.0.6])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIRS([m4])
 AH_TOP([#include "undef-ah-octave.h"])
