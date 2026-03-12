@@ -578,7 +578,7 @@ octave_odbc::find (const std::string &infilter, const std::string &catalog, cons
 
               if (coldata[c-1].numel() <= row)
                 {
-                  coldata[c-1].resize(dim_vector(row+20, 1));
+                  coldata[c-1].resize(dim_vector(2*row+32, 1));
                 }
 
               coldata[c-1](row) = value;
@@ -768,7 +768,7 @@ octave_odbc::run (const std::string &query, octave_value &v)
 
               if (coldata[c-1].numel() <= row)
                 {
-                  coldata[c-1].resize(dim_vector(row+20, 1));
+                  coldata[c-1].resize(dim_vector(2*row+32, 1));
                 }
               coldata[c-1](row) = value;
             }
@@ -1098,9 +1098,9 @@ Private function\n \
         {
           if (coldata[0].numel() <= row)
             {
-              coldata[0].resize(dim_vector(row+20, 1));
-              coldata[1].resize(dim_vector(row+20, 1));
-              coldata[2].resize(dim_vector(row+20, 1));
+              coldata[0].resize(dim_vector(2*row+32, 1));
+              coldata[1].resize(dim_vector(2*row+32, 1));
+              coldata[2].resize(dim_vector(2*row+32, 1));
             }
           coldata[0](row) = octave_value((char*)servername);
           coldata[1](row) = octave_value("ODCB");
