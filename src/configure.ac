@@ -53,6 +53,13 @@ esac
 fi
 
 CXX=`${MKOCTFILE} -p CXX`
+
+# The check for flags to enable C++11 is broken with a C++20 compiler (because
+# the type of u8"" literals changed) in autoconf before version 2.73.
+# Octave requires C++11 since version 4.2, so it is enabled by the CXX as
+# returned by mkoctfile. Skip broken check which would demote to C++11.
+ac_cv_prog_cxx_cxx11=""
+
 save_CXX="$CXX"
 AC_PROG_CXX
 AC_PROG_CXXCPP
