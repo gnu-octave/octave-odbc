@@ -202,33 +202,33 @@ classdef connection < handle
     
     function data = sqlouterjoin (this, lefttable, righttable, varargin)
       ## -*- texinfo -*-
-      ## @deftypefn {} {@var{data} =} sqlouterjoin (@var{db}, @var{lefttablename}, @var{righttablename})
-      ## @deftypefnx {} {@var{data} =} sqlouterjoin (@var{db}, @var{lefttablename}, @var{righttablename}, "Keys", @var{keys}, @dots{})
-      ## @deftypefnx {} {@var{data} =} sqlouterjoin (@var{db}, @var{lefttablename}, @var{righttablename}, "LeftKeys", @var{keys}, "RightKeys", @var{keys}, @dots{})
+      ## @deftypefn {} {@var{data} =} sqlouterjoin (@var{conn}, @var{lefttablename}, @var{righttablename})
+      ## @deftypefnx {} {@var{data} =} sqlouterjoin (@var{conn}, @var{lefttablename}, @var{righttablename}, "Keys", @var{keys}, @dots{})
+      ## @deftypefnx {} {@var{data} =} sqlouterjoin (@var{conn}, @var{lefttablename}, @var{righttablename}, "LeftKeys", @var{keys}, "RightKeys", @var{keys}, @dots{})
       ## Perform an outerjoin on two tables.
       ## 
-      ## Performs an outerjoin equivalent to 'SELECT * from lefttable OUTER JOIN righttable ON lefttable.key = rightable.key'.
+      ## Performs an outer join equivalent to 'SELECT * from lefttable OUTER JOIN righttable ON lefttable.key = rightable.key'.
       ##
       ## @subsubheading Inputs
       ## @table @asis
-      ## @item @var{db}
+      ## @item @var{conn}
       ## Previously created connection object
       ## @item @var{lefttablename}
-      ## Name of lefthand table
+      ## Name of left-hand table
       ## @item @var{righttablename}
-      ## Name of righthand table
+      ## Name of right-hand table
       ## @item @var{keys}
-      ## A string or cellstring of column names to join against.
-      ## If specified as Keys, the names will be used on lefthand and rightside of the join.
+      ## A string or cell array of strings of column names to join against.
+      ## If specified as Keys, the names will be used on left-hand and right-hand side of the join.
       ## If specified as LeftKeys and RightKeys, keys will be used separately for each side of the table.
       ## If no keys are provided, common named columns will be matched between the tables.
       ## @item @var{propertyname}, @var{propertyvalue}
-      ##  property name/value pairs where known properties are:
+      ##  Property name/value pairs where known properties are:
       ##  @table @asis
       ##  @item MaxRows
       ##  Max number of rows to return.
       ##  @item DataReturnFormat
-      ##  Format to return data in ('table', 'structure', 'cellarray')
+      ##  Format used to return data in ('table', 'structure', 'cellarray')
       ##  @end table
       ## @end table
       ##
@@ -343,23 +343,23 @@ classdef connection < handle
     
     function data = sqlinnerjoin (this, lefttable, righttable, varargin)
       ## -*- texinfo -*-
-      ## @deftypefn {} {@var{data} =} sqlinnerjoin (@var{db}, @var{lefttablename}, @var{righttablename})
-      ## @deftypefnx {} {@var{data} =} sqlinnerjoin (@var{db}, @var{lefttablename}, @var{righttablename}, "Keys", @var{keys}, @dots{})
-      ## @deftypefnx {} {@var{data} =} sqlinnerjoin (@var{db}, @var{lefttablename}, @var{righttablename}, "LeftKeys", @var{keys}, "RightKeys", @var{keys}, @dots{})
-      ## Perform an innerjoin on two tables.
+      ## @deftypefn {} {@var{data} =} sqlinnerjoin (@var{conn}, @var{lefttablename}, @var{righttablename})
+      ## @deftypefnx {} {@var{data} =} sqlinnerjoin (@var{conn}, @var{lefttablename}, @var{righttablename}, "Keys", @var{keys}, @dots{})
+      ## @deftypefnx {} {@var{data} =} sqlinnerjoin (@var{conn}, @var{lefttablename}, @var{righttablename}, "LeftKeys", @var{keys}, "RightKeys", @var{keys}, @dots{})
+      ## Perform an inner join on two tables.
       ## 
-      ## Performs an innerjoin equivalent to 'SELECT * from lefttable INNER JOIN righttable ON lefttable.key = rightable.key'.
+      ## Performs an inner join equivalent to 'SELECT * from lefttable INNER JOIN righttable ON lefttable.key = rightable.key'.
       ##
       ## @subsubheading Inputs
       ## @table @asis
-      ## @item @var{db}
+      ## @item @var{conn}
       ## Previously created connection object
       ## @item @var{lefttablename}
       ## Name of lefthand table
       ## @item @var{righttablename}
       ## Name of righthand table
       ## @item @var{keys}
-      ## A string or cellstring of column names to join against.
+      ## A string or cell array of strings of column names to join against.
       ## If specified as Keys, the names will be used on lefthand and rightside of the join.
       ## If specified as LeftKeys and RightKeys, keys will be used separately for each side of the table.
       ## If no keys are provided, common named columns will be matched between the tables.
@@ -485,9 +485,9 @@ classdef connection < handle
    
     function sqlwrite (this, tablename, data, varargin)
       ## -*- texinfo -*-
-      ## @deftypefn {} {} sqlwrite (@var{db}, @var{tablename}, @var{data})
-      ## @deftypefnx {} {} sqlwrite (@var{db}, @var{tablename}, @var{data}, @var{columntypes})
-      ## @deftypefnx {} {} sqlwrite (@var{db}, @var{tablename}, @var{data}, @var{propertyname}, @var{propertyvalue} @dots{})
+      ## @deftypefn {} {} sqlwrite (@var{conn}, @var{tablename}, @var{data})
+      ## @deftypefnx {} {} sqlwrite (@var{conn}, @var{tablename}, @var{data}, @var{columntypes})
+      ## @deftypefnx {} {} sqlwrite (@var{conn}, @var{tablename}, @var{data}, @var{propertyname}, @var{propertyvalue} @dots{})
       ## Insert rows of data into a table.
       ##
       ## Insert rows of data into a database table.
@@ -496,7 +496,7 @@ classdef connection < handle
       ##
       ## @subsubheading Inputs
       ## @table @asis
-      ## @item @var{db}
+      ## @item @var{conn}
       ## Previously created database connection object
       ## @item @var{tablename}
       ## Name of table to write data to
@@ -506,7 +506,7 @@ classdef connection < handle
       ## Optional cell array of same size as data used if table must be created. The column types may also
       ## be passed in using the @var{propertyname}, @var{propertyvalue} syntax.
       ## @item @var{propertyname}, @var{propertyvalue}
-      ##  property name/value pairs where known properties are:
+      ##  Property name/value pairs where known properties are:
       ##  @table @asis
       ##  @item ColumnType
       ##  Optional cell array of same size as the data that may be used
@@ -646,7 +646,7 @@ classdef connection < handle
       ## @item @var{conn}
       ## ODBC connection object
       ## @item @var{scriptname}
-      ## Filename to read statements from. NOTE: currently the file is expected to contain one statement per line.
+      ## Filename to read statements from. NOTE: Currently the file is expected to contain one statement per line.
       ## @end table
       ##
       ## @subsubheading Outputs
@@ -701,11 +701,11 @@ classdef connection < handle
       ## @subsubheading Inputs
       ## @table @asis
       ## @item @var{conn}
-      ##  currently open database connection.
+      ##  Currently open database connection.
       ## @item @var{sqlquery}
       ##  String containing a valid select SQL query.
       ## @item @var{propertyname}, @var{propertyvalue}
-      ##  property name/value pairs where known properties are:
+      ##  Property name/value pairs where known properties are:
       ##  @table @asis
       ##  @item MaxRows
       ##   Integer value of max number of rows in the query
@@ -810,11 +810,11 @@ classdef connection < handle
       ## @subsubheading Inputs
       ## @table @asis
       ## @item @var{conn}
-      ##  currently open database connection.
+      ##  Currently open database connection.
       ## @item @var{query}
       ##  String containing a valid select SQL query.
       ## @item @var{propertyname}, @var{propertyvalue}
-      ##  property name/value pairs where known properties are:
+      ##  Property name/value pairs where known properties are:
       ##  @table @asis
       ##  @item MaxRows
       ##   Integer value of max number of rows in the query
@@ -864,10 +864,10 @@ classdef connection < handle
       ##
       ## @subsubheading Inputs
       ## @table @asis
-      ## @item @var{db}
+      ## @item @var{conn}
       ## Previously created database connection object
       ## @item @var{sqlquery}
-      ## A valid non selecting SQL query string
+      ## A valid non-selecting SQL query string
       ## @end table
       ##
       ## @subsubheading Outputs
@@ -893,7 +893,7 @@ classdef connection < handle
     function data = sqlread (this, tablename, varargin)
       ## -*- texinfo -*-
       ## @deftypefn {} {@var{data} =} sqlread (@var{conn}, @var{tablename})
-      ## @deftypefnx {} {@var{data} =} sqlread (@var{conn}, @var{tablename}, @var{propertryname}, @var{propertyvalue})
+      ## @deftypefnx {} {@var{data} =} sqlread (@var{conn}, @var{tablename}, @var{propertyname}, @var{propertyvalue})
       ## Read data from table @var{tablename}
       ##
       ## Return rows of data from table @var{tablename} in a database.
@@ -902,11 +902,11 @@ classdef connection < handle
       ## @subsubheading Inputs
       ## @table @asis
       ## @item @var{conn}
-      ##  currently open database.
+      ##  Currently open database.
       ## @item @var{tablename}
-      ##  Name of a table with the database.
+      ##  Name of a table within the database.
       ## @item @var{propertyname}, @var{propertyvalue}
-      ##  property name/value pairs where known properties are:
+      ##  Property name/value pairs where known properties are:
       ##  @table @asis
       ##  @item MaxRows
       ##   Integer value of max number of rows in the query
@@ -971,7 +971,7 @@ classdef connection < handle
       ## @subsubheading Inputs
       ## @table @asis
       ## @item @var{conn}
-      ##  currently open database.
+      ##  Currently open database.
       ## @end table
       ##
       ## @subsubheading Outputs
@@ -988,7 +988,7 @@ classdef connection < handle
       ## @subsubheading Inputs
       ## @table @asis
       ## @item @var{conn}
-      ##  currently open database.
+      ##  Currently open database.
       ## @end table
       ##
       ## @subsubheading Outputs
@@ -997,7 +997,7 @@ classdef connection < handle
       __odbc_rollback__(this.dbhandle);
     endfunction
 
-    function update(conn,tablename,colnames,data,whereclause)
+    function update(conn, tablename, colnames, data, whereclause)
       ## -*- texinfo -*-
       ## @deftypefn {} {} update (@var{conn}, @var{tablename}, @var{colnames}, @var{data}, @var{whereclause})
       ## Update columns in database.
@@ -1093,13 +1093,13 @@ classdef connection < handle
 
     function sqlupdate(conn, tablename, data, filter, varargin)
       ## -*- texinfo -*-
-      ## @deftypefn {} {} sqlupdate (@var{db}, @var{tablename}, @var{data}, @var{filter})
-      ## @deftypefnx {} {} sqlupdate (@var{db}, @var{tablename}, @var{data}, @var{filter}, @var{propertyname}, @var{propertyvalue} @dots{})
+      ## @deftypefn {} {} sqlupdate (@var{conn}, @var{tablename}, @var{data}, @var{filter})
+      ## @deftypefnx {} {} sqlupdate (@var{conn}, @var{tablename}, @var{data}, @var{filter}, @var{propertyname}, @var{propertyvalue} @dots{})
       ## Update rows of data in database.
       ##
       ## @subsubheading Inputs
       ## @table @asis
-      ## @item @var{db}
+      ## @item @var{conn}
       ## Previously created database connection object
       ## @item @var{tablename}
       ## Name of table to write data to
@@ -1108,7 +1108,7 @@ classdef connection < handle
       ## @item @var{filter}
       ## A Filter object  or cell array of filter objects used to determine which rows of the table to update.
       ## @item @var{propertyname}, @var{propertyvalue}
-      ##  property name/value pairs where known properties are:
+      ##  Property name/value pairs where known properties are:
       ##  @table @asis
       ##  @item Catalog
       ##  An optional database catalog name.
@@ -1121,7 +1121,7 @@ classdef connection < handle
       ## None
       ##
       ## @subsubheading Examples
-      ## Update db where id > 1
+      ## Update database where id > 1
       ## @example
       ## @code {
       ## # create sql connection
@@ -1178,18 +1178,18 @@ classdef connection < handle
 
     function data = sqlfind (this, pattern, varargin)
       ## -*- texinfo -*-
-      ## @deftypefn {} {@var{data} =} sqlfind (@var{db}, @var{pattern})
-      ## @deftypefnx {} {@var{data} =} sqlfind (@var{db}, @var{pattern}, @var{propertyname}, @var{propertyvalue} @dots{})
+      ## @deftypefn {} {@var{data} =} sqlfind (@var{conn}, @var{pattern})
+      ## @deftypefnx {} {@var{data} =} sqlfind (@var{conn}, @var{pattern}, @var{propertyname}, @var{propertyvalue} @dots{})
       ## Find information about table types in a database.
       ##
       ## @subsubheading Inputs
       ## @table @asis
-      ## @item @var{db}
-      ##  currently open database.
+      ## @item @var{conn}
+      ##  Currently open database.
       ## @item @var{pattern}
       ##  Name or pattern to match table in database. Use '' to match match all tables.
       ## @item @var{propertyname}, @var{propertyvalue}
-      ##  property name/value pairs where known properties are:
+      ##  Property name/value pairs where known properties are:
       ##  @table @asis
       ##  @item Catalog
       ##   catalog value to match
@@ -1198,7 +1198,7 @@ classdef connection < handle
       ##  @end table
       ## @end table
       ##
-      ## Note: currently the property values are not used in the filter process.
+      ## Note: Currently the property values are not used in the filter process.
       ##
       ## @subsubheading Outputs
       ## @table @asis

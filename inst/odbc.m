@@ -25,7 +25,7 @@
 ## @item @var{dbname}
 ## ODBC DSN connection name, or connection string
 ## @item @var{username}
-## Username foe connecting to database.
+## Username for connecting to database.
 ## @item @var{password}
 ## Password for connecting to database.
 ## @end table
@@ -37,7 +37,7 @@
 ## @end table
 ##
 ## @subsubheading Examples
-## Open a a preconfigured default database, using blank username and password.
+## Open a preconfigured default database, using blank username and password.
 ## @example
 ## @code {
 ## db = odbc("default", "", "");
