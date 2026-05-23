@@ -67,7 +67,7 @@ classdef connection < handle
     function this = connection (databasename, varargin)
       ## -*- texinfo -*-
       ## @deftypefn {} {@var{conn} =} connection (@var{conn}, @var{varargs})
-      ## ODCB connection constructor
+      ## ODBC connection constructor
       ## @end deftypefn
 
       if nargin < 1 || !ischar(databasename)
@@ -166,7 +166,7 @@ classdef connection < handle
     function delete (this)
       ## -*- texinfo -*-
       ## @deftypefn {} {} delete (@var{conn})
-      ## ODCB connection deconstructor
+      ## ODBC connection deconstructor
       ## @end deftypefn
 
       try
@@ -179,7 +179,7 @@ classdef connection < handle
     function Y = isopen (this)
       ## -*- texinfo -*-
       ## @deftypefn {} {@var{T} =} isopen (@var{conn})
-      ## Return true if ODCB connection is open
+      ## Return true if ODBC connection is open
       ## @end deftypefn
 
       Y = ! isempty(this.dbhandle);
@@ -188,7 +188,7 @@ classdef connection < handle
     function close (this)
       ## -*- texinfo -*-
       ## @deftypefn {} {} close (@var{conn})
-      ## close ODCB connection
+      ## close ODBC connection
       ## @end deftypefn
 
       if !isempty(this.dbhandle)
