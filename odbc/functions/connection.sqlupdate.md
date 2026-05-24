@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/20_connectionsqlupdate/"
 pkg_name: "odbc"
-pkg_version: "0.0.6"
+pkg_version: "0.0.7"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - connection.sqlupdate"
 category: "Support Functions"
@@ -42,13 +42,13 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sqlupdate"><span><strong class="def-name">sqlupdate</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">filter</var>)</code></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlupdate-1"><span><strong class="def-name">sqlupdate</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">filter</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></span></dt>
+<dt class="deftypefn def-line" id="index-sqlupdate"><span><strong class="def-name">sqlupdate</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">filter</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlupdate-1"><span><strong class="def-name">sqlupdate</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">filter</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></span></dt>
 <dd><p>Update rows of data in database.
 </p>
 <h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <dl class="table">
-<dt><var class="var">db</var></dt>
+<dt><var class="var">conn</var></dt>
 <dd><p>Previously created database connection object
  </p></dd>
 <dt><var class="var">tablename</var></dt>
@@ -61,7 +61,7 @@ navigation:
 <dd><p>A Filter object  or cell array of filter objects used to determine which rows of the table to update.
  </p></dd>
 <dt><var class="var">propertyname</var>, <var class="var">propertyvalue</var></dt>
-<dd><p>property name/value pairs where known properties are:
+<dd><p>Property name/value pairs where known properties are:
   </p><dl class="table">
 <dt>Catalog</dt>
 <dd><p>An optional database catalog name.
@@ -77,7 +77,7 @@ navigation:
 <p>None
 </p>
 <h4 class="subsubheading" id="Examples"><span>Examples</span></h4>
-<p>Update db where id &gt; 1
+<p>Update database where id &gt; 1
  </p><div class="example">
 <pre class="example-preformatted"> <code class="code">
  # create sql connection

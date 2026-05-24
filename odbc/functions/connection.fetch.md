@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/16_connectionfetch/"
 pkg_name: "odbc"
-pkg_version: "0.0.6"
+pkg_version: "0.0.7"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - connection.fetch"
 category: "Support Functions"
@@ -48,13 +48,13 @@ navigation:
  </p><h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <dl class="table">
 <dt><var class="var">conn</var></dt>
-<dd><p>currently open database connection.
+<dd><p>Currently open database connection.
  </p></dd>
 <dt><var class="var">sqlquery</var></dt>
 <dd><p>String containing a valid select SQL query.
  </p></dd>
 <dt><var class="var">propertyname</var>, <var class="var">propertyvalue</var></dt>
-<dd><p>property name/value pairs where known properties are:
+<dd><p>Property name/value pairs where known properties are:
   </p><dl class="table">
 <dt>MaxRows</dt>
 <dd><p>Integer value of max number of rows in the query

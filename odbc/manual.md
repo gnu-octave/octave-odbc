@@ -3,7 +3,7 @@ layout: "default"
 permalink: "/manual/"
 title: "Odbc Toolkit - Manual"
 pkg_name: "odbc"
-version: "0.0.6"
+version: "0.0.7"
 description: "Basic Octave implementation for ODBC database functionality"
 navigation:
 - id: "overview"
@@ -112,7 +112,7 @@ to successfully install the toolkit.
 the octave-odbc website using the following command within <abbr class="acronym">GNU</abbr> Octave:
 </p>
 <div class="example">
-<pre class="example-preformatted">pkg install https://github.com/gnu-octave/octave-odbc/releases/download/v0.0.6/octave-odbc-0.0.6.tar.gz
+<pre class="example-preformatted">pkg install https://github.com/gnu-octave/octave-odbc/releases/download/v0.0.7/octave-odbc-0.0.7.tar.gz
 </pre></div>
 <p>On Octave 7.2 and later, the package can be installed using the following command within
 <abbr class="acronym">GNU</abbr> Octave:
@@ -130,7 +130,7 @@ the octave-odbc website using the following command within <abbr class="acronym"
 <abbr class="acronym">GNU</abbr> Octave, the package can be installed using the following command within <abbr class="acronym">GNU</abbr> Octave:
 </p>
 <div class="example">
-<pre class="example-preformatted">pkg install octave-odbc-0.0.6.tar.gz
+<pre class="example-preformatted">pkg install octave-odbc-0.0.7.tar.gz
 </pre></div>
 </div>
 <div class="section-level-extent" id="Loading">
@@ -282,20 +282,20 @@ close(conn)
 <h4 class="subsection">3.1.3 sqlfind</h4>
 <a class="index-entry-id" id="index-sqlfind"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sqlfind-1"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlfind</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">pattern</var>)</code></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlfind-2"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlfind</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">pattern</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></span></dt>
+<dt class="deftypefn def-line" id="index-sqlfind-1"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlfind</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">pattern</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlfind-2"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlfind</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">pattern</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></span></dt>
 <dd><p>Find information about table types in a database.
 </p>
 <h4 class="subsubheading" id="Inputs-1">Inputs</h4>
 <dl class="table">
-<dt><var class="var">db</var></dt>
-<dd><p>currently open database.
+<dt><var class="var">conn</var></dt>
+<dd><p>Currently open database.
 </p></dd>
 <dt><var class="var">pattern</var></dt>
 <dd><p>Name or pattern to match table in database. Use &rdquo; to match match all tables.
 </p></dd>
 <dt><var class="var">propertyname</var>, <var class="var">propertyvalue</var></dt>
-<dd><p>property name/value pairs where known properties are:
+<dd><p>Property name/value pairs where known properties are:
   </p><dl class="table">
 <dt>Catalog</dt>
 <dd><p>catalog value to match
@@ -306,7 +306,7 @@ close(conn)
 </dl>
 </dd>
 </dl>
-<p>Note: currently the property values are not used in the filter process.
+<p>Note: Currently the property values are not used in the filter process.
 </p>
 <h4 class="subsubheading" id="Outputs-1">Outputs</h4>
 <dl class="table">
@@ -408,7 +408,7 @@ close(conn)
 <dd><p>ODBC DSN connection name, or connection string
 </p></dd>
 <dt><code class="code"><var class="var">username</var></code></dt>
-<dd><p>Username foe connecting to database.
+<dd><p>Username for connecting to database.
 </p></dd>
 <dt><code class="code"><var class="var">password</var></code></dt>
 <dd><p>Password for connecting to database.
@@ -421,7 +421,7 @@ close(conn)
 </p></dd>
 </dl>
 <h4 class="subsubheading" id="Examples-2">Examples</h4>
-<p>Open a a preconfigured default database, using blank username and password.
+<p>Open a preconfigured default database, using blank username and password.
 </p><div class="example">
 <pre class="example-preformatted"><code class="code">
  db = odbc(&quot;default&quot;, &quot;&quot;, &quot;&quot;);
@@ -448,7 +448,7 @@ close(conn)
 <dd><p>ODBC connection object
 </p></dd>
 <dt><code class="code"><var class="var">scriptname</var></code></dt>
-<dd><p>Filename to read statements from. NOTE: currently the file is expected to contain one statement per line.
+<dd><p>Filename to read statements from. NOTE: Currently the file is expected to contain one statement per line.
 </p></dd>
 </dl>
 <h4 class="subsubheading" id="Outputs-5">Outputs</h4>
@@ -469,13 +469,13 @@ close(conn)
 </p><h4 class="subsubheading" id="Inputs-6">Inputs</h4>
 <dl class="table">
 <dt><var class="var">conn</var></dt>
-<dd><p>currently open database connection.
+<dd><p>Currently open database connection.
 </p></dd>
 <dt><var class="var">sqlquery</var></dt>
 <dd><p>String containing a valid select SQL query.
 </p></dd>
 <dt><var class="var">propertyname</var>, <var class="var">propertyvalue</var></dt>
-<dd><p>property name/value pairs where known properties are:
+<dd><p>Property name/value pairs where known properties are:
   </p><dl class="table">
 <dt>MaxRows</dt>
 <dd><p>Integer value of max number of rows in the query
@@ -525,13 +525,13 @@ close(conn)
 </p><h4 class="subsubheading" id="Inputs-7">Inputs</h4>
 <dl class="table">
 <dt><var class="var">conn</var></dt>
-<dd><p>currently open database connection.
+<dd><p>Currently open database connection.
 </p></dd>
 <dt><var class="var">query</var></dt>
 <dd><p>String containing a valid select SQL query.
 </p></dd>
 <dt><var class="var">propertyname</var>, <var class="var">propertyvalue</var></dt>
-<dd><p>property name/value pairs where known properties are:
+<dd><p>Property name/value pairs where known properties are:
   </p><dl class="table">
 <dt>MaxRows</dt>
 <dd><p>Integer value of max number of rows in the query
@@ -575,16 +575,16 @@ close(conn)
 <h4 class="subsection">3.2.4 sqlinnerjoin</h4>
 <a class="index-entry-id" id="index-sqlinnerjoin"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sqlinnerjoin-1"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>)</code></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlinnerjoin-2"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;Keys&quot;, <var class="var">keys</var>, &hellip;)</code></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlinnerjoin-3"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;LeftKeys&quot;, <var class="var">keys</var>, &quot;RightKeys&quot;, <var class="var">keys</var>, &hellip;)</code></span></dt>
-<dd><p>Perform an innerjoin on two tables.
+<dt class="deftypefn def-line" id="index-sqlinnerjoin-1"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlinnerjoin-2"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;Keys&quot;, <var class="var">keys</var>, &hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlinnerjoin-3"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;LeftKeys&quot;, <var class="var">keys</var>, &quot;RightKeys&quot;, <var class="var">keys</var>, &hellip;)</code></span></dt>
+<dd><p>Perform an inner join on two tables.
 </p>
-<p>Performs an innerjoin equivalent to &rsquo;SELECT * from lefttable INNER JOIN righttable ON lefttable.key = rightable.key&rsquo;.
+<p>Performs an inner join equivalent to &rsquo;SELECT * from lefttable INNER JOIN righttable ON lefttable.key = rightable.key&rsquo;.
 </p>
 <h4 class="subsubheading" id="Inputs-8">Inputs</h4>
 <dl class="table">
-<dt><var class="var">db</var></dt>
+<dt><var class="var">conn</var></dt>
 <dd><p>Previously created connection object
 </p></dd>
 <dt><var class="var">lefttablename</var></dt>
@@ -594,7 +594,7 @@ close(conn)
 <dd><p>Name of righthand table
 </p></dd>
 <dt><var class="var">keys</var></dt>
-<dd><p>A string or cellstring of column names to join against.
+<dd><p>A string or cell array of strings of column names to join against.
  If specified as Keys, the names will be used on lefthand and rightside of the join.
  If specified as LeftKeys and RightKeys, keys will be used separately for each side of the table.
  If no keys are provided, common named columns will be matched between the tables.
@@ -621,38 +621,38 @@ close(conn)
 <h4 class="subsection">3.2.5 sqlouterjoin</h4>
 <a class="index-entry-id" id="index-sqlouterjoin"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sqlouterjoin-1"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlouterjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>)</code></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlouterjoin-2"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlouterjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;Keys&quot;, <var class="var">keys</var>, &hellip;)</code></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlouterjoin-3"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlouterjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;LeftKeys&quot;, <var class="var">keys</var>, &quot;RightKeys&quot;, <var class="var">keys</var>, &hellip;)</code></span></dt>
+<dt class="deftypefn def-line" id="index-sqlouterjoin-1"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlouterjoin</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlouterjoin-2"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlouterjoin</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;Keys&quot;, <var class="var">keys</var>, &hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlouterjoin-3"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlouterjoin</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;LeftKeys&quot;, <var class="var">keys</var>, &quot;RightKeys&quot;, <var class="var">keys</var>, &hellip;)</code></span></dt>
 <dd><p>Perform an outerjoin on two tables.
 </p>
-<p>Performs an outerjoin equivalent to &rsquo;SELECT * from lefttable OUTER JOIN righttable ON lefttable.key = rightable.key&rsquo;.
+<p>Performs an outer join equivalent to &rsquo;SELECT * from lefttable OUTER JOIN righttable ON lefttable.key = rightable.key&rsquo;.
 </p>
 <h4 class="subsubheading" id="Inputs-9">Inputs</h4>
 <dl class="table">
-<dt><var class="var">db</var></dt>
+<dt><var class="var">conn</var></dt>
 <dd><p>Previously created connection object
 </p></dd>
 <dt><var class="var">lefttablename</var></dt>
-<dd><p>Name of lefthand table
+<dd><p>Name of left-hand table
 </p></dd>
 <dt><var class="var">righttablename</var></dt>
-<dd><p>Name of righthand table
+<dd><p>Name of right-hand table
 </p></dd>
 <dt><var class="var">keys</var></dt>
-<dd><p>A string or cellstring of column names to join against.
- If specified as Keys, the names will be used on lefthand and rightside of the join.
+<dd><p>A string or cell array of strings of column names to join against.
+ If specified as Keys, the names will be used on left-hand and right-hand side of the join.
  If specified as LeftKeys and RightKeys, keys will be used separately for each side of the table.
  If no keys are provided, common named columns will be matched between the tables.
 </p></dd>
 <dt><var class="var">propertyname</var>, <var class="var">propertyvalue</var></dt>
-<dd><p>property name/value pairs where known properties are:
+<dd><p>Property name/value pairs where known properties are:
   </p><dl class="table">
 <dt>MaxRows</dt>
 <dd><p>Max number of rows to return.
   </p></dd>
 <dt>DataReturnFormat</dt>
-<dd><p>Format to return data in (&rsquo;table&rsquo;, &rsquo;structure&rsquo;, &rsquo;cellarray&rsquo;)
+<dd><p>Format used to return data in (&rsquo;table&rsquo;, &rsquo;structure&rsquo;, &rsquo;cellarray&rsquo;)
   </p></dd>
 </dl>
 </dd>
@@ -668,7 +668,7 @@ close(conn)
 <a class="index-entry-id" id="index-sqlread"></a>
 <dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-sqlread-1"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlread</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>)</code></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlread-2"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlread</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>, <var class="var">propertryname</var>, <var class="var">propertyvalue</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlread-2"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlread</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var>)</code></span></dt>
 <dd><p>Read data from table <var class="var">tablename</var>
 </p>
 <p>Return rows of data from table <var class="var">tablename</var> in a database.
@@ -677,13 +677,13 @@ close(conn)
 <h4 class="subsubheading" id="Inputs-10">Inputs</h4>
 <dl class="table">
 <dt><var class="var">conn</var></dt>
-<dd><p>currently open database.
+<dd><p>Currently open database.
 </p></dd>
 <dt><var class="var">tablename</var></dt>
-<dd><p>Name of a table with the database.
+<dd><p>Name of a table within the database.
 </p></dd>
 <dt><var class="var">propertyname</var>, <var class="var">propertyvalue</var></dt>
-<dd><p>property name/value pairs where known properties are:
+<dd><p>Property name/value pairs where known properties are:
   </p><dl class="table">
 <dt>MaxRows</dt>
 <dd><p>Integer value of max number of rows in the query
@@ -732,9 +732,9 @@ close(conn)
 <h4 class="subsection">3.3.1 sqlwrite</h4>
 <a class="index-entry-id" id="index-sqlwrite"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sqlwrite-1"><span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>)</code></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlwrite-2"><span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">columntypes</var>)</code></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlwrite-3"><span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></span></dt>
+<dt class="deftypefn def-line" id="index-sqlwrite-1"><span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>, <var class="var">data</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlwrite-2"><span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">columntypes</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlwrite-3"><span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></span></dt>
 <dd><p>Insert rows of data into a table.
 </p>
 <p>Insert rows of data into a database table.
@@ -743,7 +743,7 @@ close(conn)
 </p>
 <h4 class="subsubheading" id="Inputs-11">Inputs</h4>
 <dl class="table">
-<dt><var class="var">db</var></dt>
+<dt><var class="var">conn</var></dt>
 <dd><p>Previously created database connection object
 </p></dd>
 <dt><var class="var">tablename</var></dt>
@@ -757,7 +757,7 @@ close(conn)
  be passed in using the <var class="var">propertyname</var>, <var class="var">propertyvalue</var> syntax.
 </p></dd>
 <dt><var class="var">propertyname</var>, <var class="var">propertyvalue</var></dt>
-<dd><p>property name/value pairs where known properties are:
+<dd><p>Property name/value pairs where known properties are:
   </p><dl class="table">
 <dt>ColumnType</dt>
 <dd><p>Optional cell array of same size as the data that may be used
@@ -787,7 +787,7 @@ close(conn)
 <h4 class="subsubheading" id="Inputs-12">Inputs</h4>
 <dl class="table">
 <dt><var class="var">conn</var></dt>
-<dd><p>currently open database.
+<dd><p>Currently open database.
 </p></dd>
 </dl>
 <h4 class="subsubheading" id="Outputs-12">Outputs</h4>
@@ -803,11 +803,11 @@ close(conn)
 </p>
 <h4 class="subsubheading" id="Inputs-13">Inputs</h4>
 <dl class="table">
-<dt><var class="var">db</var></dt>
+<dt><var class="var">conn</var></dt>
 <dd><p>Previously created database connection object
 </p></dd>
 <dt><var class="var">sqlquery</var></dt>
-<dd><p>A valid non selecting SQL query string
+<dd><p>A valid non-selecting SQL query string
 </p></dd>
 </dl>
 <h4 class="subsubheading" id="Outputs-13">Outputs</h4>
@@ -837,7 +837,7 @@ close(conn)
 <h4 class="subsubheading" id="Inputs-14">Inputs</h4>
 <dl class="table">
 <dt><var class="var">conn</var></dt>
-<dd><p>currently open database.
+<dd><p>Currently open database.
 </p></dd>
 </dl>
 <h4 class="subsubheading" id="Outputs-14">Outputs</h4>
@@ -848,13 +848,13 @@ close(conn)
 <h4 class="subsection">3.4.4 sqlupdate</h4>
 <a class="index-entry-id" id="index-sqlupdate"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sqlupdate-1"><span><strong class="def-name">sqlupdate</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">filter</var>)</code></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlupdate-2"><span><strong class="def-name">sqlupdate</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">filter</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></span></dt>
+<dt class="deftypefn def-line" id="index-sqlupdate-1"><span><strong class="def-name">sqlupdate</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">filter</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlupdate-2"><span><strong class="def-name">sqlupdate</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">filter</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></span></dt>
 <dd><p>Update rows of data in database.
 </p>
 <h4 class="subsubheading" id="Inputs-15">Inputs</h4>
 <dl class="table">
-<dt><var class="var">db</var></dt>
+<dt><var class="var">conn</var></dt>
 <dd><p>Previously created database connection object
 </p></dd>
 <dt><var class="var">tablename</var></dt>
@@ -867,7 +867,7 @@ close(conn)
 <dd><p>A Filter object  or cell array of filter objects used to determine which rows of the table to update.
 </p></dd>
 <dt><var class="var">propertyname</var>, <var class="var">propertyvalue</var></dt>
-<dd><p>property name/value pairs where known properties are:
+<dd><p>Property name/value pairs where known properties are:
   </p><dl class="table">
 <dt>Catalog</dt>
 <dd><p>An optional database catalog name.
@@ -882,7 +882,7 @@ close(conn)
 <p>None
 </p>
 <h4 class="subsubheading" id="Examples-7">Examples</h4>
-<p>Update db where id &gt; 1
+<p>Update database where id &gt; 1
 </p><div class="example">
 <pre class="example-preformatted"><code class="code">
  # create sql connection

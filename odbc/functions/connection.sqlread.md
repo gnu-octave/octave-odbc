@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/18_connectionsqlread/"
 pkg_name: "odbc"
-pkg_version: "0.0.6"
+pkg_version: "0.0.7"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - connection.sqlread"
 category: "Support Functions"
@@ -43,7 +43,7 @@ navigation:
 ---
 <dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-sqlread"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlread</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>)</code></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlread-1"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlread</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>, <var class="var">propertryname</var>, <var class="var">propertyvalue</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlread-1"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlread</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var>)</code></span></dt>
 <dd><p>Read data from table <var class="var">tablename</var>
 </p>
 <p>Return rows of data from table <var class="var">tablename</var> in a database.
@@ -52,13 +52,13 @@ navigation:
 <h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <dl class="table">
 <dt><var class="var">conn</var></dt>
-<dd><p>currently open database.
+<dd><p>Currently open database.
  </p></dd>
 <dt><var class="var">tablename</var></dt>
-<dd><p>Name of a table with the database.
+<dd><p>Name of a table within the database.
  </p></dd>
 <dt><var class="var">propertyname</var>, <var class="var">propertyvalue</var></dt>
-<dd><p>property name/value pairs where known properties are:
+<dd><p>Property name/value pairs where known properties are:
   </p><dl class="table">
 <dt>MaxRows</dt>
 <dd><p>Integer value of max number of rows in the query

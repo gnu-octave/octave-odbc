@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/27_connectionexecuteSQLScript/"
 pkg_name: "odbc"
-pkg_version: "0.0.6"
+pkg_version: "0.0.7"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - connection.executeSQLScript"
 category: "Support Functions"
@@ -51,7 +51,7 @@ navigation:
 <dd><p>ODBC connection object
  </p></dd>
 <dt><code class="code"><var class="var">scriptname</var></code></dt>
-<dd><p>Filename to read statements from. NOTE: currently the file is expected to contain one statement per line.
+<dd><p>Filename to read statements from. NOTE: Currently the file is expected to contain one statement per line.
  </p></dd>
 </dl>
 

@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/18_connectionsqlfind/"
 pkg_name: "odbc"
-pkg_version: "0.0.6"
+pkg_version: "0.0.7"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - connection.sqlfind"
 category: "Support Functions"
@@ -42,20 +42,20 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sqlfind"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlfind</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">pattern</var>)</code></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlfind-1"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlfind</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">pattern</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></span></dt>
+<dt class="deftypefn def-line" id="index-sqlfind"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlfind</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">pattern</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlfind-1"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlfind</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">pattern</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></span></dt>
 <dd><p>Find information about table types in a database.
 </p>
 <h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <dl class="table">
-<dt><var class="var">db</var></dt>
-<dd><p>currently open database.
+<dt><var class="var">conn</var></dt>
+<dd><p>Currently open database.
  </p></dd>
 <dt><var class="var">pattern</var></dt>
 <dd><p>Name or pattern to match table in database. Use &rdquo; to match match all tables.
  </p></dd>
 <dt><var class="var">propertyname</var>, <var class="var">propertyvalue</var></dt>
-<dd><p>property name/value pairs where known properties are:
+<dd><p>Property name/value pairs where known properties are:
   </p><dl class="table">
 <dt>Catalog</dt>
 <dd><p>catalog value to match
@@ -67,7 +67,7 @@ navigation:
 </dd>
 </dl>
 
-<p>Note: currently the property values are not used in the filter process.
+<p>Note: Currently the property values are not used in the filter process.
 </p>
 <h4 class="subsubheading" id="Outputs"><span>Outputs</span></h4>
 <dl class="table">

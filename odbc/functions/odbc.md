@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/4_odbc/"
 pkg_name: "odbc"
-pkg_version: "0.0.6"
+pkg_version: "0.0.7"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - odbc"
 category: "Support Functions"
@@ -53,7 +53,7 @@ navigation:
 <dd><p>ODBC DSN connection name, or connection string
  </p></dd>
 <dt><code class="code"><var class="var">username</var></code></dt>
-<dd><p>Username foe connecting to database.
+<dd><p>Username for connecting to database.
  </p></dd>
 <dt><code class="code"><var class="var">password</var></code></dt>
 <dd><p>Password for connecting to database.
@@ -68,7 +68,7 @@ navigation:
 </dl>
 
 <h4 class="subsubheading" id="Examples"><span>Examples</span></h4>
-<p>Open a a preconfigured default database, using blank username and password.
+<p>Open a preconfigured default database, using blank username and password.
  </p><div class="example">
 <pre class="example-preformatted"> <code class="code">
  db = odbc(&quot;default&quot;, &quot;&quot;, &quot;&quot;);

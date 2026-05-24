@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/23_connectionsqlinnerjoin/"
 pkg_name: "odbc"
-pkg_version: "0.0.6"
+pkg_version: "0.0.7"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - connection.sqlinnerjoin"
 category: "Support Functions"
@@ -42,16 +42,16 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sqlinnerjoin"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>)</code></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlinnerjoin-1"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;Keys&quot;, <var class="var">keys</var>, &hellip;)</code></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlinnerjoin-2"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;LeftKeys&quot;, <var class="var">keys</var>, &quot;RightKeys&quot;, <var class="var">keys</var>, &hellip;)</code></span></dt>
-<dd><p>Perform an innerjoin on two tables.
+<dt class="deftypefn def-line" id="index-sqlinnerjoin"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlinnerjoin-1"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;Keys&quot;, <var class="var">keys</var>, &hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlinnerjoin-2"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name">sqlinnerjoin</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">lefttablename</var>, <var class="var">righttablename</var>, &quot;LeftKeys&quot;, <var class="var">keys</var>, &quot;RightKeys&quot;, <var class="var">keys</var>, &hellip;)</code></span></dt>
+<dd><p>Perform an inner join on two tables.
 </p> 
-<p>Performs an innerjoin equivalent to &rsquo;SELECT * from lefttable INNER JOIN righttable ON lefttable.key = rightable.key&rsquo;.
+<p>Performs an inner join equivalent to &rsquo;SELECT * from lefttable INNER JOIN righttable ON lefttable.key = rightable.key&rsquo;.
 </p>
 <h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <dl class="table">
-<dt><var class="var">db</var></dt>
+<dt><var class="var">conn</var></dt>
 <dd><p>Previously created connection object
  </p></dd>
 <dt><var class="var">lefttablename</var></dt>
@@ -61,7 +61,7 @@ navigation:
 <dd><p>Name of righthand table
  </p></dd>
 <dt><var class="var">keys</var></dt>
-<dd><p>A string or cellstring of column names to join against.
+<dd><p>A string or cell array of strings of column names to join against.
  If specified as Keys, the names will be used on lefthand and rightside of the join.
  If specified as LeftKeys and RightKeys, keys will be used separately for each side of the table.
  If no keys are provided, common named columns will be matched between the tables.

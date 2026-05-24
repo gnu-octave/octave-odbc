@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/10_connection/"
 pkg_name: "odbc"
-pkg_version: "0.0.6"
+pkg_version: "0.0.7"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - connection"
 category: "Support Functions"

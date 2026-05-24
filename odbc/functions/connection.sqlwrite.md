@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/19_connectionsqlwrite/"
 pkg_name: "odbc"
-pkg_version: "0.0.6"
+pkg_version: "0.0.7"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - connection.sqlwrite"
 category: "Support Functions"
@@ -42,9 +42,9 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sqlwrite"><span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>)</code></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlwrite-1"><span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">columntypes</var>)</code></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlwrite-2"><span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">db</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></span></dt>
+<dt class="deftypefn def-line" id="index-sqlwrite"><span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>, <var class="var">data</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlwrite-1"><span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">columntypes</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sqlwrite-2"><span><strong class="def-name">sqlwrite</strong> <code class="def-code-arguments">(<var class="var">conn</var>, <var class="var">tablename</var>, <var class="var">data</var>, <var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></span></dt>
 <dd><p>Insert rows of data into a table.
 </p>
 <p>Insert rows of data into a database table.
@@ -53,7 +53,7 @@ navigation:
 </p>
 <h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <dl class="table">
-<dt><var class="var">db</var></dt>
+<dt><var class="var">conn</var></dt>
 <dd><p>Previously created database connection object
  </p></dd>
 <dt><var class="var">tablename</var></dt>
@@ -67,7 +67,7 @@ navigation:
  be passed in using the <var class="var">propertyname</var>, <var class="var">propertyvalue</var> syntax.
  </p></dd>
 <dt><var class="var">propertyname</var>, <var class="var">propertyvalue</var></dt>
-<dd><p>property name/value pairs where known properties are:
+<dd><p>Property name/value pairs where known properties are:
   </p><dl class="table">
 <dt>ColumnType</dt>
 <dd><p>Optional cell array of same size as the data that may be used

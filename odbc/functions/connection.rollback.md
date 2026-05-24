@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/19_connectionrollback/"
 pkg_name: "odbc"
-pkg_version: "0.0.6"
+pkg_version: "0.0.7"
 pkg_description: "Basic Octave implementation for ODBC database functionality"
 title: "Odbc Toolkit - connection.rollback"
 category: "Support Functions"
@@ -48,7 +48,7 @@ navigation:
 <h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <dl class="table">
 <dt><var class="var">conn</var></dt>
-<dd><p>currently open database.
+<dd><p>Currently open database.
  </p></dd>
 </dl>
 
